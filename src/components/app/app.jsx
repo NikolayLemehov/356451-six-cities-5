@@ -2,6 +2,9 @@ import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter, Link} from "react-router-dom";
 import Main from "../main/main";
+import Favorites from "../favorites/favorites";
+import Login from "../login/login";
+import Offer from "../offer/offer";
 
 const App = (props) => {
   const {offerCount} = props;
@@ -12,6 +15,16 @@ const App = (props) => {
         <Route exact path="/">
           <Main offerCount={offerCount}/>
         </Route>
+        <Route exact path="/favorites">
+          <Favorites/>
+        </Route>
+        <Route exact path="/login">
+          <Login/>
+        </Route>
+        <Route exact path="/offer">
+          <Offer/>
+        </Route>
+        <Route path="/offer/:id" exact component={Offer}/>
         <Route
           render={() => (
             <Fragment>
