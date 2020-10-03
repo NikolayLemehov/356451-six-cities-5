@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Page = (props) => {
+const Main = (props) => {
   const {offerCount} = props;
 
   return (
@@ -11,7 +11,7 @@ const Page = (props) => {
           <div className="header__wrapper">
             <div className="header__left">
               <a className="header__logo-link header__logo-link--active">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </a>
             </div>
             <nav className="header__nav">
@@ -94,7 +94,7 @@ const Page = (props) => {
                   </div>
                   <div className="cities__image-wrapper place-card__image-wrapper">
                     <a href="#">
-                      <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200"
+                      <img className="place-card__image" src="/img/apartment-01.jpg" width="260" height="200"
                         alt="Place image"/>
                     </a>
                   </div>
@@ -126,7 +126,7 @@ const Page = (props) => {
                 <article className="cities__place-card place-card">
                   <div className="cities__image-wrapper place-card__image-wrapper">
                     <a href="#">
-                      <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image"/>
+                      <img className="place-card__image" src="/img/room.jpg" width="260" height="200" alt="Place image"/>
                     </a>
                   </div>
                   <div className="place-card__info">
@@ -158,7 +158,7 @@ const Page = (props) => {
                 <article className="cities__place-card place-card">
                   <div className="cities__image-wrapper place-card__image-wrapper">
                     <a href="#">
-                      <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200"
+                      <img className="place-card__image" src="/img/apartment-02.jpg" width="260" height="200"
                         alt="Place image"/>
                     </a>
                   </div>
@@ -193,7 +193,7 @@ const Page = (props) => {
                   </div>
                   <div className="cities__image-wrapper place-card__image-wrapper">
                     <a href="#">
-                      <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200"
+                      <img className="place-card__image" src="/img/apartment-03.jpg" width="260" height="200"
                         alt="Place image"/>
                     </a>
                   </div>
@@ -225,7 +225,7 @@ const Page = (props) => {
                 <article className="cities__place-card place-card">
                   <div className="cities__image-wrapper place-card__image-wrapper">
                     <a href="#">
-                      <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image"/>
+                      <img className="place-card__image" src="/img/room.jpg" width="260" height="200" alt="Place image"/>
                     </a>
                   </div>
                   <div className="place-card__info">
@@ -266,8 +266,8 @@ const Page = (props) => {
   );
 };
 
-Page.propTypes = {
+Main.propTypes = {
   offerCount: PropTypes.number.isRequired,
 };
 
-export default Page;
+export default Main;
