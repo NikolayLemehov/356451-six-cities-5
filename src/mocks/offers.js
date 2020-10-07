@@ -1,4 +1,5 @@
 import {PlaceType} from "../const";
+import {nanoid} from "nanoid";
 
 const offers = [
   {
@@ -127,5 +128,9 @@ const offers = [
     city: `Amsterdam`,
   },
 ];
+
+offers.forEach((it) => {
+  it.id = nanoid();
+});
 
 export {offers};

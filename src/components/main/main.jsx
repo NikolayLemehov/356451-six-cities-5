@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {nanoid} from "nanoid";
 import OfferCard from "../offer-card/offer-card";
 import {offerPropType} from "../../prop-types";
 
@@ -93,7 +92,7 @@ const Main = (props) => {
               <div className="cities__places-list places__list tabs__content">
                 {offers.map((offer) => (
                   <OfferCard
-                    key={nanoid()}
+                    key={offer.id}
                     offer={offer}
                   />
                 ))}

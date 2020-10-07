@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import {PlaceType} from "./const";
 
 const offerPropType = PropTypes.shape({
+  id: PropTypes.string.isRequired,
   img: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
