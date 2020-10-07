@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {PlaceType} from "../../const";
+import OfferCard from "../offer-card/offer-card";
+import {offerPropType} from "../../prop-types";
 
 const Main = (props) => {
   const {offerCount, offers} = props;
@@ -90,41 +91,10 @@ const Main = (props) => {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 {offers.map((offer, i) => (
-                  <article key={`${i}-${offer.title}`} className="cities__place-card place-card">
-                    {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : false}
-                    <div className="cities__image-wrapper place-card__image-wrapper">
-                      <a href="#">
-                        <img className="place-card__image" src={offer.img[0]} width="260" height="200"
-                          alt="Place image"/>
-                      </a>
-                    </div>
-                    <div className="place-card__info">
-                      <div className="place-card__price-wrapper">
-                        <div className="place-card__price">
-                          <b className="place-card__price-value">&euro;{offer.price}</b>
-                          <span className="place-card__price-text">&#47;&nbsp;night</span>
-                        </div>
-                        <button className={`place-card__bookmark-button${
-                          offer.isBookMark ? ` place-card__bookmark-button--active` : false
-                        } button`} type="button">
-                          <svg className="place-card__bookmark-icon" width="18" height="19">
-                            <use xlinkHref="#icon-bookmark"/>
-                          </svg>
-                          <span className="visually-hidden">To bookmarks</span>
-                        </button>
-                      </div>
-                      <div className="place-card__rating rating">
-                        <div className="place-card__stars rating__stars">
-                          <span style={{width: `${offer.rating}%`}}/>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <h2 className="place-card__name">
-                        <a href="#">{offer.title}</a>
-                      </h2>
-                      <p className="place-card__type">{offer.type}</p>
-                    </div>
-                  </article>
+                  <OfferCard
+                    key={`${i}-${offer.title}`}
+                    offer={offer}
+                  />
                 ))}
               </div>
             </section>
@@ -140,30 +110,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   offerCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    img: PropTypes.arrayOf(PropTypes.string).isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([PlaceType.APARTMENT, PlaceType.PRIVATE_ROOM]).isRequired,
-    rating: PropTypes.number.isRequired,
-    bedroom: PropTypes.number.isRequired,
-    visitor: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    option: PropTypes.shape({
-      wifi: PropTypes.bool.isRequired,
-      heating: PropTypes.bool.isRequired,
-      kitchen: PropTypes.bool.isRequired,
-      fridge: PropTypes.bool.isRequired,
-      washingMachine: PropTypes.bool.isRequired,
-      coffeeMachine: PropTypes.bool.isRequired,
-      dishMachine: PropTypes.bool.isRequired,
-      towels: PropTypes.bool.isRequired,
-      babySeat: PropTypes.bool.isRequired,
-      cableTV: PropTypes.bool.isRequired,
-    }).isRequired,
-    isBookMark: PropTypes.bool.isRequired,
-    city: PropTypes.string.isRequired,
-  })).isRequired,
+  offers: PropTypes.arrayOf(offerPropType).isRequired,
 };
 
 export default Main;

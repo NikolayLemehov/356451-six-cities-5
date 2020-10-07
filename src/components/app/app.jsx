@@ -5,6 +5,7 @@ import Main from "../main/main";
 import Favorites from "../favorites/favorites";
 import Login from "../login/login";
 import Offer from "../offer/offer";
+import {offerPropType} from "../../prop-types";
 
 const App = (props) => {
   const {offerCount, offers} = props;
@@ -49,7 +50,7 @@ const App = (props) => {
 
 App.propTypes = {
   offerCount: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerPropType).isRequired,
 };
 
 export default App;
