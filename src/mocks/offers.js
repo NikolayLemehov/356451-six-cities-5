@@ -3,7 +3,8 @@ import {nanoid} from "nanoid";
 
 const offers = [
   {
-    img: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    img: [`apartment-01.jpg`, `apartment-02.jpg`],
+    smallImg: `apartment-small-03.jpg`,
     title: `01Beautiful & luxurious apartment at great location`,
     description: ``,
     isPremium: true,
@@ -28,7 +29,8 @@ const offers = [
     city: `Amsterdam`,
   },
   {
-    img: [`img/room.jpg`, `img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    img: [`room.jpg`, `apartment-01.jpg`, `apartment-02.jpg`],
+    smallImg: `apartment-small-03.jpg`,
     title: `02Wood and stone place`,
     description: ``,
     isPremium: false,
@@ -53,7 +55,8 @@ const offers = [
     city: `Amsterdam`,
   },
   {
-    img: [`img/apartment-02.jpg`, `img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    img: [`apartment-02.jpg`, `apartment-01.jpg`, `apartment-02.jpg`],
+    smallImg: `apartment-small-04.jpg`,
     title: `03Canal View Prinsengracht`,
     description: ``,
     isPremium: false,
@@ -78,7 +81,8 @@ const offers = [
     city: `Amsterdam`,
   },
   {
-    img: [`img/apartment-03.jpg`, `img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    img: [`apartment-03.jpg`, `apartment-01.jpg`, `apartment-02.jpg`],
+    smallImg: `apartment-small-03.jpg`,
     title: `04Nice, cozy, warm big bed apartment`,
     description: ``,
     isPremium: true,
@@ -103,7 +107,8 @@ const offers = [
     city: `Amsterdam`,
   },
   {
-    img: [`img/room.jpg`, `img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    img: [`room.jpg`, `apartment-01.jpg`, `apartment-02.jpg`],
+    smallImg: `room-small.jpg`,
     title: `05Wood and stone place`,
     description: ``,
     isPremium: false,
@@ -128,7 +133,8 @@ const offers = [
     city: `Amsterdam`,
   },
   {
-    img: [`img/apartment-01.jpg`, `img/room.jpg`, `img/apartment-02.jpg`],
+    img: [`apartment-01.jpg`, `room.jpg`, `apartment-02.jpg`],
+    smallImg: `apartment-small-04.jpg`,
     title: `06Wood and stone place`,
     description: ``,
     isPremium: false,

@@ -3,4 +3,10 @@ const PlaceType = {
   PRIVATE_ROOM: `Private room`,
 };
 
-export {PlaceType};
+const OfferCardType = {
+  MAIN: `main`,
+  NEAR: `near`,
+  FAVORITE: `favorite`,
+};
+
+export {PlaceType, OfferCardType};

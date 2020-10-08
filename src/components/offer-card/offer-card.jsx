@@ -1,26 +1,50 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {offerPropType} from "../../prop-types";
+import {OfferCardType} from "../../const";
 
 const OfferCard = (props) => {
-  const {offer, onMouseOverOffer, currentOffer} = props;
+  const {offer, onMouseOverOffer, currentOffer, currentCardType} = props;
+  const isFavoriteType = currentCardType === OfferCardType.FAVORITE;
+  const getClass = (classMain, classNear, classFavorite) => {
+    switch (currentCardType) {
+      case OfferCardType.MAIN:
+        return classMain;
+      case OfferCardType.NEAR:
+        return classNear;
+      case OfferCardType.FAVORITE:
+        return classFavorite;
+      default:
+        return false;
+    }
+  };
 
   return (
-    <article className="cities__place-card place-card"
-      onMouseOver={(evt) => {
-        evt.preventDefault();
-        if (currentOffer !== offer) {
-          onMouseOverOffer(offer);
-        }
-      }}>
+    <article className={`
+    ${getClass(`cities__place-card`, `near-places__card`, `favorites__card`)}
+     place-card`}
+    onMouseOver={(evt) => {
+      evt.preventDefault();
+      if (currentOffer !== offer) {
+        onMouseOverOffer(offer);
+      }
+    }}>
       {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : false}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`
+       ${getClass(
+        `cities__image-wrapper`,
+        `near-places__image-wrapper`,
+        `favorites__image-wrapper`)}
+       place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={offer.img[0]} width="260" height="200"
+          <img className="place-card__image"
+            src={`img/${isFavoriteType ? offer.smallImg : offer.img[0]}`}
+            width={isFavoriteType ? `150` : `260`}
+            height={isFavoriteType ? `110` : `200`}
             alt="Place image"/>
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={`${getClass(``, ``, `favorites__card-info`)}place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>
@@ -32,7 +56,7 @@ const OfferCard = (props) => {
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"/>
             </svg>
-            <span className="visually-hidden">To bookmarks</span>
+            <span className="visually-hidden">{offer.isBookMark ? `In` : `To`} bookmarks</span>
           </button>
         </div>
         <div className="place-card__rating rating">
@@ -50,10 +74,15 @@ const OfferCard = (props) => {
   );
 };
 
+OfferCard.defaultProps = {
+  onMouseOverOffer: () => {},
+};
+
 OfferCard.propTypes = {
   offer: offerPropType,
   currentOffer: offerPropType,
-  onMouseOverOffer: PropTypes.func.isRequired
+  onMouseOverOffer: PropTypes.func.isRequired,
+  currentCardType: PropTypes.string.isRequired,
 };
 
 export default OfferCard;

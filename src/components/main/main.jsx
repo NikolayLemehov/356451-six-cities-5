@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import OfferList from "../offer-list/offer-list";
 import {offerPropType} from "../../prop-types";
+import {OfferCardType} from "../../const";
 
 const CURRENT_CITY = `Amsterdam`;
 const Main = (props) => {
@@ -93,6 +94,7 @@ const Main = (props) => {
               </form>
               <OfferList
                 offers={currentOffers}
+                currentCardType={OfferCardType.MAIN}
               />
             </section>
             <div className="cities__right-section">

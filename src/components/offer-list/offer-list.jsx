@@ -12,7 +12,7 @@ class OfferList extends PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, currentCardType} = this.props;
 
     return (
       <div className="cities__places-list places__list tabs__content">
@@ -20,6 +20,7 @@ class OfferList extends PureComponent {
           <OfferCard
             key={offer.id}
             offer={offer}
+            currentCardType={currentCardType}
             currentOffer={this.state.overOffer}
             onMouseOverOffer={(newOverOffer) => {
               this.setState(() => ({
@@ -35,6 +36,7 @@ class OfferList extends PureComponent {
 
 OfferList.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
+  currentCardType: PropTypes.string.isRequired,
 };
 
 export default OfferList;
