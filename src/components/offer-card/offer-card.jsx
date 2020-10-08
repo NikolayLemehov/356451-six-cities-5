@@ -1,10 +1,17 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 import {offerPropType} from "../../prop-types";
 
 const OfferCard = (props) => {
-  const {offer} = props;
+  const {offer, onMouseOverOffer, currentOffer} = props;
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card"
+      onMouseOver={(evt) => {
+        evt.preventDefault();
+        if (currentOffer !== offer) {
+          onMouseOverOffer(offer);
+        }
+      }}>
       {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : false}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
@@ -44,6 +51,8 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   offer: offerPropType,
+  currentOffer: offerPropType,
+  onMouseOverOffer: PropTypes.func.isRequired
 };
 
 export default OfferCard;
