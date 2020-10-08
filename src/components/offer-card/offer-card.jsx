@@ -4,6 +4,7 @@ import {offerPropType} from "../../prop-types";
 
 const OfferCard = (props) => {
   const {offer, onMouseOverOffer, currentOffer} = props;
+
   return (
     <article className="cities__place-card place-card"
       onMouseOver={(evt) => {
