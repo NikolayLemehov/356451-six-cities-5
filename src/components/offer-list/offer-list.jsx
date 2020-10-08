@@ -3,7 +3,7 @@ import OfferCard from "../offer-card/offer-card";
 import PropTypes from "prop-types";
 import {offerPropType} from "../../prop-types";
 
-class CardList extends PureComponent {
+class OfferList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,8 +33,8 @@ class CardList extends PureComponent {
   }
 }
 
-CardList.propTypes = {
+OfferList.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
 };
 
-export default CardList;
+export default OfferList;

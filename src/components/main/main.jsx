@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CardList from "../card-list/card-list";
+import OfferList from "../offer-list/offer-list";
 import {offerPropType} from "../../prop-types";
 
 const CURRENT_CITY = `Amsterdam`;
@@ -91,7 +91,7 @@ const Main = (props) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <CardList
+              <OfferList
                 offers={currentOffers}
               />
             </section>
