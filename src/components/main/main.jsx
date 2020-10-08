@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import CardList from "../card-list/card-list";
 import {offerPropType} from "../../prop-types";
 
+const CURRENT_CITY = `Amsterdam`;
 const Main = (props) => {
   const {offerCount, offers} = props;
+  const currentOffers = offers.filter((it) => it.city === CURRENT_CITY);
 
   return (
     <div className="page page--gray page--main">
@@ -90,7 +92,7 @@ const Main = (props) => {
                 </ul>
               </form>
               <CardList
-                offers={offers}
+                offers={currentOffers}
               />
             </section>
             <div className="cities__right-section">
