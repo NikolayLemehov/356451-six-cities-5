@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import moment from "moment";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 import OfferCard from "../offer-card/offer-card";
@@ -135,7 +136,9 @@ const Offer = (props) => {
                         <p className="reviews__text">
                           {it.message}
                         </p>
-                        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+                        <time className="reviews__time" dateTime={it.date}>
+                          {moment(it.date, `YYYY-MM-DD`).format(`MMMM YYYY`)}
+                        </time>
                       </div>
                     </li>
                   ))}

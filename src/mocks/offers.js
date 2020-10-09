@@ -39,14 +39,14 @@ const offers = [
         avatar: `avatar-max.jpg`,
         rate: 4,
         message: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-        date: `April 2019`,
+        date: `2019-04-24`,
       },
       {
         reviewer: `Max`,
         avatar: `avatar-max.jpg`,
         rate: 4,
         message: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-        date: `April 2019`,
+        date: `2019-04-24`,
       },
     ],
   },
@@ -87,7 +87,7 @@ const offers = [
         avatar: `avatar-max.jpg`,
         rate: 4,
         message: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-        date: `April 2019`,
+        date: `2019-04-24`,
       }
     ],
   },
@@ -128,7 +128,7 @@ const offers = [
         avatar: `avatar-max.jpg`,
         rate: 4,
         message: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-        date: `April 2019`,
+        date: `2019-04-24`,
       }
     ],
   },
@@ -169,7 +169,7 @@ const offers = [
         avatar: `avatar-max.jpg`,
         rate: 4,
         message: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-        date: `April 2019`,
+        date: `2019-04-24`,
       }
     ],
   },
@@ -210,7 +210,7 @@ const offers = [
         avatar: `avatar-max.jpg`,
         rate: 4,
         message: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-        date: `April 2019`,
+        date: `2019-04-24`,
       }
     ],
   },
@@ -251,7 +251,7 @@ const offers = [
         avatar: `avatar-max.jpg`,
         rate: 4,
         message: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-        date: `April 2019`,
+        date: `2019-04-24`,
       }
     ],
   },
