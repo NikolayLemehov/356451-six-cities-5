@@ -19,6 +19,13 @@ const offerPropType = PropTypes.shape({
   host: PropTypes.string.isRequired,
   hostTop: PropTypes.bool.isRequired,
   avatar: PropTypes.string.isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    reviewer: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    rate: PropTypes.number.isRequired,
+    message: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  })).isRequired
 });
 
 export {offerPropType};
