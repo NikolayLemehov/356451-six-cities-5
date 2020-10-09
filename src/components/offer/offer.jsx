@@ -61,11 +61,11 @@ const Offer = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${offer.rating}%`}}/>
+                  <span style={{width: `${offer.rating * RATING_COEFFICIENT}%`}}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">
-                  {(offer.rating / RATING_COEFFICIENT).toFixed(1)}
+                  {(offer.rating).toFixed(1)}
                 </span>
               </div>
               <ul className="property__features">

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {offerPropType} from "../../prop-types";
-import {OfferCardType} from "../../const";
+import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 
 const OfferCard = (props) => {
   const {offer, onMouseOverOffer, currentOffer, currentCardType} = props;
@@ -61,7 +61,7 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${offer.rating}%`}}/>
+            <span style={{width: `${offer.rating * RATING_COEFFICIENT}%`}}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
