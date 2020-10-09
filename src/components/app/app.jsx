@@ -30,7 +30,10 @@ const App = (props) => {
           <Login/>
         </Route>
         <Route exact path="/offer">
-          <Offer/>
+          <Offer
+            offer={offers[0]}
+            nearOffers={offers.slice(0, 3)}
+          />
         </Route>
         <Route path="/offer/:id" exact component={Offer}/>
         <Route

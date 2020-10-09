@@ -8,5 +8,6 @@ const OfferCardType = {
   NEAR: `near`,
   FAVORITE: `favorite`,
 };
+const RATING_COEFFICIENT = 20;
 
-export {PlaceType, OfferCardType};
+export {PlaceType, OfferCardType, RATING_COEFFICIENT};
