@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 
@@ -36,13 +37,13 @@ const OfferCard = (props) => {
         `near-places__image-wrapper`,
         `favorites__image-wrapper`)}
        place-card__image-wrapper`}>
-        <a href="#">
+        <Link to={`/offer/${offer.id}`}>
           <img className="place-card__image"
             src={`img/${isFavoriteType ? offer.smallImg : offer.img[0]}`}
             width={isFavoriteType ? `150` : `260`}
             height={isFavoriteType ? `110` : `200`}
             alt="Place image"/>
-        </a>
+        </Link>
       </div>
       <div className={`${getClass(``, ``, `favorites__card-info`)}place-card__info`}>
         <div className="place-card__price-wrapper">
@@ -65,7 +66,7 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

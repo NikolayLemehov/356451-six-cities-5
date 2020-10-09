@@ -35,7 +35,14 @@ const App = (props) => {
             nearOffers={offers.slice(0, 3)}
           />
         </Route>
-        <Route path="/offer/:id" exact component={Offer}/>
+        <Route path="/offer/:id" exact
+          render={({match}) => (
+            <Offer
+              offer={offers.find((it) => it.id === match.params.id)}
+              nearOffers={offers.slice(0, 3)}
+            />
+          )}
+        />
         <Route
           render={() => (
             <Fragment>

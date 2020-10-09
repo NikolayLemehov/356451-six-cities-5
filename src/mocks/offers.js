@@ -92,7 +92,7 @@ const offers = [
     ],
   },
   {
-    img: [`apartment-02.jpg`, `apartment-01.jpg`, `apartment-02.jpg`],
+    img: [`apartment-02.jpg`, `apartment-01.jpg`, `room.jpg`],
     smallImg: `apartment-small-04.jpg`,
     title: `03Canal View Prinsengracht`,
     description: [
