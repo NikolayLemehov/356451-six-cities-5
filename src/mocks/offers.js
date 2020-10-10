@@ -1,8 +1,8 @@
 import {PlaceType} from "../const";
-import {nanoid} from "nanoid";
 
 const offers = [
   {
+    id: `01-AiBFYnZhAPVxgj6c8jmTp`,
     img: [`apartment-01.jpg`, `apartment-02.jpg`],
     smallImg: `apartment-small-03.jpg`,
     title: `01Beautiful & luxurious apartment at great location`,
@@ -51,6 +51,7 @@ const offers = [
     ],
   },
   {
+    id: `02-oz7zeOXFl1dNgsSr60r3f`,
     img: [`room.jpg`, `apartment-01.jpg`, `apartment-02.jpg`],
     smallImg: `apartment-small-03.jpg`,
     title: `02Wood and stone place`,
@@ -92,6 +93,7 @@ const offers = [
     ],
   },
   {
+    id: `03-rEgx598pJmxUgHaqEALKj`,
     img: [`apartment-02.jpg`, `apartment-01.jpg`, `room.jpg`],
     smallImg: `apartment-small-04.jpg`,
     title: `03Canal View Prinsengracht`,
@@ -133,6 +135,7 @@ const offers = [
     ],
   },
   {
+    id: `04-OpnK6w_5Cy3CSrWeO8XNl`,
     img: [`apartment-03.jpg`, `apartment-01.jpg`, `apartment-02.jpg`],
     smallImg: `apartment-small-03.jpg`,
     title: `04Nice, cozy, warm big bed apartment`,
@@ -174,6 +177,7 @@ const offers = [
     ],
   },
   {
+    id: `05-U5zCWGoobLGmghMb9YP4W`,
     img: [`room.jpg`, `apartment-01.jpg`, `apartment-02.jpg`],
     smallImg: `room-small.jpg`,
     title: `05Wood and stone place`,
@@ -215,6 +219,7 @@ const offers = [
     ],
   },
   {
+    id: `06-BuiwU2MQYV06aPYkBIe2w`,
     img: [`apartment-01.jpg`, `room.jpg`, `apartment-02.jpg`],
     smallImg: `apartment-small-04.jpg`,
     title: `06Wood and stone place`,
@@ -256,9 +261,5 @@ const offers = [
     ],
   },
 ];
-
-offers.forEach((it) => {
-  it.id = nanoid();
-});
 
 export {offers};
