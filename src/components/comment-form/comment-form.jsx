@@ -32,7 +32,7 @@ class CommentForm extends PureComponent {
           {RADIO_VALUES.map((it) => (
             <React.Fragment key={it}>
               <input className="form__rating-input visually-hidden" name="rating" value={it} id={`${it}-stars`}
-                onChange={this.handleFieldChange} type="radio"
+                onChange={this.handleFieldChange} type="radio" checked={rating === it}
               />
               <label htmlFor={`${it}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
                 <svg className="form__star-image" width="37" height="33">
@@ -52,7 +52,6 @@ class CommentForm extends PureComponent {
           </p>
           <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
         </div>
-        <p>rating: {rating}</p>
       </form>
     );
   }
