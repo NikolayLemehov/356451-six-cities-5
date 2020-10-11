@@ -43,7 +43,7 @@ class CommentForm extends PureComponent {
         </div>
         <textarea className="reviews__textarea form__textarea" id="review" name="review"
           placeholder="Tell how was your stay, what you like and what can be improved"
-          onChange={this.handleFieldChange}/>
+          onChange={this.handleFieldChange} value={review} />
         <div className="reviews__button-wrapper">
           <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span> and
@@ -52,7 +52,6 @@ class CommentForm extends PureComponent {
           <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
         </div>
         <p>rating: {rating}</p>
-        <p>review: {review}</p>
       </form>
     );
   }
