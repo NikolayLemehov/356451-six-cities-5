@@ -22,13 +22,14 @@ class CommentForm extends PureComponent {
 
   render() {
     const {rating, review} = this.state;
+    const RADIO_VALUES = [`5`, `4`, `3`, `2`, `1`];
     return (
       <form className="reviews__form form" action="#" method="post"
         onSubmit={this.handleSubmit}
       >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
-          {[`5`, `4`, `3`, `2`, `1`].map((it) => (
+          {RADIO_VALUES.map((it) => (
             <React.Fragment key={it}>
               <input className="form__rating-input visually-hidden" name="rating" value={it} id={`${it}-stars`}
                 onChange={this.handleFieldChange} type="radio"
