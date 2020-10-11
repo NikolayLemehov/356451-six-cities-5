@@ -18,7 +18,6 @@ const App = (props) => {
           <Main
             offerCount={offerCount}
             offers={offers}
-            onMouseOverOffer={() => {}}
           />
         </Route>
         <Route exact path="/favorites">
