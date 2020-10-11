@@ -7,6 +7,8 @@ import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 import OfferCard from "../offer-card/offer-card";
 import CommentForm from "../comment-form/comment-form";
 
+const MAX_VISIBLE_PHOTO = 6;
+
 const Offer = (props) => {
   const {offer, nearOffers} = props;
 
@@ -39,7 +41,7 @@ const Offer = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.img.slice(0, 6).map((it) => (
+              {offer.img.slice(0, MAX_VISIBLE_PHOTO).map((it) => (
                 <div key={it} className="property__image-wrapper">
                   <img className="property__image" src={`img/${it}`} alt="Photo studio"/>
                 </div>
