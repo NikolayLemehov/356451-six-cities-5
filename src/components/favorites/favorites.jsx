@@ -9,11 +9,7 @@ const Favorites = (props) => {
   const {bookMarkOffers} = props;
   const bookMarkOffersCityMap = new Map();
   bookMarkOffers.forEach((it) => {
-    if (!Array.from(bookMarkOffersCityMap.keys()).some((city) => city === it.city)) {
-      bookMarkOffersCityMap.set(it.city, [it]);
-    } else {
-      bookMarkOffersCityMap.set(it.city, [...(bookMarkOffersCityMap.get(it.city)), it]);
-    }
+    bookMarkOffersCityMap.set(it.city, bookMarkOffersCityMap.has(it.city) ? [...(bookMarkOffersCityMap.get(it.city)), it] : [it]);
   });
 
   return (
