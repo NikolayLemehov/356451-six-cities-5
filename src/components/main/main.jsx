@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OfferList from "../offer-list/offer-list";
+import Map from "../map/map";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType} from "../../const";
 
@@ -98,7 +99,9 @@ const Main = (props) => {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"/>
+              <Map
+                offers={currentOffers}
+              />
             </div>
           </div>
         </div>

@@ -49,6 +49,7 @@ const offers = [
         date: `2019-04-24`,
       },
     ],
+    coordinates: [52.3909553943508, 4.85309666406198],
   },
   {
     id: `02-oz7zeOXFl1dNgsSr60r3f`,
@@ -91,6 +92,7 @@ const offers = [
         date: `2019-04-24`,
       }
     ],
+    coordinates: [52.369553943508, 4.85309666406198],
   },
   {
     id: `03-rEgx598pJmxUgHaqEALKj`,
@@ -133,6 +135,7 @@ const offers = [
         date: `2019-04-24`,
       }
     ],
+    coordinates: [52.3909553943508, 4.929309666406198],
   },
   {
     id: `04-OpnK6w_5Cy3CSrWeO8XNl`,
@@ -175,6 +178,7 @@ const offers = [
         date: `2019-04-24`,
       }
     ],
+    coordinates: [52.3809553943508, 4.939309666406198],
   },
   {
     id: `05-U5zCWGoobLGmghMb9YP4W`,
@@ -217,6 +221,7 @@ const offers = [
         date: `2019-04-24`,
       }
     ],
+    coordinates: [52.3739553943508, 4.909309666406198],
   },
   {
     id: `06-BuiwU2MQYV06aPYkBIe2w`,
@@ -259,6 +264,7 @@ const offers = [
         date: `2019-04-24`,
       }
     ],
+    coordinates: [52.3739553943508, 4.909309666406198],
   },
 ];
 
