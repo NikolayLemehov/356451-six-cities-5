@@ -6,6 +6,9 @@ import {offerPropType} from "../../prop-types";
 import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 import OfferCard from "../offer-card/offer-card";
 import CommentForm from "../comment-form/comment-form";
+import Map from "../map/map";
+
+const MAX_VISIBLE_PHOTO = 6;
 
 const Offer = (props) => {
   const {offer, nearOffers} = props;
@@ -39,7 +42,7 @@ const Offer = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.img.slice(0, 6).map((it) => (
+              {offer.img.slice(0, MAX_VISIBLE_PHOTO).map((it) => (
                 <div key={it} className="property__image-wrapper">
                   <img className="property__image" src={`img/${it}`} alt="Photo studio"/>
                 </div>
@@ -148,7 +151,13 @@ const Offer = (props) => {
               </section>
             </div>
           </div>
-          <section className="property__map map"/>
+
+          <section className="property__map map">
+            <Map
+              offers={nearOffers}
+              city={offer.city}
+            />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">

@@ -9,5 +9,13 @@ const OfferCardType = {
   FAVORITE: `favorite`,
 };
 const RATING_COEFFICIENT = 20;
+const CityName = {
+  PARIS: `Paris`,
+  COLOGNE: `Cologne`,
+  BRUSSELS: `Brussels`,
+  AMSTERDAM: `Amsterdam`,
+  HAMBURG: `Hamburg`,
+  DUSSELDORF: `Dusseldorf`,
+};
 
-export {PlaceType, OfferCardType, RATING_COEFFICIENT};
+export {PlaceType, OfferCardType, RATING_COEFFICIENT, CityName};
