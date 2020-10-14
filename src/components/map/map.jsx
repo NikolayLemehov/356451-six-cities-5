@@ -2,11 +2,13 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {offerPropType} from "../../prop-types";
+import {cityOption} from "../../mocks/cities";
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    this.city = [52.38333, 4.9];
+    this.city = props.city;
+    this.cityCoordinates = cityOption[this.city.toLowerCase()].coordinates;
     this.zoom = 12;
   }
 
@@ -17,19 +19,19 @@ class Map extends PureComponent {
       iconSize: [30, 30]
     });
     const map = leaflet.map(`map`, {
-      center: this.city,
+      center: this.cityCoordinates,
       zoom: this.zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(this.city, this.zoom);
+    map.setView(this.cityCoordinates, this.zoom);
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
     .addTo(map);
     leaflet
-      .marker(this.city, {icon, title: `Amsterdam`})
+      .marker(this.cityCoordinates, {icon, title: `Amsterdam`})
       .addTo(map);
     offers.forEach(({coordinates, title}) => {
       leaflet
@@ -40,15 +42,14 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <section className="cities__map map">
-        <div id="map" style={{height: `100%`}}/>
-      </section>
+      <div id="map" style={{height: `100%`}}/>
     );
   }
 }
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
+  city: PropTypes.string.isRequired,
 };
 
 

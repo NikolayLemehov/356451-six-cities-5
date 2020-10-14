@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
 import {offerPropType} from "../../prop-types";
-import {OfferCardType} from "../../const";
+import {OfferCardType, CityName} from "../../const";
 
-const CURRENT_CITY = `Amsterdam`;
+const currentCity = CityName.AMSTERDAM;
 const Main = (props) => {
   const {offerCount, offers} = props;
-  const currentOffers = offers.filter((it) => it.city === CURRENT_CITY);
+  const currentOffers = offers.filter((it) => it.city === currentCity);
 
   return (
     <div className="page page--gray page--main">
@@ -99,9 +99,12 @@ const Main = (props) => {
               />
             </section>
             <div className="cities__right-section">
-              <Map
-                offers={currentOffers}
-              />
+              <section className="cities__map map">
+                <Map
+                  offers={currentOffers}
+                  city={currentCity}
+                />
+              </section>
             </div>
           </div>
         </div>

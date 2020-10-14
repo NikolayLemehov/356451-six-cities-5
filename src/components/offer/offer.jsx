@@ -6,6 +6,7 @@ import {offerPropType} from "../../prop-types";
 import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 import OfferCard from "../offer-card/offer-card";
 import CommentForm from "../comment-form/comment-form";
+import Map from "../map/map";
 
 const MAX_VISIBLE_PHOTO = 6;
 
@@ -150,7 +151,13 @@ const Offer = (props) => {
               </section>
             </div>
           </div>
-          <section className="property__map map"/>
+
+          <section className="property__map map">
+            <Map
+              offers={nearOffers}
+              city={offer.city}
+            />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">

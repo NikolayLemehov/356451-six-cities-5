@@ -1,4 +1,4 @@
-import {PlaceType} from "../const";
+import {PlaceType, CityName} from "../const";
 
 const offers = [
   {
@@ -29,7 +29,7 @@ const offers = [
       `cableTV`,
     ],
     isBookMark: false,
-    city: `Amsterdam`,
+    city: CityName.AMSTERDAM,
     host: `Angelina`,
     hostTop: true,
     avatar: `avatar-angelina.jpg`,
@@ -79,7 +79,7 @@ const offers = [
       `cableTV`,
     ],
     isBookMark: true,
-    city: `Amsterdam`,
+    city: CityName.AMSTERDAM,
     host: `Angelina`,
     hostTop: true,
     avatar: `avatar-angelina.jpg`,
@@ -122,7 +122,7 @@ const offers = [
       `cableTV`,
     ],
     isBookMark: false,
-    city: `Amsterdam`,
+    city: CityName.AMSTERDAM,
     host: `Angelina`,
     hostTop: true,
     avatar: `avatar-angelina.jpg`,
@@ -165,7 +165,7 @@ const offers = [
       `cableTV`,
     ],
     isBookMark: false,
-    city: `Amsterdam`,
+    city: CityName.AMSTERDAM,
     host: `Angelina`,
     hostTop: true,
     avatar: `avatar-angelina.jpg`,
@@ -208,7 +208,7 @@ const offers = [
       `cableTV`,
     ],
     isBookMark: true,
-    city: `Amsterdam`,
+    city: CityName.AMSTERDAM,
     host: `Angelina`,
     hostTop: true,
     avatar: `avatar-angelina.jpg`,
@@ -251,7 +251,7 @@ const offers = [
       `cableTV`,
     ],
     isBookMark: true,
-    city: `Cologne`,
+    city: CityName.COLOGNE,
     host: `Angelina`,
     hostTop: true,
     avatar: `avatar-angelina.jpg`,
