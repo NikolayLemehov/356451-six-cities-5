@@ -154,7 +154,7 @@ const Offer = (props) => {
 
           <section className="property__map map">
             <Map
-              offers={nearOffers}
+              offers={[offer, ...nearOffers]}
               city={offer.city}
             />
           </section>
