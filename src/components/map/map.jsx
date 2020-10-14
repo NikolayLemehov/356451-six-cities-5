@@ -30,9 +30,6 @@ class Map extends PureComponent {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
     .addTo(map);
-    leaflet
-      .marker(this.cityCoordinates, {icon, title: `Amsterdam`})
-      .addTo(map);
     offers.forEach(({coordinates, title}) => {
       leaflet
         .marker(coordinates, {icon, title})
