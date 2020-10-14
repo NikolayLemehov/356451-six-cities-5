@@ -7,13 +7,9 @@ import {OfferCardType} from "../../const";
 
 const Favorites = (props) => {
   const {bookMarkOffers} = props;
-  const bookMarkOffersCityMap = new Map();
+  const bookMarkOffersCityMap = {};
   bookMarkOffers.forEach((it) => {
-    if (!Array.from(bookMarkOffersCityMap.keys()).some((city) => city === it.city)) {
-      bookMarkOffersCityMap.set(it.city, [it]);
-    } else {
-      bookMarkOffersCityMap.set(it.city, [...(bookMarkOffersCityMap.get(it.city)), it]);
-    }
+    bookMarkOffersCityMap[it.city] = bookMarkOffersCityMap[it.city] ? [...(bookMarkOffersCityMap[it.city]), it] : [it];
   });
 
   return (
@@ -46,7 +42,7 @@ const Favorites = (props) => {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {Array.from(bookMarkOffersCityMap.keys()).map((city) => (
+              {(Object.keys(bookMarkOffersCityMap)).map((city) => (
                 <li key={city} className="favorites__locations-items">
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
@@ -56,7 +52,7 @@ const Favorites = (props) => {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {Array.from(bookMarkOffersCityMap.get(city)).map((offer) => (
+                    {bookMarkOffersCityMap[city].map((offer) => (
                       <OfferCard
                         key={offer.id}
                         offer={offer}
