@@ -10,34 +10,54 @@ class Map extends PureComponent {
     this.city = props.city;
     this.cityCoordinates = cityOption[this.city.toLowerCase()].coordinates;
     this.zoom = 12;
+    this.icon = undefined;
+    this.markers = [];
   }
 
   componentDidMount() {
     const {offers} = this.props;
-    const icon = leaflet.icon({
+    this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
-    const map = leaflet.map(`map`, {
+
+    this.map = leaflet.map(`map`, {
       center: this.cityCoordinates,
       zoom: this.zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(this.cityCoordinates, this.zoom);
+
+    this.map.setView(this.cityCoordinates, this.zoom);
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
-    .addTo(map);
-    leaflet
-      .marker(this.cityCoordinates, {icon, title: `Amsterdam`})
-      .addTo(map);
+    .addTo(this.map);
+
+    this._addMarkersToMap(offers);
+  }
+
+  componentDidUpdate() {
+    const {offers} = this.props;
+    this._removeMarkersFromMap();
+    this._addMarkersToMap(offers);
+  }
+
+  _addMarkersToMap(offers) {
     offers.forEach(({coordinates, title}) => {
-      leaflet
-        .marker(coordinates, {icon, title})
-        .addTo(map);
+      const marker = leaflet
+        .marker(coordinates, {icon: this.icon, title})
+        .addTo(this.map);
+      this.markers = [...this.markers, marker];
     });
+  }
+
+  _removeMarkersFromMap() {
+    this.markers.forEach((it) => {
+      it.removeFrom(this.map);
+    });
+    this.markers = [];
   }
 
   render() {
@@ -51,6 +71,5 @@ Map.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
   city: PropTypes.string.isRequired,
 };
-
 
 export default Map;
