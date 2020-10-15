@@ -8,6 +8,7 @@ import OfferCard from "../offer-card/offer-card";
 import CommentForm from "../comment-form/comment-form";
 import Map from "../map/map";
 
+
 const MAX_VISIBLE_PHOTO = 6;
 
 const Offer = (props) => {
