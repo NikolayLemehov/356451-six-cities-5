@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter, Link} from "react-router-dom";
+import {connect} from "react-redux";
 import Main from "../main/main";
 import Favorites from "../favorites/favorites";
 import Login from "../login/login";
@@ -66,4 +67,10 @@ App.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  offerCount: state.offerCount,
+});
+
+export {App};
+export default connect(mapStateToProps)(App);
