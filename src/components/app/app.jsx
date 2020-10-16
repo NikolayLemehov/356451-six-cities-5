@@ -10,7 +10,6 @@ import {offerPropType} from "../../prop-types";
 
 const App = (props) => {
   const {offers} = props;
-  const bookMarkOffers = offers.filter((it) => it.isBookMark);
 
   return (
     <BrowserRouter>
@@ -19,9 +18,7 @@ const App = (props) => {
           <Main/>
         </Route>
         <Route exact path="/favorites">
-          <Favorites
-            bookMarkOffers={bookMarkOffers}
-          />
+          <Favorites/>
         </Route>
         <Route exact path="/login">
           <Login/>
@@ -60,13 +57,11 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offerCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(offerPropType).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
-  offerCount: state.offerCount,
 });
 
 export {App};

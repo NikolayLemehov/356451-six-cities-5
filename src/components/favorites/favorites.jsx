@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {offerPropType} from "../../prop-types";
 import OfferCard from "../offer-card/offer-card";
 import {OfferCardType} from "../../const";
 
 const Favorites = (props) => {
-  const {bookMarkOffers} = props;
-  const bookMarkOffersCityMap = {};
-  bookMarkOffers.forEach((it) => {
-    bookMarkOffersCityMap[it.city] = bookMarkOffersCityMap[it.city] ? [...(bookMarkOffersCityMap[it.city]), it] : [it];
+  const {bookmarkOffers} = props;
+  const bookmarkOffersByCity = {};
+  bookmarkOffers.forEach((it) => {
+    bookmarkOffersByCity[it.city] = bookmarkOffersByCity[it.city] ? [...(bookmarkOffersByCity[it.city]), it] : [it];
   });
 
   return (
@@ -42,7 +43,7 @@ const Favorites = (props) => {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {(Object.keys(bookMarkOffersCityMap)).map((city) => (
+              {(Object.keys(bookmarkOffersByCity)).map((city) => (
                 <li key={city} className="favorites__locations-items">
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
@@ -52,7 +53,7 @@ const Favorites = (props) => {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {bookMarkOffersCityMap[city].map((offer) => (
+                    {bookmarkOffersByCity[city].map((offer) => (
                       <OfferCard
                         key={offer.id}
                         offer={offer}
@@ -76,8 +77,12 @@ const Favorites = (props) => {
 };
 
 Favorites.propTypes = {
-  bookMarkOffers: PropTypes.arrayOf(offerPropType).isRequired,
+  bookmarkOffers: PropTypes.arrayOf(offerPropType).isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  bookmarkOffers: state.bookmarkOffers,
+});
 
-export default Favorites;
+export {Favorites};
+export default connect(mapStateToProps)(Favorites);

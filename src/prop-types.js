@@ -14,7 +14,7 @@ const offerPropType = PropTypes.shape({
   visitor: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
   option: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isBookMark: PropTypes.bool.isRequired,
+  isBookmark: PropTypes.bool.isRequired,
   city: PropTypes.string.isRequired,
   host: PropTypes.string.isRequired,
   hostTop: PropTypes.bool.isRequired,
