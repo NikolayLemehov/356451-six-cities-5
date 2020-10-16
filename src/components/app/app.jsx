@@ -9,17 +9,14 @@ import Offer from "../offer/offer";
 import {offerPropType} from "../../prop-types";
 
 const App = (props) => {
-  const {offerCount, offers} = props;
+  const {offers} = props;
   const bookMarkOffers = offers.filter((it) => it.isBookMark);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Main
-            offerCount={offerCount}
-            offers={offers}
-          />
+          <Main/>
         </Route>
         <Route exact path="/favorites">
           <Favorites

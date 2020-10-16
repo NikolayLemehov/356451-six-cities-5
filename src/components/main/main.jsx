@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
 import {offerPropType} from "../../prop-types";
@@ -114,8 +115,14 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offerCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(offerPropType).isRequired,
+  offerCount: PropTypes.number.isRequired,
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  offerCount: state.offerCount,
+});
+
+export {Main};
+export default connect(mapStateToProps)(Main);
