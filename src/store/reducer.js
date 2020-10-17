@@ -5,6 +5,9 @@ import {extend} from "../utils";
 import {getBookmarkOffers} from "../game";
 
 const initialState = {
+  cities,
+  currentCityOrder: 3,
+  cityNames: cities.map((it) => it.name),
   city: cities[3].name,
   offers,
   offerCount: 312,

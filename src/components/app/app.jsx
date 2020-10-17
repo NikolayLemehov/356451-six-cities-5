@@ -23,12 +23,6 @@ const App = (props) => {
         <Route exact path="/login">
           <Login/>
         </Route>
-        <Route exact path="/offer">
-          <Offer
-            offer={offers[0]}
-            nearOffers={offers.slice(0, 3)}
-          />
-        </Route>
         <Route path="/offer/:id" exact
           render={({match}) => (
             <Offer

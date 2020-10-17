@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
+import CityTabs from "../city-tabs/city-tabs";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType, CityName} from "../../const";
 
@@ -38,42 +39,7 @@ const Main = (props) => {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+        <CityTabs/>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -117,11 +83,15 @@ const Main = (props) => {
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
   offerCount: PropTypes.number.isRequired,
+  cityNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  currentCityOrder: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
   offerCount: state.offerCount,
+  cityNames: state.cityNames,
+  currentCityOrder: state.currentCityOrder,
 });
 
 export {Main};
