@@ -1,7 +1,7 @@
 import {cities} from "../mocks/cities";
 import {offers} from "../mocks/offers";
-import {ActionType} from "./action";
-import {extend} from "../utils";
+// import {ActionType} from "./action";
+// import {extend} from "../utils";
 import {getBookmarkOffers} from "../game";
 
 const initialState = {
@@ -14,13 +14,13 @@ const initialState = {
   bookmarkOffers: getBookmarkOffers(offers),
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.GET_BOOKMARK_OFFERS:
-      return extend(state, {
-        bookmarkOffers: getBookmarkOffers(state.offers),
-      });
-  }
+const reducer = (state = initialState) => {
+  // switch (action.type) {
+  //   case ActionType.GET_BOOKMARK_OFFERS:
+  //     return extend(state, {
+  //       bookmarkOffers: action.payload,
+  //     });
+  // }
   return state;
 };
 
