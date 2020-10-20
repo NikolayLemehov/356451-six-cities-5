@@ -5,12 +5,10 @@ import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
 import CityTabs from "../city-tabs/city-tabs";
 import {offerPropType} from "../../prop-types";
-import {OfferCardType, CityName} from "../../const";
+import {OfferCardType} from "../../const";
 
-const currentCity = CityName.AMSTERDAM;
 const Main = (props) => {
-  const {offerCount, offers} = props;
-  const currentOffers = offers.filter((it) => it.city === currentCity);
+  const {currentCityOffers, currentCityName} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -44,7 +42,7 @@ const Main = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offerCount} offers to stay in Amsterdam</b>
+              <b className="places__found">{currentCityOffers.length} offers to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -61,15 +59,15 @@ const Main = (props) => {
                 </ul>
               </form>
               <OfferList
-                offers={currentOffers}
+                offers={currentCityOffers}
                 currentCardType={OfferCardType.MAIN}
               />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  offers={currentOffers}
-                  city={currentCity}
+                  offers={currentCityOffers}
+                  city={currentCityName}
                 />
               </section>
             </div>
@@ -81,17 +79,13 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offers: PropTypes.arrayOf(offerPropType).isRequired,
-  offerCount: PropTypes.number.isRequired,
-  cityNames: PropTypes.arrayOf(PropTypes.string).isRequired,
-  currentCityOrder: PropTypes.number.isRequired,
+  currentCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
+  currentCityName: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  offerCount: state.offerCount,
-  cityNames: state.cityNames,
-  currentCityOrder: state.currentCityOrder,
+  currentCityName: state.currentCityName,
+  currentCityOffers: state.currentCityOffers,
 });
 
 export {Main};

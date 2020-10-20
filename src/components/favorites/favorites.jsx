@@ -7,7 +7,8 @@ import OfferCard from "../offer-card/offer-card";
 import {OfferCardType} from "../../const";
 
 const Favorites = (props) => {
-  const {bookmarkOffers} = props;
+  const {offers} = props;
+  const bookmarkOffers = offers.filter((it) => it.isBookmark);
   const bookmarkOffersByCity = {};
   bookmarkOffers.forEach((it) => {
     bookmarkOffersByCity[it.city] = bookmarkOffersByCity[it.city] ? [...(bookmarkOffersByCity[it.city]), it] : [it];
@@ -77,11 +78,11 @@ const Favorites = (props) => {
 };
 
 Favorites.propTypes = {
-  bookmarkOffers: PropTypes.arrayOf(offerPropType).isRequired,
+  offers: PropTypes.arrayOf(offerPropType).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  bookmarkOffers: state.bookmarkOffers,
+  offers: state.offers,
 });
 
 export {Favorites};

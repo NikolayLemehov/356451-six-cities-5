@@ -1,19 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 
 const CityTabs = (props) => {
-  const {cityNames, currentCityOrder} = props;
-
+  const {cities, currentCityName, onChangeCityFilter} = props;
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cityNames.map((it, i) => (
+          {cities.map((it, i) => (
             <li key={`city-${i}`} className="locations__item">
               <a className={`locations__item-link tabs__item${
-                i === currentCityOrder && ` tabs__item--active`}`} href="#">
-                <span>{it}</span>
+                it.name === currentCityName && ` tabs__item--active`}`} href="#"
+              onClick={(evt) => {
+                evt.preventDefault();
+                onChangeCityFilter(it.name);
+              }}
+              >
+                <span>{it.name}</span>
               </a>
             </li>
           ))}
@@ -24,14 +29,25 @@ const CityTabs = (props) => {
 };
 
 CityTabs.propTypes = {
-  cityNames: PropTypes.arrayOf(PropTypes.string).isRequired,
-  currentCityOrder: PropTypes.number.isRequired,
+  currentCityName: PropTypes.string.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+  })).isRequired,
+  onChangeCityFilter: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  cityNames: state.cityNames,
-  currentCityOrder: state.currentCityOrder,
+  currentCityName: state.currentCityName,
+  cities: state.cities,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeCityFilter(cityName) {
+    dispatch(ActionCreator.changeCityFilter(cityName));
+    dispatch(ActionCreator.getCityOffers(cityName));
+  },
 });
 
 export {CityTabs};
-export default connect(mapStateToProps)(CityTabs);
+export default connect(mapStateToProps, mapDispatchToProps)(CityTabs);
