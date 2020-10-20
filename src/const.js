@@ -1,15 +1,15 @@
-const PlaceType = {
+export const PlaceType = {
   APARTMENT: `Apartment`,
   PRIVATE_ROOM: `Private room`,
 };
 
-const OfferCardType = {
+export const OfferCardType = {
   MAIN: `main`,
   NEAR: `near`,
   FAVORITE: `favorite`,
 };
-const RATING_COEFFICIENT = 20;
-const CityName = {
+export const RATING_COEFFICIENT = 20;
+export const CityName = {
   PARIS: `Paris`,
   COLOGNE: `Cologne`,
   BRUSSELS: `Brussels`,
@@ -17,5 +17,3 @@ const CityName = {
   HAMBURG: `Hamburg`,
   DUSSELDORF: `Dusseldorf`,
 };
-
-export {PlaceType, OfferCardType, RATING_COEFFICIENT, CityName};

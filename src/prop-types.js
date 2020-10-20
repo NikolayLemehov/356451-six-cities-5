@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import {PlaceType} from "./const";
 
-const offerPropType = PropTypes.shape({
+export const offerPropType = PropTypes.shape({
   id: PropTypes.string.isRequired,
   img: PropTypes.arrayOf(PropTypes.string).isRequired,
   smallImg: PropTypes.string.isRequired,
@@ -14,7 +14,7 @@ const offerPropType = PropTypes.shape({
   visitor: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
   option: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isBookMark: PropTypes.bool.isRequired,
+  isBookmark: PropTypes.bool.isRequired,
   city: PropTypes.string.isRequired,
   host: PropTypes.string.isRequired,
   hostTop: PropTypes.bool.isRequired,
@@ -28,4 +28,8 @@ const offerPropType = PropTypes.shape({
   })).isRequired
 });
 
-export {offerPropType};
+export const citiesPropType = PropTypes.arrayOf(PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+}));
+

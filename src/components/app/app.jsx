@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter, Link} from "react-router-dom";
+import {connect} from "react-redux";
 import Main from "../main/main";
 import Favorites from "../favorites/favorites";
 import Login from "../login/login";
@@ -8,31 +9,19 @@ import Offer from "../offer/offer";
 import {offerPropType} from "../../prop-types";
 
 const App = (props) => {
-  const {offerCount, offers} = props;
-  const bookMarkOffers = offers.filter((it) => it.isBookMark);
+  const {offers} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Main
-            offerCount={offerCount}
-            offers={offers}
-          />
+          <Main/>
         </Route>
         <Route exact path="/favorites">
-          <Favorites
-            bookMarkOffers={bookMarkOffers}
-          />
+          <Favorites/>
         </Route>
         <Route exact path="/login">
           <Login/>
-        </Route>
-        <Route exact path="/offer">
-          <Offer
-            offer={offers[0]}
-            nearOffers={offers.slice(0, 3)}
-          />
         </Route>
         <Route path="/offer/:id" exact
           render={({match}) => (
@@ -62,8 +51,12 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offerCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(offerPropType).isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export {App};
+export default connect(mapStateToProps)(App);

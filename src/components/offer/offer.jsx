@@ -57,11 +57,11 @@ const Offer = (props) => {
                   {offer.title}
                 </h1>
                 <button className={`property__bookmark-button ${
-                  offer.isBookMark ? `property__bookmark-button--active ` : ``}button`} type="button">
+                  offer.isBookmark ? `property__bookmark-button--active ` : ``}button`} type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"/>
                   </svg>
-                  <span className="visually-hidden">{offer.isBookMark ? `In` : `To`} bookmarks</span>
+                  <span className="visually-hidden">{offer.isBookmark ? `In` : `To`} bookmarks</span>
                 </button>
               </div>
               <div className="property__rating rating">
