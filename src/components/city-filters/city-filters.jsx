@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
-const CityTabs = (props) => {
+const CityFilters = (props) => {
   const {cities, currentCityName, onChangeCityFilter} = props;
   return (
     <div className="tabs">
@@ -28,7 +28,7 @@ const CityTabs = (props) => {
   );
 };
 
-CityTabs.propTypes = {
+CityFilters.propTypes = {
   currentCityName: PropTypes.string.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -49,5 +49,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {CityTabs};
-export default connect(mapStateToProps, mapDispatchToProps)(CityTabs);
+export {CityFilters};
+export default connect(mapStateToProps, mapDispatchToProps)(CityFilters);

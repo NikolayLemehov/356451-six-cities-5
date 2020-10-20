@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
-import CityTabs from "../city-tabs/city-tabs";
+import CityTabs from "../city-filters/city-filters";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType} from "../../const";
 
