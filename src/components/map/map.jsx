@@ -3,6 +3,7 @@ import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {offerPropType} from "../../prop-types";
 import {cityOption} from "../../mocks/cities";
+import {connect} from "react-redux";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -72,4 +73,9 @@ Map.propTypes = {
   city: PropTypes.string.isRequired,
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  offers: state.currentCityOffers,
+});
+
+export {Map};
+export default connect(mapStateToProps)(Map);
