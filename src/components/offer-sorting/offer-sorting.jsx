@@ -43,8 +43,4 @@ OfferSorting.propTypes = {
   currentCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
 };
 
-// const mapStateToProps = (state) = ({
-//
-// });
-
 export default OfferSorting;
