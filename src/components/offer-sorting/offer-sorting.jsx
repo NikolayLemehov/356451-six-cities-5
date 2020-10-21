@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {offerPropType} from "../../prop-types";
+import {sortTypes} from "../../const";
+import OfferSortingItem from "../offer-sorting-item/offer-sorting-item";
 
 class OfferSorting extends PureComponent {
   constructor(props) {
@@ -29,10 +31,13 @@ class OfferSorting extends PureComponent {
           </svg>
         </span>
         <ul className={`places__options places__options--custom ${isOpened && `places__options--opened`}`}>
-          <li className="places__option places__option--active" tabIndex="0">Popular</li>
-          <li className="places__option" tabIndex="0">Price: low to high</li>
-          <li className="places__option" tabIndex="0">Price: high to low</li>
-          <li className="places__option" tabIndex="0">Top rated first</li>
+          {sortTypes.map((it, i) => (
+            <OfferSortingItem
+              key={`${it}-${i}`}
+              type={it}
+              isActive={i === 0}
+            />
+          ))}
         </ul>
       </form>
     );
