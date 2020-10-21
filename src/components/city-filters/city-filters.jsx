@@ -47,6 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeCityFilter(cityName));
     dispatch(ActionCreator.getCityOffers(cityName));
     dispatch(ActionCreator.getSortedCityOffers());
+    dispatch(ActionCreator.getFirstOfferId());
   },
 });
 

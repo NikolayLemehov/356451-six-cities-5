@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType, RATING_COEFFICIENT} from "../../const";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 
 const OfferCard = (props) => {
-  const {offer, onMouseOverOffer, currentOffer, currentCardType} = props;
+  const {offer, currentCardType, overOfferId, onChangeOfferId} = props;
   const isFavoriteType = currentCardType === OfferCardType.FAVORITE;
   const getClass = (classMain, classNear, classFavorite) => {
     switch (currentCardType) {
@@ -26,8 +28,8 @@ const OfferCard = (props) => {
      place-card`}
     onMouseOver={(evt) => {
       evt.preventDefault();
-      if (currentOffer !== offer) {
-        onMouseOverOffer(offer);
+      if (offer.id !== overOfferId) {
+        onChangeOfferId(offer.id);
       }
     }}>
       {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : false}
@@ -82,7 +84,20 @@ OfferCard.propTypes = {
   offer: offerPropType,
   currentOffer: offerPropType,
   onMouseOverOffer: PropTypes.func.isRequired,
+  onChangeOfferId: PropTypes.func.isRequired,
   currentCardType: PropTypes.string.isRequired,
+  overOfferId: PropTypes.string.isRequired,
 };
 
-export default OfferCard;
+const mapStateToProps = (state) => ({
+  overOfferId: state.overOfferId,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeOfferId(offerId) {
+    dispatch(ActionCreator.getOverOfferId(offerId));
+  },
+});
+
+export {OfferCard};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);

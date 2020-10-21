@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
-import CityTabs from "../city-filters/city-filters";
+import CityFilters from "../city-filters/city-filters";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType} from "../../const";
 import OfferSorting from "../offer-sorting/offer-sorting";
 
 const Main = (props) => {
-  const {currentSortedCityOffers, currentCityName} = props;
+  const {currentSortedCityOffers, currentCityOffers, currentCityName} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -38,7 +38,7 @@ const Main = (props) => {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <CityTabs/>
+        <CityFilters/>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -56,6 +56,7 @@ const Main = (props) => {
               <section className="cities__map map">
                 <Map
                   city={currentCityName}
+                  offers={currentCityOffers}
                 />
               </section>
             </div>
@@ -68,12 +69,14 @@ const Main = (props) => {
 
 Main.propTypes = {
   currentSortedCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
+  currentCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
   currentCityName: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currentCityName: state.currentCityName,
   currentSortedCityOffers: state.currentSortedCityOffers,
+  currentCityOffers: state.currentCityOffers,
 });
 
 export {Main};

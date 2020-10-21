@@ -6,13 +6,13 @@ import {getCityOffers, getSortedOffersByType} from "../core";
 import {SortingType, CityName} from "../const";
 
 const initialState = {
-  cities,
   offers,
+  cities,
   currentCityName: CityName.AMSTERDAM,
   currentCityOffers: undefined,
   currentSortedCityOffers: undefined,
   currentSortType: SortingType.POPULAR,
-  overOffer: cities[0],
+  overOfferId: offers[0].id,
 };
 initialState.currentCityOffers = getCityOffers(offers, initialState.currentCityName);
 initialState.currentSortedCityOffers = getSortedOffersByType(initialState.currentCityOffers, SortingType.POPULAR);
@@ -34,6 +34,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.GET_SORTED_CITY_OFFERS:
       return extend(state, {
         currentSortedCityOffers: getSortedOffersByType(state.currentCityOffers, state.currentSortType),
+      });
+    case ActionType.GET_OVER_OFFER_ID:
+      return extend(state, {
+        overOfferId: action.payload,
+      });
+    case ActionType.GET_FIRST_OFFER_ID:
+      return extend(state, {
+        overOfferId: state.currentSortedCityOffers[0].id,
       });
   }
   return state;
