@@ -35,7 +35,6 @@ class OfferSorting extends PureComponent {
             <OfferSortingItem
               key={`${it}-${i}`}
               type={it}
-              isActive={i === 0}
             />
           ))}
         </ul>
