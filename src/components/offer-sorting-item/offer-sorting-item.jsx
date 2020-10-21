@@ -4,13 +4,14 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
 const OfferSortingItem = (props) => {
-  const {type, currentSortType, onChangeSortedType, onChangeSortedCityOffers} = props;
+  const {type, onCloseMenu, currentSortType, onChangeSortedType, onChangeSortedCityOffers} = props;
 
   return (
     <li className={`places__option ${currentSortType === type && `places__option--active`}`} tabIndex="0"
       onClick={() => {
         onChangeSortedType(type);
         onChangeSortedCityOffers();
+        onCloseMenu();
       }}
     >{type}</li>
   );
@@ -21,6 +22,7 @@ OfferSortingItem.propTypes = {
   currentSortType: PropTypes.string.isRequired,
   onChangeSortedType: PropTypes.func.isRequired,
   onChangeSortedCityOffers: PropTypes.func.isRequired,
+  onCloseMenu: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

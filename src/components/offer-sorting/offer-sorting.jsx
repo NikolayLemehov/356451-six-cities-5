@@ -10,6 +10,11 @@ class OfferSorting extends PureComponent {
     this.state = {
       isOpened: false,
     };
+    this._onCloseMenu = this._onCloseMenu.bind(this);
+  }
+
+  _onCloseMenu() {
+    this.setState({isOpened: false});
   }
 
   render() {
@@ -35,6 +40,7 @@ class OfferSorting extends PureComponent {
             <OfferSortingItem
               key={`${it}-${i}`}
               type={it}
+              onCloseMenu={this._onCloseMenu}
             />
           ))}
         </ul>
