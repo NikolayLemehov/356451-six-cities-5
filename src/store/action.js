@@ -1,6 +1,8 @@
 const ActionType = {
   CHANGE_CITY_FILTER: `CHANGE_CITY_FILTER`,
   GET_CITY_OFFERS: `GET_CITY_OFFERS`,
+  GET_SORTED_TYPE: `GET_SORTED_TYPE`,
+  GET_SORTED_CITY_OFFERS: `GET_SORTED_CITY_OFFERS`,
 };
 
 const ActionCreator = {
@@ -8,9 +10,15 @@ const ActionCreator = {
     type: ActionType.CHANGE_CITY_FILTER,
     payload: cityName,
   }),
-  getCityOffers: (cityName) => ({
+  getCityOffers: () => ({
     type: ActionType.GET_CITY_OFFERS,
-    payload: cityName,
+  }),
+  getSortedType: (sortType) => ({
+    type: ActionType.GET_SORTED_TYPE,
+    payload: sortType,
+  }),
+  getSortedCityOffers: () => ({
+    type: ActionType.GET_SORTED_CITY_OFFERS,
   }),
 };
 

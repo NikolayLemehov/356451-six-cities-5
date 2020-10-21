@@ -10,12 +10,12 @@ const initialState = {
   offers,
   currentCityName: CityName.AMSTERDAM,
   currentCityOffers: undefined,
-  currentCitySortedOffers: undefined,
+  currentSortedCityOffers: undefined,
   currentSortType: SortingType.POPULAR,
   overOffer: cities[0],
 };
 initialState.currentCityOffers = getCityOffers(offers, initialState.currentCityName);
-initialState.currentCitySortedOffers = getSortedOffersByType(initialState.currentCityOffers, SortingType.POPULAR);
+initialState.currentSortedCityOffers = getSortedOffersByType(initialState.currentCityOffers, SortingType.POPULAR);
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -24,9 +24,16 @@ const reducer = (state = initialState, action) => {
         currentCityName: action.payload,
       });
     case ActionType.GET_CITY_OFFERS:
-      const currentOffers = state.offers.filter((it) => it.city === action.payload);
       return extend(state, {
-        currentCityOffers: currentOffers,
+        currentCityOffers: state.offers.filter((it) => it.city === state.currentCityName),
+      });
+    case ActionType.GET_SORTED_TYPE:
+      return extend(state, {
+        currentSortType: action.payload,
+      });
+    case ActionType.GET_SORTED_CITY_OFFERS:
+      return extend(state, {
+        currentSortedCityOffers: getSortedOffersByType(state.currentCityOffers, state.currentSortType),
       });
   }
   return state;
