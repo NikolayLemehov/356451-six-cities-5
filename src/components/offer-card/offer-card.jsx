@@ -22,16 +22,20 @@ const OfferCard = (props) => {
     }
   };
 
+  const onSetNewId = () => {
+    if (offer.id !== overOfferId) {
+      onChangeOfferId(offer.id);
+    }
+  };
+
   return (
     <article className={`
     ${getClass(`cities__place-card`, `near-places__card`, `favorites__card`)}
      place-card`}
-    onMouseOver={(evt) => {
+    onMouseOver={currentCardType === OfferCardType.MAIN ? (evt) => {
       evt.preventDefault();
-      if (offer.id !== overOfferId) {
-        onChangeOfferId(offer.id);
-      }
-    }}>
+      onSetNewId();
+    } : undefined}>
       {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : false}
       <div className={`
        ${getClass(
@@ -39,7 +43,9 @@ const OfferCard = (props) => {
         `near-places__image-wrapper`,
         `favorites__image-wrapper`)}
        place-card__image-wrapper`}>
-        <Link to={`/offer/${offer.id}`}>
+        <Link to={`/offer/${offer.id}`}
+          onClick={currentCardType !== OfferCardType.MAIN ? onSetNewId : undefined}
+        >
           <img className="place-card__image"
             src={`img/${isFavoriteType ? offer.smallImg : offer.img[0]}`}
             width={isFavoriteType ? `150` : `260`}
@@ -68,7 +74,9 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
+          <Link to={`/offer/${offer.id}`}
+            onClick={currentCardType !== OfferCardType.MAIN ? onSetNewId : undefined}
+          >{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
@@ -77,7 +85,8 @@ const OfferCard = (props) => {
 };
 
 OfferCard.defaultProps = {
-  onMouseOverOffer: () => {},
+  onMouseOverOffer: () => {
+  },
 };
 
 OfferCard.propTypes = {
