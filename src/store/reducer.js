@@ -41,7 +41,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.GET_FIRST_OFFER_ID:
       return extend(state, {
-        overOfferId: state.currentSortedCityOffers[0].id,
+        overOfferId: state.currentSortedCityOffers[0] ? state.currentSortedCityOffers[0].id : false,
       });
   }
   return state;
