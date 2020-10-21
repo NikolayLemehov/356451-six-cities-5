@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
-import CityFilters from "../city-filters/city-filters";
+import CityFilterList from "../city-filter-list/city-filter-list";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType} from "../../const";
 import OfferSorting from "../offer-sorting/offer-sorting";
@@ -38,7 +38,7 @@ const Main = (props) => {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <CityFilters/>
+        <CityFilterList/>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">

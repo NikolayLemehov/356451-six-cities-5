@@ -1,5 +1,5 @@
-import {cities} from "../mocks/cities";
 import {offers} from "../mocks/offers";
+import {cities} from "../mocks/cities";
 import {ActionType} from "./action";
 import {extend} from "../utils";
 import {getCityOffers, getSortedOffersByType} from "../core";
