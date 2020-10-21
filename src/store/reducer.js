@@ -2,16 +2,20 @@ import {cities} from "../mocks/cities";
 import {offers} from "../mocks/offers";
 import {ActionType} from "./action";
 import {extend} from "../utils";
-import {getCityOffers} from "../core";
+import {getCityOffers, getSortedOffersByType} from "../core";
+import {SortingType, CityName} from "../const";
 
-const INITIAL_CITY_ORDER = 3;
 const initialState = {
   cities,
   offers,
-  currentCityName: cities[INITIAL_CITY_ORDER].name,
-  currentCityOffers: getCityOffers(offers, cities[INITIAL_CITY_ORDER].name),
+  currentCityName: CityName.AMSTERDAM,
+  currentCityOffers: undefined,
+  currentCitySortedOffers: undefined,
+  currentSortType: SortingType.POPULAR,
   overOffer: cities[0],
 };
+initialState.currentCityOffers = getCityOffers(offers, initialState.currentCityName);
+initialState.currentCitySortedOffers = getSortedOffersByType(initialState.currentCityOffers, SortingType.POPULAR);
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {

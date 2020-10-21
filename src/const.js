@@ -17,7 +17,7 @@ export const CityName = {
   HAMBURG: `Hamburg`,
   DUSSELDORF: `Dusseldorf`,
 };
-const SortingType = {
+export const SortingType = {
   POPULAR: `Popular`,
   price: {
     LOW_TO_HIGH: `Price: low to high`,
