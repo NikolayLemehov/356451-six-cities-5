@@ -9,7 +9,7 @@ import {OfferCardType} from "../../const";
 import OfferSorting from "../offer-sorting/offer-sorting";
 
 const Main = (props) => {
-  const {currentCityOffers, currentCityName} = props;
+  const {currentSortedCityOffers, currentCityName} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -43,19 +43,19 @@ const Main = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{currentCityOffers.length} offers to stay in {currentCityName}</b>
+              <b className="places__found">{currentSortedCityOffers.length} offers to stay in {currentCityName}</b>
               <OfferSorting
-                currentCityOffers={currentCityOffers}
+                currentCityOffers={currentSortedCityOffers}
               />
               <OfferList
-                offers={currentCityOffers}
+                offers={currentSortedCityOffers}
                 currentCardType={OfferCardType.MAIN}
               />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  offers={currentCityOffers}
+                  offers={currentSortedCityOffers}
                   city={currentCityName}
                 />
               </section>
@@ -68,13 +68,13 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  currentCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
+  currentSortedCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
   currentCityName: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currentCityName: state.currentCityName,
-  currentCityOffers: state.currentCityOffers,
+  currentSortedCityOffers: state.currentSortedCityOffers,
 });
 
 export {Main};

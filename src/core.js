@@ -4,13 +4,13 @@ export const getCityOffers = (offers, city) => offers.filter((it) => it.city ===
 export const getSortedOffersByType = (offers, sortType) => {
   switch (sortType) {
     case SortingType.POPULAR:
-      return offers;
+      return offers.slice();
     case SortingType.price.LOW_TO_HIGH:
-      return offers.sort((a, b) => a.price - b.price);
+      return offers.slice().sort((a, b) => a.price - b.price);
     case SortingType.price.HIGH_TO_LOW:
-      return offers.sort((a, b) => b.price - a.price);
+      return offers.slice().sort((a, b) => b.price - a.price);
     case SortingType.RATE:
-      return offers.sort((a, b) => a.rating - b.rating);
+      return offers.slice().sort((a, b) => b.rating - a.rating);
   }
   return offers;
 };
