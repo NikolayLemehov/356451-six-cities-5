@@ -32,9 +32,11 @@ const OfferCard = (props) => {
     <article className={`
     ${getClass(`cities__place-card`, `near-places__card`, `favorites__card`)}
      place-card`}
-    onMouseOver={currentCardType === OfferCardType.MAIN ? (evt) => {
-      evt.preventDefault();
+    onMouseEnter={currentCardType === OfferCardType.MAIN ? () => {
       onSetNewId();
+    } : undefined}
+    onMouseLeave={currentCardType === OfferCardType.MAIN ? () => {
+      onChangeOfferId(``);
     } : undefined}>
       {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : false}
       <div className={`

@@ -12,7 +12,7 @@ const initialState = {
   currentCityOffers: undefined,
   currentSortedCityOffers: undefined,
   currentSortType: SortingType.POPULAR,
-  overOfferId: offers[0].id,
+  overOfferId: ``,
 };
 initialState.currentCityOffers = getCityOffers(offers, initialState.currentCityName);
 initialState.currentSortedCityOffers = getSortedOffersByType(initialState.currentCityOffers, SortingType.POPULAR);
