@@ -23,19 +23,19 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         currentCityName: action.payload,
       });
-    case ActionType.GET_CITY_OFFERS:
+    case ActionType.SET_CITY_OFFERS:
       return extend(state, {
         currentCityOffers: state.offers.filter((it) => it.city === state.currentCityName),
       });
-    case ActionType.GET_SORTED_TYPE:
+    case ActionType.SET_SORTED_TYPE:
       return extend(state, {
         currentSortType: action.payload,
       });
-    case ActionType.GET_SORTED_CITY_OFFERS:
+    case ActionType.SET_SORTED_CITY_OFFERS:
       return extend(state, {
         currentSortedCityOffers: getSortedOffersByType(state.currentCityOffers, state.currentSortType),
       });
-    case ActionType.GET_OVER_OFFER_ID:
+    case ActionType.SET_OVER_OFFER_ID:
       return extend(state, {
         overOfferId: action.payload,
       });

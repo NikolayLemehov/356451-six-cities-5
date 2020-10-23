@@ -31,10 +31,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeSortedType(sortedType) {
-    dispatch(ActionCreator.getSortedType(sortedType));
+    dispatch(ActionCreator.setSortedType(sortedType));
   },
   onChangeSortedCityOffers() {
-    dispatch(ActionCreator.getSortedCityOffers());
+    dispatch(ActionCreator.setSortedCityOffers());
   },
 });
 

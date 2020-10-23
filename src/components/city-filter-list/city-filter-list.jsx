@@ -45,8 +45,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onChangeCityFilter(cityName) {
     dispatch(ActionCreator.changeCityFilter(cityName));
-    dispatch(ActionCreator.getCityOffers(cityName));
-    dispatch(ActionCreator.getSortedCityOffers());
+    dispatch(ActionCreator.setCityOffers(cityName));
+    dispatch(ActionCreator.setSortedCityOffers());
     // dispatch(ActionCreator.getFirstOfferId());
   },
 });

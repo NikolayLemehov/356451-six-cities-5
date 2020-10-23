@@ -106,7 +106,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeOfferId(offerId) {
-    dispatch(ActionCreator.getOverOfferId(offerId));
+    dispatch(ActionCreator.setOverOfferId(offerId));
   },
 });
 
