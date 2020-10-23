@@ -1,17 +1,21 @@
-import {cities} from "../mocks/cities";
 import {offers} from "../mocks/offers";
+import {cities} from "../mocks/cities";
 import {ActionType} from "./action";
 import {extend} from "../utils";
-import {getCityOffers} from "../core";
+import {getCityOffers, getSortedOffersByType} from "../core";
+import {SortingType, CityName} from "../const";
 
-const INITIAL_CITY_ORDER = 3;
 const initialState = {
-  cities,
   offers,
-  currentCityName: cities[INITIAL_CITY_ORDER].name,
-  currentCityOffers: getCityOffers(offers, cities[INITIAL_CITY_ORDER].name),
-  overOffer: cities[0],
+  cities,
+  currentCityName: CityName.AMSTERDAM,
+  currentCityOffers: undefined,
+  currentSortedCityOffers: undefined,
+  currentSortType: SortingType.POPULAR,
+  overOfferId: ``,
 };
+initialState.currentCityOffers = getCityOffers(offers, initialState.currentCityName);
+initialState.currentSortedCityOffers = getSortedOffersByType(initialState.currentCityOffers, SortingType.POPULAR);
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -19,10 +23,21 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         currentCityName: action.payload,
       });
-    case ActionType.GET_CITY_OFFERS:
-      const currentOffers = state.offers.filter((it) => it.city === action.payload);
+    case ActionType.SET_CITY_OFFERS:
       return extend(state, {
-        currentCityOffers: currentOffers,
+        currentCityOffers: state.offers.filter((it) => it.city === state.currentCityName),
+      });
+    case ActionType.SET_SORTED_TYPE:
+      return extend(state, {
+        currentSortType: action.payload,
+      });
+    case ActionType.SET_SORTED_CITY_OFFERS:
+      return extend(state, {
+        currentSortedCityOffers: getSortedOffersByType(state.currentCityOffers, state.currentSortType),
+      });
+    case ActionType.SET_OVER_OFFER_ID:
+      return extend(state, {
+        overOfferId: action.payload,
       });
   }
   return state;

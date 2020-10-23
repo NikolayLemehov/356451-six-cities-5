@@ -3,6 +3,7 @@ import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {offerPropType} from "../../prop-types";
 import {cityOption} from "../../mocks/cities";
+import {connect} from "react-redux";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -11,6 +12,7 @@ class Map extends PureComponent {
     this.cityCoordinates = cityOption[this.city.toLowerCase()].coordinates;
     this.zoom = 12;
     this.icon = undefined;
+    this.activeIcon = undefined;
     this.markers = [];
   }
 
@@ -18,6 +20,10 @@ class Map extends PureComponent {
     const {offers} = this.props;
     this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
+      iconSize: [30, 30]
+    });
+    this.activeIcon = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
       iconSize: [30, 30]
     });
 
@@ -45,9 +51,11 @@ class Map extends PureComponent {
   }
 
   _addMarkersToMap(offers) {
-    offers.forEach(({coordinates, title}) => {
+    const {overOfferId} = this.props;
+    offers.forEach(({coordinates, title, id}) => {
+      const currentIcon = overOfferId === id ? this.activeIcon : this.icon;
       const marker = leaflet
-        .marker(coordinates, {icon: this.icon, title})
+        .marker(coordinates, {icon: currentIcon, title})
         .addTo(this.map);
       this.markers = [...this.markers, marker];
     });
@@ -70,6 +78,12 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
   city: PropTypes.string.isRequired,
+  overOfferId: PropTypes.string.isRequired,
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  overOfferId: state.overOfferId,
+});
+
+export {Map};
+export default connect(mapStateToProps)(Map);

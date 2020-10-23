@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType, RATING_COEFFICIENT} from "../../const";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 
 const OfferCard = (props) => {
-  const {offer, onMouseOverOffer, currentOffer, currentCardType} = props;
+  const {offer, currentCardType, overOfferId, onChangeOfferId} = props;
   const isFavoriteType = currentCardType === OfferCardType.FAVORITE;
   const getClass = (classMain, classNear, classFavorite) => {
     switch (currentCardType) {
@@ -20,16 +22,22 @@ const OfferCard = (props) => {
     }
   };
 
+  const onSetNewId = () => {
+    if (offer.id !== overOfferId) {
+      onChangeOfferId(offer.id);
+    }
+  };
+
   return (
     <article className={`
     ${getClass(`cities__place-card`, `near-places__card`, `favorites__card`)}
      place-card`}
-    onMouseOver={(evt) => {
-      evt.preventDefault();
-      if (currentOffer !== offer) {
-        onMouseOverOffer(offer);
-      }
-    }}>
+    onMouseEnter={currentCardType === OfferCardType.MAIN ? () => {
+      onSetNewId();
+    } : undefined}
+    onMouseLeave={currentCardType === OfferCardType.MAIN ? () => {
+      onChangeOfferId(``);
+    } : undefined}>
       {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : false}
       <div className={`
        ${getClass(
@@ -37,7 +45,9 @@ const OfferCard = (props) => {
         `near-places__image-wrapper`,
         `favorites__image-wrapper`)}
        place-card__image-wrapper`}>
-        <Link to={`/offer/${offer.id}`}>
+        <Link to={`/offer/${offer.id}`}
+          onClick={currentCardType !== OfferCardType.MAIN ? onSetNewId : undefined}
+        >
           <img className="place-card__image"
             src={`img/${isFavoriteType ? offer.smallImg : offer.img[0]}`}
             width={isFavoriteType ? `150` : `260`}
@@ -66,7 +76,9 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
+          <Link to={`/offer/${offer.id}`}
+            onClick={currentCardType !== OfferCardType.MAIN ? onSetNewId : undefined}
+          >{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
@@ -75,14 +87,28 @@ const OfferCard = (props) => {
 };
 
 OfferCard.defaultProps = {
-  onMouseOverOffer: () => {},
+  onMouseOverOffer: () => {
+  },
 };
 
 OfferCard.propTypes = {
   offer: offerPropType,
   currentOffer: offerPropType,
   onMouseOverOffer: PropTypes.func.isRequired,
+  onChangeOfferId: PropTypes.func.isRequired,
   currentCardType: PropTypes.string.isRequired,
+  overOfferId: PropTypes.string.isRequired,
 };
 
-export default OfferCard;
+const mapStateToProps = (state) => ({
+  overOfferId: state.overOfferId,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeOfferId(offerId) {
+    dispatch(ActionCreator.setOverOfferId(offerId));
+  },
+});
+
+export {OfferCard};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);
