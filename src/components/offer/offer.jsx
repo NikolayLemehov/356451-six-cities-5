@@ -7,7 +7,7 @@ import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 import OfferCard from "../offer-card/offer-card";
 import CommentForm from "../comment-form/comment-form";
 import Map from "../map/map";
-import withCommentForm from "../../hocs/with-comment-form";
+import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
 
 const CommentFormWrapper = withCommentForm(CommentForm);
 const MAX_VISIBLE_PHOTO = 6;
