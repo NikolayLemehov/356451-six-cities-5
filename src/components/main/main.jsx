@@ -4,9 +4,12 @@ import {connect} from "react-redux";
 import OfferList from "../offer-list/offer-list";
 import Map from "../map/map";
 import CityFilterList from "../city-filter-list/city-filter-list";
+import OfferSorting from "../offer-sorting/offer-sorting";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType} from "../../const";
-import OfferSorting from "../offer-sorting/offer-sorting";
+import withOpening from "../../hocs/withOpening/withOpening";
+
+const OfferSortingWrapper = withOpening(OfferSorting);
 
 const Main = (props) => {
   const {currentSortedCityOffers, currentCityOffers, currentCityName} = props;
@@ -44,9 +47,7 @@ const Main = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{currentSortedCityOffers.length} offers to stay in {currentCityName}</b>
-              <OfferSorting
-                currentCityOffers={currentSortedCityOffers}
-              />
+              <OfferSortingWrapper/>
               <OfferList
                 offers={currentSortedCityOffers}
                 currentCardType={OfferCardType.MAIN}
