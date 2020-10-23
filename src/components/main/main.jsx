@@ -66,7 +66,10 @@ const Main = (props) => {
                   </section>
                 </div>
               </Fragment>
-            ) : <MainEmpty/>}
+            )
+              : <MainEmpty
+                currentCityName={currentCityName}
+              />}
           </div>
         </div>
       </main>
