@@ -4,7 +4,6 @@ const ActionType = {
   GET_SORTED_TYPE: `GET_SORTED_TYPE`,
   GET_SORTED_CITY_OFFERS: `GET_SORTED_CITY_OFFERS`,
   GET_OVER_OFFER_ID: `GET_OVER_OFFER_ID`,
-  GET_FIRST_OFFER_ID: `GET_FIRST_OFFER_ID`,
 };
 
 const ActionCreator = {
@@ -25,9 +24,6 @@ const ActionCreator = {
   getOverOfferId: (offerId) => ({
     type: ActionType.GET_OVER_OFFER_ID,
     payload: offerId,
-  }),
-  getFirstOfferId: () => ({
-    type: ActionType.GET_FIRST_OFFER_ID,
   }),
 };
 
