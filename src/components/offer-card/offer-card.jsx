@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
+import {setOverOfferId} from "../../store/action";
 
 const OfferCard = (props) => {
   const {offer, currentCardType, overOfferId, onChangeOfferId} = props;
@@ -106,7 +106,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeOfferId(offerId) {
-    dispatch(ActionCreator.setOverOfferId(offerId));
+    dispatch(setOverOfferId(offerId));
   },
 });
 
