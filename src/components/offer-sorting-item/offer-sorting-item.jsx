@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
+import {setSortedType, setSortedCityOffers} from "../../store/action";
 
 const OfferSortingItem = (props) => {
   const {type, onCloseMenu, currentSortType, onChangeSortedType, onChangeSortedCityOffers} = props;
@@ -31,10 +31,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeSortedType(sortedType) {
-    dispatch(ActionCreator.setSortedType(sortedType));
+    dispatch(setSortedType(sortedType));
   },
   onChangeSortedCityOffers() {
-    dispatch(ActionCreator.setSortedCityOffers());
+    dispatch(setSortedCityOffers());
   },
 });
 
