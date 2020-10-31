@@ -28,6 +28,10 @@ const OfferCard = (props) => {
     }
   };
 
+  const handleBookmarkClick = (evt) => {
+    evt.preventDefault();
+  };
+
   return (
     <article className={`
     ${getClass(`cities__place-card`, `near-places__card`, `favorites__card`)}
@@ -62,7 +66,10 @@ const OfferCard = (props) => {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className={`place-card__bookmark-button ${
-            offer.isBookmark ? ` place-card__bookmark-button--active ` : ``}button`} type="button">
+            offer.isBookmark ? ` place-card__bookmark-button--active ` : ``}button`}
+          type="button"
+          onClick={handleBookmarkClick}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"/>
             </svg>

@@ -40,3 +40,11 @@ const getParsedOffer = (data) => {
   };
 };
 export const getParsedOffers = (dataArray) => dataArray.map((it) => getParsedOffer(it));
+export const getParsedAuthInfo = (data) => {
+  return {
+    id: data[`id`],
+    email: data[`email`],
+    avatarUrl: data[`avatar_url`],
+    isPro: data[`is_pro`],
+  };
+};

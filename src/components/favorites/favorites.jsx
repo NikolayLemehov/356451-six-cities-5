@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {offerPropType} from "../../prop-types";
 import OfferCard from "../offer-card/offer-card";
-import {OfferCardType} from "../../const";
+import {AppRoute, OfferCardType} from "../../const";
 
 const Favorites = (props) => {
   const {offers} = props;
@@ -20,7 +20,7 @@ const Favorites = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link className="header__logo-link" to={`/`}>
+              <Link className="header__logo-link" to={AppRoute.MAIN}>
                 <img className="header__logo" src={`img/logo.svg`} alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
@@ -69,7 +69,7 @@ const Favorites = (props) => {
         </div>
       </main>
       <footer className="footer container">
-        <Link className="footer__logo-link" to={`/`}>
+        <Link className="footer__logo-link" to={AppRoute.MAIN}>
           <img className="footer__logo" src={`img/logo.svg`} alt="6 cities logo" width="64" height="33"/>
         </Link>
       </footer>
