@@ -30,3 +30,7 @@ export const sortTypes = [
   SortingType.PRICE_HIGH_TO_LOW,
   SortingType.RATE,
 ];
+
+export const APIRoute = {
+  OFFERS: `/hotels`,
+};

@@ -1,12 +1,12 @@
-import {offers} from "../mocks/offers";
+// import {offers} from "../mocks/offers";
 import {cities} from "../mocks/cities";
 import {ActionType} from "./action";
 import {extend} from "../utils";
-import {getCityOffers, getSortedOffersByType} from "../core";
+import {getSortedOffersByType} from "../core";
 import {SortingType, CityName} from "../const";
 
 const initialState = {
-  offers,
+  offers: [],
   cities,
   currentCityName: CityName.AMSTERDAM,
   currentCityOffers: undefined,
@@ -14,8 +14,6 @@ const initialState = {
   currentSortType: SortingType.POPULAR,
   overOfferId: ``,
 };
-initialState.currentCityOffers = getCityOffers(offers, initialState.currentCityName);
-initialState.currentSortedCityOffers = getSortedOffersByType(initialState.currentCityOffers, SortingType.POPULAR);
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -38,6 +36,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_OVER_OFFER_ID:
       return extend(state, {
         overOfferId: action.payload,
+      });
+    case ActionType.LOAD_OFFERS:
+      return extend(state, {
+        offers: action.payload,
       });
   }
   return state;

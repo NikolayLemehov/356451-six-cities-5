@@ -4,6 +4,7 @@ export const ActionType = {
   SET_SORTED_TYPE: `SET_SORTED_TYPE`,
   SET_SORTED_CITY_OFFERS: `SET_SORTED_CITY_OFFERS`,
   SET_OVER_OFFER_ID: `SET_OVER_OFFER_ID`,
+  LOAD_OFFERS: `LOAD_OFFERS`,
 };
 
 export const changeCityFilter = (cityName) => ({
@@ -23,4 +24,8 @@ export const setSortedCityOffers = () => ({
 export const setOverOfferId = (offerId) => ({
   type: ActionType.SET_OVER_OFFER_ID,
   payload: offerId,
+});
+export const loadOffers = (offers) => ({
+  type: ActionType.LOAD_OFFERS,
+  payload: offers,
 });

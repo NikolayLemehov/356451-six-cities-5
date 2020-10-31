@@ -49,7 +49,7 @@ const OfferCard = (props) => {
           onClick={currentCardType !== OfferCardType.MAIN ? onSetNewId : undefined}
         >
           <img className="place-card__image"
-            src={`img/${isFavoriteType ? offer.smallImg : offer.img[0]}`}
+            src={offer.smallImg}
             width={isFavoriteType ? `150` : `260`}
             height={isFavoriteType ? `110` : `200`}
             alt="Place image"/>

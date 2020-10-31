@@ -2,15 +2,11 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {offerPropType} from "../../prop-types";
-import {cityOption} from "../../mocks/cities";
 import {connect} from "react-redux";
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    this.city = props.city;
-    this.cityCoordinates = cityOption[this.city.toLowerCase()].coordinates;
-    this.zoom = 12;
     this.icon = undefined;
     this.activeIcon = undefined;
     this.markers = [];
@@ -18,6 +14,8 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const {offers} = this.props;
+    const cityCoordinates = offers[0].cityCoordinates;
+    const cityZoom = offers[0].cityZoom;
     this.icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -28,13 +26,13 @@ class Map extends PureComponent {
     });
 
     this.map = leaflet.map(`map`, {
-      center: this.cityCoordinates,
-      zoom: this.zoom,
+      center: cityCoordinates,
+      zoom: cityZoom,
       zoomControl: false,
       marker: true
     });
 
-    this.map.setView(this.cityCoordinates, this.zoom);
+    this.map.setView(cityCoordinates, cityZoom);
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
@@ -46,6 +44,9 @@ class Map extends PureComponent {
 
   componentDidUpdate() {
     const {offers} = this.props;
+    const cityCoordinates = offers[0].cityCoordinates;
+    const cityZoom = offers[0].cityZoom;
+    this.map.setView(cityCoordinates, cityZoom);
     this._removeMarkersFromMap();
     this._addMarkersToMap(offers);
   }

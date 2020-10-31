@@ -26,12 +26,12 @@ const cities = [
     coordinates: [52.38333, 4.9],
   },
 ];
-const cityOption = cities.reduce((acc, {name, coordinates}) => {
-  acc[name.toLowerCase()] = {
-    name,
-    coordinates,
-  };
-  return acc;
-}, {});
+// const cityOption = cities.reduce((acc, {name, coordinates}) => {
+//   acc[name.toLowerCase()] = {
+//     name,
+//     coordinates,
+//   };
+//   return acc;
+// }, {});
 
-export {cities, cityOption};
+export {cities};

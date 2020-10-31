@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter, Link} from "react-router-dom";
 import {connect} from "react-redux";
 import Main from "../main/main";
-import Favorites from "../favorites/favorites";
-import Login from "../login/login";
-import Offer from "../offer/offer";
+// import Favorites from "../favorites/favorites";
+// import Login from "../login/login";
+// import Offer from "../offer/offer";
 import {offerPropType} from "../../prop-types";
 
-const App = (props) => {
-  const {offers} = props;
+const App = () => {
+  // const {offers} = props;
 
   return (
     <BrowserRouter>
@@ -17,20 +17,20 @@ const App = (props) => {
         <Route exact path="/">
           <Main/>
         </Route>
-        <Route exact path="/favorites">
-          <Favorites/>
-        </Route>
-        <Route exact path="/login">
-          <Login/>
-        </Route>
-        <Route path="/offer/:id" exact
-          render={({match}) => (
-            <Offer
-              offer={offers.find((it) => it.id === match.params.id)}
-              nearOffers={offers.slice(0, 3)}
-            />
-          )}
-        />
+        {/* <Route exact path="/favorites">*/}
+        {/*  <Favorites/>*/}
+        {/* </Route>*/}
+        {/* <Route exact path="/login">*/}
+        {/*  <Login/>*/}
+        {/* </Route>*/}
+        {/* <Route path="/offer/:id" exact*/}
+        {/*  render={({match}) => (*/}
+        {/*    <Offer*/}
+        {/*      offer={offers.find((it) => it.id === match.params.id)}*/}
+        {/*      nearOffers={offers.slice(0, 3)}*/}
+        {/*    />*/}
+        {/*  )}*/}
+        {/* />*/}
         <Route
           render={() => (
             <Fragment>
