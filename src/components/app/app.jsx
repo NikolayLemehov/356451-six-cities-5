@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter, Link} from "react-router-dom";
 import {connect} from "react-redux";
 import Main from "../main/main";
-// import Favorites from "../favorites/favorites";
+import Favorites from "../favorites/favorites";
 // import Login from "../login/login";
 // import Offer from "../offer/offer";
 import {offerPropType} from "../../prop-types";
@@ -17,9 +17,9 @@ const App = () => {
         <Route exact path="/">
           <Main/>
         </Route>
-        {/* <Route exact path="/favorites">*/}
-        {/*  <Favorites/>*/}
-        {/* </Route>*/}
+        <Route exact path="/favorites">
+          <Favorites/>
+        </Route>
         {/* <Route exact path="/login">*/}
         {/*  <Login/>*/}
         {/* </Route>*/}
