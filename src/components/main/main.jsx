@@ -94,8 +94,8 @@ const mapStateToProps = (state) => ({
   currentCityName: state.currentCityName,
   currentSortedCityOffers: state.currentSortedCityOffers,
   currentCityOffers: state.currentCityOffers,
-  userEMail: state.authInfo.email,
-  userAvatar: state.authInfo.avatarUrl,
+  userEMail: state.authorizationStatus === AuthorizationStatus.AUTH ? state.authInfo.email : ``,
+  userAvatar: state.authorizationStatus === AuthorizationStatus.AUTH ? state.authInfo.avatarUrl : ``,
   authorizationStatus: state.authorizationStatus,
 });
 

@@ -15,7 +15,12 @@ export const getSortedOffersByType = (offers, sortType) => {
   }
   return offers;
 };
-const getParsedOffer = (data) => {
+export const getOffersWithNewOfferByIndex = (offers, offer) => {
+  const index = offers.findIndex((it) => it.id === offer.id);
+  offers[index] = offer;
+  return offers;
+};
+export const getParsedOffer = (data) => {
   return {
     id: String(data[`id`]),
     img: data[`images`],

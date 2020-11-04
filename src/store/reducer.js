@@ -1,7 +1,7 @@
 import {cities} from "../mocks/cities";
 import {ActionType} from "./action";
 import {extend} from "../utils";
-import {getSortedOffersByType} from "../core";
+import {getOffersWithNewOfferByIndex, getSortedOffersByType} from "../core";
 import {SortingType, CityName, AuthorizationStatus} from "../const";
 
 const initialState = {
@@ -50,10 +50,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         authorizationStatus: action.payload,
       });
-    // case ActionType.CHANGE_BOOKMARK_OFFER_STATUS:
-    //   return extend(state, {
-    //     offers: action.payload,
-    //   });
+    case ActionType.CHANGE_BOOKMARK_OFFER_STATUS:
+      return extend(state, {
+        offers: getOffersWithNewOfferByIndex(state.offers, action.payload),
+      });
   }
   return state;
 };
