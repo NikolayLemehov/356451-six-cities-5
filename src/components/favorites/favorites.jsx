@@ -4,14 +4,15 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {offerPropType} from "../../prop-types";
 import OfferCard from "../offer-card/offer-card";
-import {AppRoute, OfferCardType} from "../../const";
+import {AppRoute, AuthorizationStatus, OfferCardType} from "../../const";
 
 const Favorites = (props) => {
-  const {bookmarkOffers} = props;
+  const {bookmarkOffers, userAvatar, userEMail, authorizationStatus} = props;
   const bookmarkOffersByCity = {};
   bookmarkOffers.forEach((it) => {
     bookmarkOffersByCity[it.city] = bookmarkOffersByCity[it.city] ? [...(bookmarkOffersByCity[it.city]), it] : [it];
   });
+  const isAuthorizedStatus = authorizationStatus === AuthorizationStatus.AUTH;
 
   return (
     <div className="page">
@@ -27,9 +28,12 @@ const Favorites = (props) => {
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                    <div className="header__avatar-wrapper user__avatar-wrapper"
+                      style={isAuthorizedStatus ? {backgroundImage: `url(${userAvatar})`} : undefined}
+                    >
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    <span className="header__user-name user__name"
+                    >{isAuthorizedStatus ? userEMail : `Sign in`}</span>
                   </a>
                 </li>
               </ul>
@@ -79,10 +83,16 @@ const Favorites = (props) => {
 
 Favorites.propTypes = {
   bookmarkOffers: PropTypes.arrayOf(offerPropType).isRequired,
+  userEMail: PropTypes.string.isRequired,
+  userAvatar: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   bookmarkOffers: state.bookmarkOffers,
+  userEMail: state.authorizationStatus === AuthorizationStatus.AUTH ? state.authInfo.email : ``,
+  userAvatar: state.authorizationStatus === AuthorizationStatus.AUTH ? state.authInfo.avatarUrl : ``,
+  authorizationStatus: state.authorizationStatus,
 });
 
 export {Favorites};
