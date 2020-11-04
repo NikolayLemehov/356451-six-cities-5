@@ -6,6 +6,7 @@ import {SortingType, CityName, AuthorizationStatus} from "../const";
 
 const initialState = {
   offers: [],
+  bookmarkOffers: [],
   authInfo: {},
   cities,
   currentCityName: CityName.PARIS,
@@ -53,6 +54,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_BOOKMARK_OFFER_STATUS:
       return extend(state, {
         offers: getOffersWithNewOfferByIndex(state.offers, action.payload),
+      });
+    case ActionType.LOAD_BOOKMARK_OFFERS:
+      return extend(state, {
+        bookmarkOffers: action.payload,
       });
   }
   return state;

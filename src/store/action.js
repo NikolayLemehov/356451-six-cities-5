@@ -9,6 +9,7 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   CHANGE_BOOKMARK_OFFER_STATUS: `CHANGE_BOOKMARK_OFFER_STATUS`,
+  LOAD_BOOKMARK_OFFERS: `LOAD_BOOKMARK_OFFERS`,
 };
 
 export const changeCityFilter = (cityName) => ({
@@ -48,4 +49,8 @@ export const redirectToRoute = (url) => ({
 export const changeBookmarkOfferStatus = (offer) => ({
   type: ActionType.CHANGE_BOOKMARK_OFFER_STATUS,
   payload: offer,
+});
+export const loadBookmarkOffers = (offers) => ({
+  type: ActionType.LOAD_BOOKMARK_OFFERS,
+  payload: offers,
 });

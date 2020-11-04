@@ -1,6 +1,6 @@
 import {
   changeBookmarkOfferStatus,
-  loadAuthInfo,
+  loadAuthInfo, loadBookmarkOffers,
   loadOffers,
   redirectToRoute,
   requireAuthorization,
@@ -20,6 +20,7 @@ export const fetchOffers = () => (dispatch, getState, api) => (
       currentState = getState();
       dispatch(setSortedCityOffers(getSortedOffersByType(currentState.currentCityOffers, SortingType.POPULAR)));
     })
+    .catch(() => {})
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
@@ -49,13 +50,26 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     })
 );
 
-export const updateOfferBookmarkStatus = (offerId, bookmarkStatus) => (dispatch, _getState, api) => (
+export const updateOfferBookmarkStatus = (offerId, bookmarkStatus) => (dispatch, getState, api) => (
   api.post(`${APIRoute.FAVORITE}/${offerId}/${bookmarkStatus ? 1 : 0}`)
     .then(({data}) => {
       const offer = getParsedOffer(data);
       dispatch(changeBookmarkOfferStatus(offer));
-      dispatch(setCityOffers());
-      dispatch(setSortedCityOffers());
+    })
+    .then(() => {
+      let currentState = getState();
+      dispatch(setCityOffers(getCityOffers(currentState.offers, currentState.currentCityName)));
+      currentState = getState();
+      dispatch(setSortedCityOffers(getSortedOffersByType(currentState.currentCityOffers, SortingType.POPULAR)));
+    })
+    .catch(() => {})
+);
+
+export const fetchBookmarkOffers = () => (dispatch, getState, api) => (
+  api.get(APIRoute.FAVORITE)
+    .then(({data}) => {
+      const bookmarkOffers = getParsedOffers(data);
+      dispatch(loadBookmarkOffers(bookmarkOffers));
     })
     .catch(() => {})
 );

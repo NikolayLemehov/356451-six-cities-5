@@ -5,10 +5,10 @@ import {offerPropType} from "../../prop-types";
 import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 import {connect} from "react-redux";
 import {setOverOfferId} from "../../store/action";
-import {updateOfferBookmarkStatus} from "../../store/api-actions";
+import {fetchBookmarkOffers, updateOfferBookmarkStatus} from "../../store/api-actions";
 
 const OfferCard = (props) => {
-  const {offer, currentCardType, overOfferId, onChangeOfferId, onChangeBookmark} = props;
+  const {offer, currentCardType, overOfferId, onChangeOfferId, onChangeBookmark, onChangeBookmarkOffers} = props;
   const isFavoriteType = currentCardType === OfferCardType.FAVORITE;
   const getClass = (classMain, classNear, classFavorite) => {
     switch (currentCardType) {
@@ -32,6 +32,7 @@ const OfferCard = (props) => {
   const handleBookmarkClick = (evt) => {
     evt.preventDefault();
     onChangeBookmark(offer.id, !offer.isBookmark);
+    onChangeBookmarkOffers();
   };
 
   return (
@@ -87,7 +88,7 @@ const OfferCard = (props) => {
         <h2 className="place-card__name">
           <Link to={`/offer/${offer.id}`}
             onClick={currentCardType !== OfferCardType.MAIN ? onSetNewId : undefined}
-          >{offer.title}</Link>
+          >{offer.id} {offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
@@ -105,6 +106,7 @@ OfferCard.propTypes = {
   currentOffer: offerPropType,
   onMouseOverOffer: PropTypes.func.isRequired,
   onChangeOfferId: PropTypes.func.isRequired,
+  onChangeBookmarkOffers: PropTypes.func.isRequired,
   onChangeBookmark: PropTypes.func.isRequired,
   currentCardType: PropTypes.string.isRequired,
   overOfferId: PropTypes.string.isRequired,
@@ -120,6 +122,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onChangeBookmark(offerId, bookmarkStatus) {
     dispatch(updateOfferBookmarkStatus(offerId, bookmarkStatus));
+  },
+  onChangeBookmarkOffers() {
+    dispatch(fetchBookmarkOffers());
   },
 });
 
