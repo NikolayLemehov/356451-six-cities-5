@@ -25,8 +25,8 @@ OfferSortingItem.propTypes = {
   onCloseMenu: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentSortType: state.currentSortType,
+const mapStateToProps = ({COMMON}) => ({
+  currentSortType: COMMON.currentSortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({

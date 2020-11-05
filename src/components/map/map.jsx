@@ -82,8 +82,8 @@ Map.propTypes = {
   overOfferId: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  overOfferId: state.overOfferId,
+const mapStateToProps = ({COMMON}) => ({
+  overOfferId: COMMON.overOfferId,
 });
 
 export {Map};

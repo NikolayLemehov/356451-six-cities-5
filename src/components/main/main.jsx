@@ -93,13 +93,13 @@ Main.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentCityName: state.currentCityName,
-  currentSortedCityOffers: state.currentSortedCityOffers,
-  currentCityOffers: state.currentCityOffers,
-  userEMail: state.authorizationStatus === AuthorizationStatus.AUTH ? state.authInfo.email : ``,
-  userAvatar: state.authorizationStatus === AuthorizationStatus.AUTH ? state.authInfo.avatarUrl : ``,
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({COMMON, USER}) => ({
+  currentCityName: COMMON.currentCityName,
+  currentSortedCityOffers: COMMON.currentSortedCityOffers,
+  currentCityOffers: COMMON.currentCityOffers,
+  userEMail: USER.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.email : ``,
+  userAvatar: USER.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.avatarUrl : ``,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 export {Main};

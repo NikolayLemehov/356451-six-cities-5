@@ -37,9 +37,9 @@ CityFilterList.propTypes = {
   onChangeCityFilter: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentCityName: state.currentCityName,
-  cities: state.cities,
+const mapStateToProps = ({COMMON}) => ({
+  currentCityName: COMMON.currentCityName,
+  cities: COMMON.cities,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -88,11 +88,11 @@ Favorites.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  bookmarkOffers: state.bookmarkOffers,
-  userEMail: state.authorizationStatus === AuthorizationStatus.AUTH ? state.authInfo.email : ``,
-  userAvatar: state.authorizationStatus === AuthorizationStatus.AUTH ? state.authInfo.avatarUrl : ``,
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({COMMON, USER}) => ({
+  bookmarkOffers: COMMON.bookmarkOffers,
+  userEMail: COMMON.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.email : ``,
+  userAvatar: COMMON.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.avatarUrl : ``,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 export {Favorites};

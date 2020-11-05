@@ -15,10 +15,10 @@ export const fetchOffers = () => (dispatch, getState, api) => (
     .then(({data}) => {
       const offers = getParsedOffers(data);
       dispatch(loadOffers(offers));
-      let currentState = getState();
-      dispatch(setCityOffers(getCityOffers(currentState.offers, currentState.currentCityName)));
-      currentState = getState();
-      dispatch(setSortedCityOffers(getSortedOffersByType(currentState.currentCityOffers, SortingType.POPULAR)));
+      let currentCommon = getState().COMMON;
+      dispatch(setCityOffers(getCityOffers(currentCommon.offers, currentCommon.currentCityName)));
+      currentCommon = getState().COMMON;
+      dispatch(setSortedCityOffers(getSortedOffersByType(currentCommon.currentCityOffers, SortingType.POPULAR)));
     })
     .catch(() => {})
 );
@@ -57,10 +57,10 @@ export const updateOfferBookmarkStatus = (offerId, bookmarkStatus) => (dispatch,
       dispatch(changeBookmarkOfferStatus(offer));
     })
     .then(() => {
-      let currentState = getState();
-      dispatch(setCityOffers(getCityOffers(currentState.offers, currentState.currentCityName)));
-      currentState = getState();
-      dispatch(setSortedCityOffers(getSortedOffersByType(currentState.currentCityOffers, SortingType.POPULAR)));
+      let currentCommon = getState().COMMON;
+      dispatch(setCityOffers(getCityOffers(currentCommon.offers, currentCommon.currentCityName)));
+      currentCommon = getState().COMMON;
+      dispatch(setSortedCityOffers(getSortedOffersByType(currentCommon.currentCityOffers, SortingType.POPULAR)));
     })
     .catch(() => {})
 );

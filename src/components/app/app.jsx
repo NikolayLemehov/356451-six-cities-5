@@ -1,13 +1,13 @@
 import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {Switch, Route, Router, Link} from "react-router-dom";
-import {connect} from "react-redux";
+// import {connect} from "react-redux";
 import Main from "../main/main";
 import Favorites from "../favorites/favorites";
 import Login from "../login/login";
 // import Offer from "../offer/offer";
 import browserHistory from "../../browser-history";
-import {offerPropType} from "../../prop-types";
+// import {offerPropType} from "../../prop-types";
 import {AppRoute} from "../../const";
 
 const App = () => {
@@ -54,14 +54,15 @@ const App = () => {
   );
 };
 
-App.propTypes = {
-  offers: PropTypes.arrayOf(offerPropType).isRequired,
-};
+// App.propTypes = {
+//   offers: PropTypes.arrayOf(offerPropType).isRequired,
+// };
+//
+// const mapStateToProps = (state) => ({
+//   offers: state.offers,
+// });
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-});
-
-export {App};
-export default connect(mapStateToProps)(App);
+export default App;
+// export {App};
+// export default connect(mapStateToProps)(App);
 

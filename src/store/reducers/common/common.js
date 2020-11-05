@@ -1,8 +1,8 @@
-import {cities} from "../mocks/cities";
-import {ActionType} from "./action";
-import {extend} from "../utils";
-import {getOffersWithNewOfferByIndex, getSortedOffersByType} from "../core";
-import {SortingType, CityName, AuthorizationStatus} from "../const";
+import {cities} from "../../../mocks/cities";
+import {CityName, SortingType} from "../../../const";
+import {ActionType} from "../../action";
+import {extend} from "../../../utils";
+import {getOffersWithNewOfferByIndex, getSortedOffersByType} from "../../../core";
 
 const initialState = {
   offers: [],
@@ -14,10 +14,9 @@ const initialState = {
   currentSortedCityOffers: undefined,
   currentSortType: SortingType.POPULAR,
   overOfferId: ``,
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
 };
 
-const reducer = (state = initialState, action) => {
+export const common = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY_FILTER:
       return extend(state, {
@@ -47,10 +46,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         authInfo: action.payload,
       });
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return extend(state, {
-        authorizationStatus: action.payload,
-      });
     case ActionType.CHANGE_BOOKMARK_OFFER_STATUS:
       return extend(state, {
         offers: getOffersWithNewOfferByIndex(state.offers, action.payload),
@@ -62,5 +57,3 @@ const reducer = (state = initialState, action) => {
   }
   return state;
 };
-
-export {reducer};
