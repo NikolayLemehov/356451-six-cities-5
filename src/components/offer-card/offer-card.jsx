@@ -6,9 +6,10 @@ import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 import {connect} from "react-redux";
 import {setOverOfferId} from "../../store/action";
 import {fetchBookmarkOffers, updateOfferBookmarkStatus} from "../../store/api-actions";
+import OfferCardBookmark from "../offer-card-bookmark/offer-card-bookmark";
 
 const OfferCard = (props) => {
-  const {offer, currentCardType, overOfferId, onChangeOfferId, onChangeBookmark, onChangeBookmarkOffers} = props;
+  const {offer, currentCardType, overOfferId, onChangeOfferId} = props;
   const isFavoriteType = currentCardType === OfferCardType.FAVORITE;
   const getClass = (classMain, classNear, classFavorite) => {
     switch (currentCardType) {
@@ -27,12 +28,6 @@ const OfferCard = (props) => {
     if (offer.id !== overOfferId) {
       onChangeOfferId(offer.id);
     }
-  };
-
-  const handleBookmarkClick = (evt) => {
-    evt.preventDefault();
-    onChangeBookmark(offer.id, !offer.isBookmark);
-    onChangeBookmarkOffers();
   };
 
   return (
@@ -68,16 +63,10 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${
-            offer.isBookmark ? ` place-card__bookmark-button--active ` : ``}button`}
-          type="button"
-          onClick={handleBookmarkClick}
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"/>
-            </svg>
-            <span className="visually-hidden">{offer.isBookmark ? `In` : `To`} bookmarks</span>
-          </button>
+          <OfferCardBookmark
+            offerId={offer.id}
+            offerBookmarkStatus={offer.isBookmark}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -110,6 +99,7 @@ OfferCard.propTypes = {
   onChangeBookmark: PropTypes.func.isRequired,
   currentCardType: PropTypes.string.isRequired,
   overOfferId: PropTypes.string.isRequired,
+  offerBookmarkStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({COMMON}) => ({

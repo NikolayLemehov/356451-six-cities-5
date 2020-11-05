@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {changeCityFilter, setCityOffers, setSortedCityOffers} from "../../store/action";
+import {changeCityFilter} from "../../store/action";
 
 const CityFilterList = (props) => {
   const {cities, currentCityName, onChangeCityFilter} = props;
@@ -45,8 +45,6 @@ const mapStateToProps = ({COMMON}) => ({
 const mapDispatchToProps = (dispatch) => ({
   onChangeCityFilter(cityName) {
     dispatch(changeCityFilter(cityName));
-    dispatch(setCityOffers(cityName));
-    dispatch(setSortedCityOffers());
   },
 });
 

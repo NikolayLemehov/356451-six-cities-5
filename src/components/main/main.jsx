@@ -10,6 +10,7 @@ import {offerPropType} from "../../prop-types";
 import {AppRoute, AuthorizationStatus, OfferCardType} from "../../const";
 import withOpening from "../../hocs/withOpening/withOpening";
 import MainEmpty from "../main-empty/main-empty";
+import {getCurrentCityOffers, getCurrentSortedCityOffers} from "../../store/selectors";
 
 const OfferSortingWrapper = withOpening(OfferSorting);
 
@@ -85,22 +86,25 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  currentSortedCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
   currentCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
+  currentSortedCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
   currentCityName: PropTypes.string.isRequired,
   userEMail: PropTypes.string.isRequired,
   userAvatar: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({COMMON, USER}) => ({
-  currentCityName: COMMON.currentCityName,
-  currentSortedCityOffers: COMMON.currentSortedCityOffers,
-  currentCityOffers: COMMON.currentCityOffers,
-  userEMail: USER.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.email : ``,
-  userAvatar: USER.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.avatarUrl : ``,
-  authorizationStatus: USER.authorizationStatus,
-});
+const mapStateToProps = (state) => {
+  const {COMMON, USER} = state;
+  return ({
+    currentCityName: COMMON.currentCityName,
+    currentCityOffers: getCurrentCityOffers(state),
+    currentSortedCityOffers: getCurrentSortedCityOffers(state),
+    userEMail: USER.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.email : ``,
+    userAvatar: USER.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.avatarUrl : ``,
+    authorizationStatus: USER.authorizationStatus,
+  });
+};
 
 export {Main};
 export default connect(mapStateToProps)(Main);

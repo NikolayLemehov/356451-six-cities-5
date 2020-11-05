@@ -4,21 +4,14 @@ import {
   loadOffers,
   redirectToRoute,
   requireAuthorization,
-  setCityOffers,
-  setSortedCityOffers
 } from "./action";
-import {APIRoute, AppRoute, AuthorizationStatus, SortingType} from "../const";
-import {getCityOffers, getParsedAuthInfo, getParsedOffer, getParsedOffers, getSortedOffersByType} from "../core";
+import {APIRoute, AppRoute, AuthorizationStatus} from "../const";
+import {getParsedAuthInfo, getParsedOffer, getParsedOffers} from "../core";
 
 export const fetchOffers = () => (dispatch, getState, api) => (
   api.get(APIRoute.OFFERS)
     .then(({data}) => {
-      const offers = getParsedOffers(data);
-      dispatch(loadOffers(offers));
-      let currentCommon = getState().COMMON;
-      dispatch(setCityOffers(getCityOffers(currentCommon.offers, currentCommon.currentCityName)));
-      currentCommon = getState().COMMON;
-      dispatch(setSortedCityOffers(getSortedOffersByType(currentCommon.currentCityOffers, SortingType.POPULAR)));
+      dispatch(loadOffers(getParsedOffers(data)));
     })
     .catch(() => {})
 );
@@ -55,12 +48,6 @@ export const updateOfferBookmarkStatus = (offerId, bookmarkStatus) => (dispatch,
     .then(({data}) => {
       const offer = getParsedOffer(data);
       dispatch(changeBookmarkOfferStatus(offer));
-    })
-    .then(() => {
-      let currentCommon = getState().COMMON;
-      dispatch(setCityOffers(getCityOffers(currentCommon.offers, currentCommon.currentCityName)));
-      currentCommon = getState().COMMON;
-      dispatch(setSortedCityOffers(getSortedOffersByType(currentCommon.currentCityOffers, SortingType.POPULAR)));
     })
     .catch(() => {})
 );

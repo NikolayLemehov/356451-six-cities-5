@@ -18,7 +18,7 @@ export const getSortedOffersByType = (offers, sortType) => {
 export const getOffersWithNewOfferByIndex = (offers, offer) => {
   const index = offers.findIndex((it) => it.id === offer.id);
   offers[index] = offer;
-  return offers;
+  return offers.slice();
 };
 export const getParsedOffer = (data) => {
   return {
