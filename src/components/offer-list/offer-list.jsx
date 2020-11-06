@@ -13,6 +13,7 @@ const OfferList = (props) => {
           key={offer.id}
           offer={offer}
           currentCardType={currentCardType}
+          offerBookmarkStatus={offer.isBookmark}
         />
       ))}
     </div>

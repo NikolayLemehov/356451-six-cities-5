@@ -4,7 +4,9 @@ import {Link} from "react-router-dom";
 import {offerPropType} from "../../prop-types";
 import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
+import {setOverOfferId} from "../../store/action";
+import {fetchBookmarkOffers, updateOfferBookmarkStatus} from "../../store/api-actions";
+import OfferCardBookmark from "../offer-card-bookmark/offer-card-bookmark";
 
 const OfferCard = (props) => {
   const {offer, currentCardType, overOfferId, onChangeOfferId} = props;
@@ -49,7 +51,7 @@ const OfferCard = (props) => {
           onClick={currentCardType !== OfferCardType.MAIN ? onSetNewId : undefined}
         >
           <img className="place-card__image"
-            src={`img/${isFavoriteType ? offer.smallImg : offer.img[0]}`}
+            src={offer.smallImg}
             width={isFavoriteType ? `150` : `260`}
             height={isFavoriteType ? `110` : `200`}
             alt="Place image"/>
@@ -61,13 +63,10 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${
-            offer.isBookmark ? ` place-card__bookmark-button--active ` : ``}button`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"/>
-            </svg>
-            <span className="visually-hidden">{offer.isBookmark ? `In` : `To`} bookmarks</span>
-          </button>
+          <OfferCardBookmark
+            offerId={offer.id}
+            offerBookmarkStatus={offer.isBookmark}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -78,7 +77,7 @@ const OfferCard = (props) => {
         <h2 className="place-card__name">
           <Link to={`/offer/${offer.id}`}
             onClick={currentCardType !== OfferCardType.MAIN ? onSetNewId : undefined}
-          >{offer.title}</Link>
+          >{offer.id} {offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
@@ -96,17 +95,26 @@ OfferCard.propTypes = {
   currentOffer: offerPropType,
   onMouseOverOffer: PropTypes.func.isRequired,
   onChangeOfferId: PropTypes.func.isRequired,
+  onChangeBookmarkOffers: PropTypes.func.isRequired,
+  onChangeBookmark: PropTypes.func.isRequired,
   currentCardType: PropTypes.string.isRequired,
   overOfferId: PropTypes.string.isRequired,
+  offerBookmarkStatus: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  overOfferId: state.overOfferId,
+const mapStateToProps = ({COMMON}) => ({
+  overOfferId: COMMON.overOfferId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeOfferId(offerId) {
-    dispatch(ActionCreator.setOverOfferId(offerId));
+    dispatch(setOverOfferId(offerId));
+  },
+  onChangeBookmark(offerId, bookmarkStatus) {
+    dispatch(updateOfferBookmarkStatus(offerId, bookmarkStatus));
+  },
+  onChangeBookmarkOffers() {
+    dispatch(fetchBookmarkOffers());
   },
 });
 

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
+import {changeCityFilter} from "../../store/action";
 
 const CityFilterList = (props) => {
   const {cities, currentCityName, onChangeCityFilter} = props;
@@ -37,16 +37,14 @@ CityFilterList.propTypes = {
   onChangeCityFilter: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentCityName: state.currentCityName,
-  cities: state.cities,
+const mapStateToProps = ({COMMON}) => ({
+  currentCityName: COMMON.currentCityName,
+  cities: COMMON.cities,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeCityFilter(cityName) {
-    dispatch(ActionCreator.changeCityFilter(cityName));
-    dispatch(ActionCreator.setCityOffers(cityName));
-    dispatch(ActionCreator.setSortedCityOffers());
+    dispatch(changeCityFilter(cityName));
   },
 });
 

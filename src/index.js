@@ -1,18 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {createStore} from "redux";
+import React from "react";
+import ReactDOM from "react-dom";
+import thunk from "redux-thunk";
+import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
-import App from './components/app/app';
-import {reducer} from "./store/reducer";
+import {composeWithDevTools} from "redux-devtools-extension";
+import {createAPI} from "./services/api";
+import App from "./components/app/app";
+import {rootReducer} from "./store/reducers/root-reducer";
+import {checkAuth, fetchBookmarkOffers, fetchOffers} from "./store/api-actions";
+import {redirect} from "./store/middlewares/redirect";
+import {requireAuthorization} from "./store/action";
+import {AuthorizationStatus} from "./const";
+
+const api = createAPI(
+    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
+);
 
 const store = createStore(
-    reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    rootReducer,
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
+    )
 );
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App/>
-    </Provider>,
-    document.querySelector(`#root`)
-);
+Promise.all([
+  store.dispatch(fetchOffers()),
+  store.dispatch(fetchBookmarkOffers()),
+  store.dispatch(checkAuth()),
+])
+  .then(() => {
+    ReactDOM.render(
+        <Provider store={store}>
+          <App/>
+        </Provider>,
+        document.querySelector(`#root`)
+    );
+  });
+

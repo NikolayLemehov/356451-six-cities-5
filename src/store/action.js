@@ -1,30 +1,48 @@
-const ActionType = {
+export const ActionType = {
   CHANGE_CITY_FILTER: `CHANGE_CITY_FILTER`,
-  SET_CITY_OFFERS: `SET_CITY_OFFERS`,
   SET_SORTED_TYPE: `SET_SORTED_TYPE`,
-  SET_SORTED_CITY_OFFERS: `SET_SORTED_CITY_OFFERS`,
   SET_OVER_OFFER_ID: `SET_OVER_OFFER_ID`,
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_AUTH_INFO: `LOAD_AUTH_INFO`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  CHANGE_BOOKMARK_OFFER_STATUS: `CHANGE_BOOKMARK_OFFER_STATUS`,
+  LOAD_BOOKMARK_OFFERS: `LOAD_BOOKMARK_OFFERS`,
 };
 
-const ActionCreator = {
-  changeCityFilter: (cityName) => ({
-    type: ActionType.CHANGE_CITY_FILTER,
-    payload: cityName,
-  }),
-  setCityOffers: () => ({
-    type: ActionType.SET_CITY_OFFERS,
-  }),
-  setSortedType: (sortType) => ({
-    type: ActionType.SET_SORTED_TYPE,
-    payload: sortType,
-  }),
-  setSortedCityOffers: () => ({
-    type: ActionType.SET_SORTED_CITY_OFFERS,
-  }),
-  setOverOfferId: (offerId) => ({
-    type: ActionType.SET_OVER_OFFER_ID,
-    payload: offerId,
-  }),
-};
-
-export {ActionType, ActionCreator};
+export const changeCityFilter = (cityName) => ({
+  type: ActionType.CHANGE_CITY_FILTER,
+  payload: cityName,
+});
+export const setSortedType = (sortType) => ({
+  type: ActionType.SET_SORTED_TYPE,
+  payload: sortType,
+});
+export const setOverOfferId = (offerId) => ({
+  type: ActionType.SET_OVER_OFFER_ID,
+  payload: offerId,
+});
+export const loadOffers = (offers) => ({
+  type: ActionType.LOAD_OFFERS,
+  payload: offers,
+});
+export const loadAuthInfo = (authInfo) => ({
+  type: ActionType.LOAD_AUTH_INFO,
+  payload: authInfo,
+});
+export const requireAuthorization = (status) => ({
+  type: ActionType.REQUIRED_AUTHORIZATION,
+  payload: status,
+});
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
+});
+export const changeBookmarkOfferStatus = (offer) => ({
+  type: ActionType.CHANGE_BOOKMARK_OFFER_STATUS,
+  payload: offer,
+});
+export const loadBookmarkOffers = (offers) => ({
+  type: ActionType.LOAD_BOOKMARK_OFFERS,
+  payload: offers,
+});

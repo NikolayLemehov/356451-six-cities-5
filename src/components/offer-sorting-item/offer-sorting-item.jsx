@@ -1,16 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
+import {setSortedType} from "../../store/action";
 
 const OfferSortingItem = (props) => {
-  const {type, onCloseMenu, currentSortType, onChangeSortedType, onChangeSortedCityOffers} = props;
+  const {type, onCloseMenu, currentSortType, onChangeSortedType} = props;
 
   return (
     <li className={`places__option ${currentSortType === type && `places__option--active`}`} tabIndex="0"
       onClick={() => {
         onChangeSortedType(type);
-        onChangeSortedCityOffers();
         onCloseMenu();
       }}
     >{type}</li>
@@ -21,20 +20,16 @@ OfferSortingItem.propTypes = {
   type: PropTypes.string.isRequired,
   currentSortType: PropTypes.string.isRequired,
   onChangeSortedType: PropTypes.func.isRequired,
-  onChangeSortedCityOffers: PropTypes.func.isRequired,
   onCloseMenu: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentSortType: state.currentSortType,
+const mapStateToProps = ({COMMON}) => ({
+  currentSortType: COMMON.currentSortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeSortedType(sortedType) {
-    dispatch(ActionCreator.setSortedType(sortedType));
-  },
-  onChangeSortedCityOffers() {
-    dispatch(ActionCreator.setSortedCityOffers());
+    dispatch(setSortedType(sortedType));
   },
 });
 

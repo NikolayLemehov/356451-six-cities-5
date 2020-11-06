@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import moment from "moment";
 import {offerPropType} from "../../prop-types";
-import {OfferCardType, RATING_COEFFICIENT} from "../../const";
+import {AppRoute, OfferCardType, RATING_COEFFICIENT} from "../../const";
 import OfferCard from "../offer-card/offer-card";
 import CommentForm from "../comment-form/comment-form";
 import Map from "../map/map";
@@ -21,7 +21,7 @@ const Offer = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link className="header__logo-link" to={`/`}>
+              <Link className="header__logo-link" to={AppRoute.MAIN}>
                 <img className="header__logo" src={`img/logo.svg`} alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>

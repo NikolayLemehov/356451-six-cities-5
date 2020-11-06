@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import {PlaceType} from "./const";
+// import {PlaceType} from "./const";
 
 export const offerPropType = PropTypes.shape({
   id: PropTypes.string.isRequired,
@@ -8,7 +8,7 @@ export const offerPropType = PropTypes.shape({
   title: PropTypes.string.isRequired,
   description: PropTypes.arrayOf(PropTypes.string).isRequired,
   isPremium: PropTypes.bool.isRequired,
-  type: PropTypes.oneOf([PlaceType.APARTMENT, PlaceType.PRIVATE_ROOM]).isRequired,
+  type: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   bedroom: PropTypes.number.isRequired,
   visitor: PropTypes.number.isRequired,
@@ -16,16 +16,19 @@ export const offerPropType = PropTypes.shape({
   option: PropTypes.arrayOf(PropTypes.string).isRequired,
   isBookmark: PropTypes.bool.isRequired,
   city: PropTypes.string.isRequired,
+  cityCoordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+  cityZoom: PropTypes.number.isRequired,
   host: PropTypes.string.isRequired,
   hostTop: PropTypes.bool.isRequired,
   avatar: PropTypes.string.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    reviewer: PropTypes.string.isRequired,
-    avatar: PropTypes.string.isRequired,
-    rate: PropTypes.number.isRequired,
-    message: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  })).isRequired
+  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+  // reviews: PropTypes.arrayOf(PropTypes.shape({
+  //   reviewer: PropTypes.string.isRequired,
+  //   avatar: PropTypes.string.isRequired,
+  //   rate: PropTypes.number.isRequired,
+  //   message: PropTypes.string.isRequired,
+  //   date: PropTypes.string.isRequired,
+  // })).isRequired
 });
 
 export const citiesPropType = PropTypes.arrayOf(PropTypes.shape({

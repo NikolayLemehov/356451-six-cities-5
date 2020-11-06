@@ -1,4 +1,5 @@
 import React, {Fragment} from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import OfferList from "../offer-list/offer-list";
@@ -6,15 +7,17 @@ import Map from "../map/map";
 import CityFilterList from "../city-filter-list/city-filter-list";
 import OfferSorting from "../offer-sorting/offer-sorting";
 import {offerPropType} from "../../prop-types";
-import {OfferCardType} from "../../const";
+import {AppRoute, AuthorizationStatus, OfferCardType} from "../../const";
 import withOpening from "../../hocs/withOpening/withOpening";
 import MainEmpty from "../main-empty/main-empty";
+import {getCurrentCityOffers, getCurrentSortedCityOffers} from "../../store/selectors";
 
 const OfferSortingWrapper = withOpening(OfferSorting);
 
 const Main = (props) => {
-  const {currentSortedCityOffers, currentCityOffers, currentCityName} = props;
+  const {currentSortedCityOffers, currentCityOffers, currentCityName, userEMail, authorizationStatus, userAvatar} = props;
   const haveCityOffer = currentCityOffers.length > 0;
+  const isAuthorizedStatus = authorizationStatus === AuthorizationStatus.AUTH;
 
   return (
     <div className={`page page--gray page--main ${!haveCityOffer ? `page__main--index-empty` : ``}`}>
@@ -29,11 +32,16 @@ const Main = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                  <Link className="header__nav-link header__nav-link--profile"
+                    to={isAuthorizedStatus ? AppRoute.FAVORITES : AppRoute.LOGIN}
+                  >
+                    <div className="header__avatar-wrapper user__avatar-wrapper"
+                      style={isAuthorizedStatus ? {backgroundImage: `url(${userAvatar})`} : undefined}
+                    >
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
+                    <span className="header__user-name user__name"
+                    >{isAuthorizedStatus ? userEMail : `Sign in`}</span>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -78,16 +86,25 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  currentSortedCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
   currentCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
+  currentSortedCityOffers: PropTypes.arrayOf(offerPropType).isRequired,
   currentCityName: PropTypes.string.isRequired,
+  userEMail: PropTypes.string.isRequired,
+  userAvatar: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentCityName: state.currentCityName,
-  currentSortedCityOffers: state.currentSortedCityOffers,
-  currentCityOffers: state.currentCityOffers,
-});
+const mapStateToProps = (state) => {
+  const {COMMON, USER} = state;
+  return ({
+    currentCityName: COMMON.currentCityName,
+    currentCityOffers: getCurrentCityOffers(state),
+    currentSortedCityOffers: getCurrentSortedCityOffers(state),
+    userEMail: USER.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.email : ``,
+    userAvatar: USER.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.avatarUrl : ``,
+    authorizationStatus: USER.authorizationStatus,
+  });
+};
 
 export {Main};
 export default connect(mapStateToProps)(Main);
