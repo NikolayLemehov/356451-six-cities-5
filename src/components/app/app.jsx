@@ -9,6 +9,7 @@ import Login from "../login/login";
 import browserHistory from "../../browser-history";
 // import {offerPropType} from "../../prop-types";
 import {AppRoute} from "../../const";
+import PrivateRoute from "../private-route/private-route";
 
 const App = () => {
   // const {offers} = props;
@@ -22,6 +23,15 @@ const App = () => {
         <Route exact path={AppRoute.FAVORITES}>
           <Favorites/>
         </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.MAIN}
+          render={() => {
+            return (
+              <Favorites/>
+            );
+          }}
+        />
         <Route exact path={AppRoute.LOGIN}
           render={() => (
             <Login/>

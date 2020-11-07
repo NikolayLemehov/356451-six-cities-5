@@ -4,6 +4,7 @@ import {getCityOffers, getSortedOffersByType} from "../core";
 const getOffers = (state) => state.COMMON.offers;
 const getCurrentCityName = (state) => state.COMMON.currentCityName;
 const getCurrentSortType = (state) => state.COMMON.currentSortType;
+export const getAuthorizationStatus = (state) => state.USER.authorizationStatus;
 
 export const getCurrentCityOffers = createSelector(
     getOffers,
