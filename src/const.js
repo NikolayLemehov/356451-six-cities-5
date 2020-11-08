@@ -17,6 +17,14 @@ export const CityName = {
   HAMBURG: `Hamburg`,
   DUSSELDORF: `Dusseldorf`,
 };
+export const cities = [
+  CityName.PARIS,
+  CityName.COLOGNE,
+  CityName.BRUSSELS,
+  CityName.AMSTERDAM,
+  CityName.HAMBURG,
+  CityName.DUSSELDORF,
+];
 export const SortingType = {
   POPULAR: `Popular`,
   PRICE_LOW_TO_HIGH: `Price: low to high`,

@@ -1,4 +1,4 @@
-import {cities} from "../../../mocks/cities";
+import {cities} from "../../../const";
 import {CityName, SortingType} from "../../../const";
 import {ActionType} from "../../action";
 import {extend} from "../../../utils";
