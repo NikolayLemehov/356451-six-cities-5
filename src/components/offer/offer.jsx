@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 // import moment from "moment";
 import {offerPropType} from "../../prop-types";
-import {AppRoute, OfferCardType, RATING_COEFFICIENT} from "../../const";
+import {AppRoute, AuthorizationStatus, OfferCardType, RATING_COEFFICIENT} from "../../const";
 import OfferCard from "../offer-card/offer-card";
 // import CommentForm from "../comment-form/comment-form";
 import Map from "../map/map";
 // import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
 import {connect} from "react-redux";
-import {getCurrentOffer, getNearOffers} from "../../store/selectors";
-import {fetchIdOffer, fetchNearOffers} from "../../store/api-actions";
+import {getAuthInfo, getAuthorizationStatus, getChangedBookmarkOffer, getNearOffers} from "../../store/selectors";
+import {fetchBookmarkOffers, fetchIdOffer, fetchNearOffers, updateOfferBookmarkStatus} from "../../store/api-actions";
+import OfferBookmark from "../offer-bookmark/offer-bookmark";
 
 // const CommentFormWrapper = withCommentForm(CommentForm);
 const MAX_VISIBLE_PHOTO = 6;
@@ -35,7 +36,8 @@ class Offer extends PureComponent {
   }
 
   render() {
-    const {offer, nearOffers} = this.props;
+    const {offer, nearOffers, authorizationStatus, userEMail, userAvatar, offerBookmarkStatus} = this.props;
+    const isAuthorizedStatus = authorizationStatus === AuthorizationStatus.AUTH;
 
     return !offer.id ? (
       <div>Идёт загрузка...</div>
@@ -52,11 +54,16 @@ class Offer extends PureComponent {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                    <Link className="header__nav-link header__nav-link--profile"
+                      to={isAuthorizedStatus ? AppRoute.FAVORITES : AppRoute.LOGIN}
+                    >
+                      <div className="header__avatar-wrapper user__avatar-wrapper"
+                        style={isAuthorizedStatus ? {backgroundImage: `url(${userAvatar})`} : undefined}
+                      >
                       </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
+                      <span className="header__user-name user__name"
+                      >{isAuthorizedStatus ? userEMail : `Sign in`}</span>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -82,13 +89,17 @@ class Offer extends PureComponent {
                   <h1 className="property__name">
                     {offer.title}
                   </h1>
-                  <button className={`property__bookmark-button ${
-                    offer.isBookmark ? `property__bookmark-button--active ` : ``}button`} type="button">
-                    <svg className="property__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"/>
-                    </svg>
-                    <span className="visually-hidden">{offer.isBookmark ? `In` : `To`} bookmarks</span>
-                  </button>
+                  <OfferBookmark
+                    offerId={offer.id}
+                    offerBookmarkStatus={offerBookmarkStatus}
+                  />
+                  {/* <button className={`property__bookmark-button ${*/}
+                  {/*  offer.isBookmark ? `property__bookmark-button--active ` : ``}button`} type="button">*/}
+                  {/*  <svg className="property__bookmark-icon" width="31" height="33">*/}
+                  {/*    <use xlinkHref="#icon-bookmark"/>*/}
+                  {/*  </svg>*/}
+                  {/*  <span className="visually-hidden">{offer.isBookmark ? `In` : `To`} bookmarks</span>*/}
+                  {/* </button>*/}
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
@@ -194,6 +205,7 @@ class Offer extends PureComponent {
                     key={it.id}
                     offer={it}
                     currentCardType={OfferCardType.NEAR}
+                    offerBookmarkStatus={it.isBookmark}
                   />
                 ))}
               </div>
@@ -207,15 +219,23 @@ class Offer extends PureComponent {
 
 Offer.propTypes = {
   offer: PropTypes.any.isRequired,
+  offerBookmarkStatus: PropTypes.any,
   nearOffers: PropTypes.arrayOf(offerPropType).isRequired,
   offerId: PropTypes.string.isRequired,
   loadOfferAction: PropTypes.func.isRequired,
   loadNearOffersAction: PropTypes.func.isRequired,
+  userEMail: PropTypes.string.isRequired,
+  userAvatar: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offer: getCurrentOffer(state),
+  offer: getChangedBookmarkOffer(state),
+  offerBookmarkStatus: getChangedBookmarkOffer(state).isBookmark,
   nearOffers: getNearOffers(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  userEMail: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).email : ``,
+  userAvatar: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).avatarUrl : ``,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -224,6 +244,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadNearOffersAction(offerId) {
     dispatch(fetchNearOffers(offerId));
+  },
+  onChangeBookmark(offerId, bookmarkStatus) {
+    dispatch(updateOfferBookmarkStatus(offerId, bookmarkStatus));
+  },
+  onChangeBookmarkOffers() {
+    dispatch(fetchBookmarkOffers());
   },
 });
 

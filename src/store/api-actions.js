@@ -1,6 +1,7 @@
 import {
-  changeBookmarkOfferStatus,
-  loadAuthInfo, loadBookmarkOffers, loadNearOffer, loadOffer,
+  changeBookmarkStatusOfferInNearOffers,
+  changeBookmarkStatusOfferInOffers,
+  loadAuthInfo, loadBookmarkOffers, loadNearOffer, loadBookmarkOffer,
   loadOffers,
   redirectToRoute,
   requireAuthorization,
@@ -47,7 +48,8 @@ export const updateOfferBookmarkStatus = (offerId, bookmarkStatus) => (dispatch,
   api.post(`${APIRoute.FAVORITE}/${offerId}/${bookmarkStatus ? 1 : 0}`)
     .then(({data}) => {
       const offer = getParsedOffer(data);
-      dispatch(changeBookmarkOfferStatus(offer));
+      dispatch(changeBookmarkStatusOfferInOffers(offer));
+      dispatch(changeBookmarkStatusOfferInNearOffers(offer));
     })
     .catch(() => {})
 );
@@ -65,7 +67,7 @@ export const fetchIdOffer = (offerId) => (dispatch, getState, api) => (
   api.get(`${APIRoute.OFFERS}/${offerId}`)
     .then(({data}) => {
       const offer = getParsedOffer(data);
-      dispatch(loadOffer(offer));
+      dispatch(loadBookmarkOffer(offer));
     })
     .catch(() => {})
 );

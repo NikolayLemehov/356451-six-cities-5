@@ -7,7 +7,8 @@ import {getOffersWithNewOfferByIndex} from "../../../core";
 const initialState = {
   offers: [],
   nearOffers: [],
-  currentOffer: {},
+  changedBookmarkOffer: {},
+  pageOffer: {},
   bookmarkOffers: [],
   authInfo: {},
   cities,
@@ -34,9 +35,9 @@ export const common = (state = initialState, action) => {
       return extend(state, {
         offers: action.payload,
       });
-    case ActionType.LOAD_OFFER:
+    case ActionType.LOAD_BOOKMARK_OFFER:
       return extend(state, {
-        currentOffer: action.payload,
+        changedBookmarkOffer: action.payload,
       });
     case ActionType.LOAD_NEAR_OFFERS:
       return extend(state, {
@@ -46,9 +47,15 @@ export const common = (state = initialState, action) => {
       return extend(state, {
         authInfo: action.payload,
       });
-    case ActionType.CHANGE_BOOKMARK_OFFER_STATUS:
+    case ActionType.CHANGE_BOOKMARK_STATUS_OFFER_IN_OFFERS:
       return extend(state, {
         offers: getOffersWithNewOfferByIndex(state.offers, action.payload),
+        changedBookmarkOffer: action.payload,
+      });
+    case ActionType.CHANGE_BOOKMARK_STATUS_OFFER_IN_NEAR_OFFERS:
+      return extend(state, {
+        nearOffers: getOffersWithNewOfferByIndex(state.nearOffers, action.payload),
+        changedBookmarkOffer: action.payload,
       });
     case ActionType.LOAD_BOOKMARK_OFFERS:
       return extend(state, {

@@ -92,7 +92,7 @@ OfferCard.defaultProps = {
 
 OfferCard.propTypes = {
   offer: offerPropType,
-  currentOffer: offerPropType,
+  changedBookmarkOffer: offerPropType,
   onMouseOverOffer: PropTypes.func.isRequired,
   onChangeOfferId: PropTypes.func.isRequired,
   onChangeBookmarkOffers: PropTypes.func.isRequired,

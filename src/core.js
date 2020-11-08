@@ -18,6 +18,9 @@ export const getSortedOffersByType = (offers, sortType) => {
 export const getOffersWithNewOfferByIndex = (offers, offer) => {
   const cloneOffers = offers.slice();
   const index = cloneOffers.findIndex((it) => it.id === offer.id);
+  if (index === -1) {
+    return offers;
+  }
   cloneOffers[index] = offer;
   return cloneOffers;
 };
