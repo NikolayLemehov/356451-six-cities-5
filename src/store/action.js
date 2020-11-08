@@ -3,6 +3,8 @@ export const ActionType = {
   SET_SORTED_TYPE: `SET_SORTED_TYPE`,
   SET_OVER_OFFER_ID: `SET_OVER_OFFER_ID`,
   LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_OFFER: `LOAD_OFFER`,
+  LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
   LOAD_AUTH_INFO: `LOAD_AUTH_INFO`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
@@ -24,6 +26,14 @@ export const setOverOfferId = (offerId) => ({
 });
 export const loadOffers = (offers) => ({
   type: ActionType.LOAD_OFFERS,
+  payload: offers,
+});
+export const loadOffer = (offer) => ({
+  type: ActionType.LOAD_OFFER,
+  payload: offer,
+});
+export const loadNearOffer = (offers) => ({
+  type: ActionType.LOAD_NEAR_OFFERS,
   payload: offers,
 });
 export const loadAuthInfo = (authInfo) => ({

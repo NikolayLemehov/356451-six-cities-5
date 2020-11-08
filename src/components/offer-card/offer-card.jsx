@@ -99,7 +99,6 @@ OfferCard.propTypes = {
   onChangeBookmark: PropTypes.func.isRequired,
   currentCardType: PropTypes.string.isRequired,
   overOfferId: PropTypes.string.isRequired,
-  offerBookmarkStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({COMMON}) => ({

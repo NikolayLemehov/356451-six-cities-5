@@ -1,6 +1,6 @@
 import {
   changeBookmarkOfferStatus,
-  loadAuthInfo, loadBookmarkOffers,
+  loadAuthInfo, loadBookmarkOffers, loadOffer,
   loadOffers,
   redirectToRoute,
   requireAuthorization,
@@ -57,6 +57,15 @@ export const fetchBookmarkOffers = () => (dispatch, getState, api) => (
     .then(({data}) => {
       const bookmarkOffers = getParsedOffers(data);
       dispatch(loadBookmarkOffers(bookmarkOffers));
+    })
+    .catch(() => {})
+);
+
+export const fetchIdOffer = (offerId) => (dispatch, getState, api) => (
+  api.get(`${APIRoute.OFFERS}/${offerId}`)
+    .then(({data}) => {
+      const offer = getParsedOffer(data);
+      dispatch(loadOffer(offer));
     })
     .catch(() => {})
 );

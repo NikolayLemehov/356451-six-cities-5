@@ -1,18 +1,20 @@
 import React, {Fragment} from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {Switch, Route, Router, Link} from "react-router-dom";
-// import {connect} from "react-redux";
+import {connect} from "react-redux";
 import Main from "../main/main";
 import Favorites from "../favorites/favorites";
 import Login from "../login/login";
-// import Offer from "../offer/offer";
+import Offer from "../offer/offer";
 import browserHistory from "../../browser-history";
-// import {offerPropType} from "../../prop-types";
+import {offerPropType} from "../../prop-types";
 import {AppRoute} from "../../const";
 import PrivateRoute from "../private-route/private-route";
+import {fetchIdOffer} from "../../store/api-actions";
+import {getOffers} from "../../store/selectors";
 
-const App = () => {
-  // const {offers} = props;
+const App = (props) => {
+  const {offers} = props;
 
   return (
     <Router history={browserHistory}>
@@ -37,14 +39,18 @@ const App = () => {
             <Login/>
           )}
         />
-        {/* <Route path="/offer/:id" exact*/}
-        {/*  render={({match}) => (*/}
-        {/*    <Offer*/}
-        {/*      offer={offers.find((it) => it.id === match.params.id)}*/}
-        {/*      nearOffers={offers.slice(0, 3)}*/}
-        {/*    />*/}
-        {/*  )}*/}
-        {/* />*/}
+        <Route path="/offer/:id" exact
+          render={({match}) => {
+            return (
+              <Offer
+                // offer={offers.find((it) => it.id === match.params.id)}
+                // offer={loadOfferAction(match.params.id)}
+                nearOffers={offers.slice(0, 3)}
+                offerId={match.params.id}
+              />
+            );
+          }}
+        />
         <Route
           render={() => (
             <Fragment>
@@ -64,15 +70,22 @@ const App = () => {
   );
 };
 
-// App.propTypes = {
-//   offers: PropTypes.arrayOf(offerPropType).isRequired,
-// };
-//
-// const mapStateToProps = (state) => ({
-//   offers: state.offers,
-// });
+App.propTypes = {
+  offers: PropTypes.arrayOf(offerPropType).isRequired,
+  loadOfferAction: PropTypes.func.isRequired,
+};
 
-export default App;
-// export {App};
-// export default connect(mapStateToProps)(App);
+const mapStateToProps = (state) => ({
+  offers: getOffers(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadOfferAction(offerId) {
+    dispatch(fetchIdOffer(offerId));
+  }
+});
+
+// export default App;
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 

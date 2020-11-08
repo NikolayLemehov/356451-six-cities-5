@@ -6,6 +6,8 @@ import {getOffersWithNewOfferByIndex} from "../../../core";
 
 const initialState = {
   offers: [],
+  nearOffers: [],
+  currentOffer: {},
   bookmarkOffers: [],
   authInfo: {},
   cities,
@@ -31,6 +33,14 @@ export const common = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return extend(state, {
         offers: action.payload,
+      });
+    case ActionType.LOAD_OFFER:
+      return extend(state, {
+        currentOffer: action.payload,
+      });
+    case ActionType.LOAD_NEAR_OFFERS:
+      return extend(state, {
+        nearOffers: action.payload,
       });
     case ActionType.LOAD_AUTH_INFO:
       return extend(state, {
