@@ -1,6 +1,6 @@
 import {
   changeBookmarkOfferStatus,
-  loadAuthInfo, loadBookmarkOffers, loadOffer,
+  loadAuthInfo, loadBookmarkOffers, loadNearOffer, loadOffer,
   loadOffers,
   redirectToRoute,
   requireAuthorization,
@@ -66,6 +66,15 @@ export const fetchIdOffer = (offerId) => (dispatch, getState, api) => (
     .then(({data}) => {
       const offer = getParsedOffer(data);
       dispatch(loadOffer(offer));
+    })
+    .catch(() => {})
+);
+
+export const fetchNearOffers = (offerId) => (dispatch, getState, api) => (
+  api.get(`${APIRoute.OFFERS}/${offerId}/nearby`)
+    .then(({data}) => {
+      const offers = getParsedOffers(data);
+      dispatch(loadNearOffer(offers));
     })
     .catch(() => {})
 );

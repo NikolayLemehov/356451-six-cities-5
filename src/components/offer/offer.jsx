@@ -9,8 +9,8 @@ import OfferCard from "../offer-card/offer-card";
 import Map from "../map/map";
 // import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
 import {connect} from "react-redux";
-import {getCurrentOffer} from "../../store/selectors";
-import {fetchIdOffer} from "../../store/api-actions";
+import {getCurrentOffer, getNearOffers} from "../../store/selectors";
+import {fetchIdOffer, fetchNearOffers} from "../../store/api-actions";
 
 // const CommentFormWrapper = withCommentForm(CommentForm);
 const MAX_VISIBLE_PHOTO = 6;
@@ -21,8 +21,17 @@ class Offer extends PureComponent {
   }
 
   componentDidMount() {
-    const {offerId, loadOfferAction} = this.props;
+    const {offerId, loadOfferAction, loadNearOffersAction} = this.props;
     loadOfferAction(offerId);
+    loadNearOffersAction(offerId);
+  }
+
+  componentDidUpdate(prevProps) {
+    const {offerId, loadOfferAction, loadNearOffersAction} = this.props;
+    if (prevProps.offerId !== offerId) {
+      loadOfferAction(offerId);
+      loadNearOffersAction(offerId);
+    }
   }
 
   render() {
@@ -201,16 +210,21 @@ Offer.propTypes = {
   nearOffers: PropTypes.arrayOf(offerPropType).isRequired,
   offerId: PropTypes.string.isRequired,
   loadOfferAction: PropTypes.func.isRequired,
+  loadNearOffersAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offer: getCurrentOffer(state),
+  nearOffers: getNearOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   loadOfferAction(offerId) {
     dispatch(fetchIdOffer(offerId));
-  }
+  },
+  loadNearOffersAction(offerId) {
+    dispatch(fetchNearOffers(offerId));
+  },
 });
 
 export {Offer};
