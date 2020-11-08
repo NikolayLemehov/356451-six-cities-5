@@ -22,12 +22,9 @@ const App = (props) => {
         <Route exact path={AppRoute.MAIN}>
           <Main/>
         </Route>
-        <Route exact path={AppRoute.FAVORITES}>
-          <Favorites/>
-        </Route>
         <PrivateRoute
           exact
-          path={AppRoute.MAIN}
+          path={AppRoute.FAVORITES}
           render={() => {
             return (
               <Favorites/>
