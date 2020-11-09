@@ -92,14 +92,13 @@ OfferCard.defaultProps = {
 
 OfferCard.propTypes = {
   offer: offerPropType,
-  currentOffer: offerPropType,
+  changedBookmarkOffer: offerPropType,
   onMouseOverOffer: PropTypes.func.isRequired,
   onChangeOfferId: PropTypes.func.isRequired,
   onChangeBookmarkOffers: PropTypes.func.isRequired,
   onChangeBookmark: PropTypes.func.isRequired,
   currentCardType: PropTypes.string.isRequired,
   overOfferId: PropTypes.string.isRequired,
-  offerBookmarkStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({COMMON}) => ({

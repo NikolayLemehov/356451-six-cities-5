@@ -12,13 +12,13 @@ const CityFilterList = (props) => {
           {cities.map((it, i) => (
             <li key={`city-${i}`} className="locations__item">
               <a className={`locations__item-link tabs__item${
-                it.name === currentCityName && ` tabs__item--active`}`} href="#"
+                it === currentCityName && ` tabs__item--active`}`} href="#"
               onClick={(evt) => {
                 evt.preventDefault();
-                onChangeCityFilter(it.name);
+                onChangeCityFilter(it);
               }}
               >
-                <span>{it.name}</span>
+                <span>{it}</span>
               </a>
             </li>
           ))}
@@ -30,10 +30,7 @@ const CityFilterList = (props) => {
 
 CityFilterList.propTypes = {
   currentCityName: PropTypes.string.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-  })).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChangeCityFilter: PropTypes.func.isRequired,
 };
 

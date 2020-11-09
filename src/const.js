@@ -17,6 +17,14 @@ export const CityName = {
   HAMBURG: `Hamburg`,
   DUSSELDORF: `Dusseldorf`,
 };
+export const cities = [
+  CityName.PARIS,
+  CityName.COLOGNE,
+  CityName.BRUSSELS,
+  CityName.AMSTERDAM,
+  CityName.HAMBURG,
+  CityName.DUSSELDORF,
+];
 export const SortingType = {
   POPULAR: `Popular`,
   PRICE_LOW_TO_HIGH: `Price: low to high`,
@@ -42,4 +50,11 @@ export const APIRoute = {
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
+};
+export const HttpCode = {
+  UNAUTHORIZED: 401
+};
+export const ResponseType = {
+  SUCCESS: `SUCCESS`,
+  ERROR: `ERROR`,
 };

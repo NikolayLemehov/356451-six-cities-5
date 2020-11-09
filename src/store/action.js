@@ -3,10 +3,13 @@ export const ActionType = {
   SET_SORTED_TYPE: `SET_SORTED_TYPE`,
   SET_OVER_OFFER_ID: `SET_OVER_OFFER_ID`,
   LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_BOOKMARK_OFFER: `LOAD_BOOKMARK_OFFER`,
+  LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
   LOAD_AUTH_INFO: `LOAD_AUTH_INFO`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
-  CHANGE_BOOKMARK_OFFER_STATUS: `CHANGE_BOOKMARK_OFFER_STATUS`,
+  CHANGE_BOOKMARK_STATUS_OFFER_IN_OFFERS: `CHANGE_BOOKMARK_STATUS_OFFER_IN_OFFERS`,
+  CHANGE_BOOKMARK_STATUS_OFFER_IN_NEAR_OFFERS: `CHANGE_BOOKMARK_STATUS_OFFER_IN_NEAR_OFFERS`,
   LOAD_BOOKMARK_OFFERS: `LOAD_BOOKMARK_OFFERS`,
 };
 
@@ -26,6 +29,14 @@ export const loadOffers = (offers) => ({
   type: ActionType.LOAD_OFFERS,
   payload: offers,
 });
+export const loadBookmarkOffer = (offer) => ({
+  type: ActionType.LOAD_BOOKMARK_OFFER,
+  payload: offer,
+});
+export const loadNearOffer = (offers) => ({
+  type: ActionType.LOAD_NEAR_OFFERS,
+  payload: offers,
+});
 export const loadAuthInfo = (authInfo) => ({
   type: ActionType.LOAD_AUTH_INFO,
   payload: authInfo,
@@ -38,8 +49,12 @@ export const redirectToRoute = (url) => ({
   type: ActionType.REDIRECT_TO_ROUTE,
   payload: url,
 });
-export const changeBookmarkOfferStatus = (offer) => ({
-  type: ActionType.CHANGE_BOOKMARK_OFFER_STATUS,
+export const changeBookmarkStatusOfferInOffers = (offer) => ({
+  type: ActionType.CHANGE_BOOKMARK_STATUS_OFFER_IN_OFFERS,
+  payload: offer,
+});
+export const changeBookmarkStatusOfferInNearOffers = (offer) => ({
+  type: ActionType.CHANGE_BOOKMARK_STATUS_OFFER_IN_NEAR_OFFERS,
   payload: offer,
 });
 export const loadBookmarkOffers = (offers) => ({

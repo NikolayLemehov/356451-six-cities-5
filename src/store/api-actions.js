@@ -1,45 +1,62 @@
 import {
-  changeBookmarkOfferStatus,
-  loadAuthInfo, loadBookmarkOffers,
+  changeBookmarkStatusOfferInNearOffers,
+  changeBookmarkStatusOfferInOffers,
+  loadAuthInfo, loadBookmarkOffers, loadNearOffer, loadBookmarkOffer,
   loadOffers,
   redirectToRoute,
   requireAuthorization,
 } from "./action";
-import {APIRoute, AppRoute, AuthorizationStatus} from "../const";
+import {APIRoute, AppRoute, AuthorizationStatus, HttpCode, ResponseType} from "../const";
 import {getParsedAuthInfo, getParsedOffer, getParsedOffers} from "../core";
+import swal from "sweetalert";
 
 export const fetchOffers = () => (dispatch, getState, api) => (
   api.get(APIRoute.OFFERS)
-    .then(({data}) => {
-      dispatch(loadOffers(getParsedOffers(data)));
+    .then((response) => {
+      const offers = getParsedOffers(response.data);
+      dispatch(loadOffers(offers));
+      return ResponseType.SUCCESS;
     })
-    .catch(() => {})
+    .catch((err) => {
+      swal(`Error`, String(err), `error`);
+      return err;
+    })
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(({data}) => {
-      const authInfo = getParsedAuthInfo(data);
-      dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-      dispatch(loadAuthInfo(authInfo));
+    .then((response) => {
+      if (response.status !== HttpCode.UNAUTHORIZED) {
+        const authInfo = getParsedAuthInfo(response.data);
+        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(loadAuthInfo(authInfo));
+        return ResponseType.SUCCESS;
+      } else {
+        return response;
+      }
     })
-    .catch(() => {
-      dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH));
-      dispatch(loadAuthInfo({}));
+    .catch((err) => {
+      swal(`Error`, String(err), `error`);
+      return err;
     })
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
-    .then(({data}) => {
-      const authInfo = getParsedAuthInfo(data);
-      dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-      dispatch(loadAuthInfo(authInfo));
+    .then((response) => {
+      if (response.status !== HttpCode.UNAUTHORIZED) {
+        const authInfo = getParsedAuthInfo(response.data);
+        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(loadAuthInfo(authInfo));
+        return ResponseType.SUCCESS;
+      } else {
+        return response;
+      }
     })
     .then(() => dispatch(redirectToRoute(AppRoute.MAIN)))
-    .catch(() => {
-      dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH));
-      dispatch(loadAuthInfo({}));
+    .catch((err) => {
+      swal(`Error`, String(err), `error`);
+      return err;
     })
 );
 
@@ -47,16 +64,55 @@ export const updateOfferBookmarkStatus = (offerId, bookmarkStatus) => (dispatch,
   api.post(`${APIRoute.FAVORITE}/${offerId}/${bookmarkStatus ? 1 : 0}`)
     .then(({data}) => {
       const offer = getParsedOffer(data);
-      dispatch(changeBookmarkOfferStatus(offer));
+      dispatch(changeBookmarkStatusOfferInOffers(offer));
+      dispatch(changeBookmarkStatusOfferInNearOffers(offer));
+      return ResponseType.SUCCESS;
     })
-    .catch(() => {})
+    .catch((err) => {
+      swal(`Error`, String(err), `error`);
+      return err;
+    })
 );
 
 export const fetchBookmarkOffers = () => (dispatch, getState, api) => (
   api.get(APIRoute.FAVORITE)
-    .then(({data}) => {
-      const bookmarkOffers = getParsedOffers(data);
-      dispatch(loadBookmarkOffers(bookmarkOffers));
+    .then((response) => {
+      if (response.status !== HttpCode.UNAUTHORIZED) {
+        const bookmarkOffers = getParsedOffers(response.data);
+        dispatch(loadBookmarkOffers(bookmarkOffers));
+        return ResponseType.SUCCESS;
+      } else {
+        return response;
+      }
     })
-    .catch(() => {})
+    .catch((err) => {
+      swal(`Error`, String(err), `error`);
+      return err;
+    })
+);
+
+export const fetchIdOffer = (offerId) => (dispatch, getState, api) => (
+  api.get(`${APIRoute.OFFERS}/${offerId}`)
+    .then(({data}) => {
+      const offer = getParsedOffer(data);
+      dispatch(loadBookmarkOffer(offer));
+      return ResponseType.SUCCESS;
+    })
+    .catch((err) => {
+      swal(`Error`, String(err), `error`);
+      return err;
+    })
+);
+
+export const fetchNearOffers = (offerId) => (dispatch, getState, api) => (
+  api.get(`${APIRoute.OFFERS}/${offerId}/nearby`)
+    .then(({data}) => {
+      const offers = getParsedOffers(data);
+      dispatch(loadNearOffer(offers));
+      return ResponseType.SUCCESS;
+    })
+    .catch((err) => {
+      swal(`Error`, String(err), `error`);
+      return err;
+    })
 );

@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import {getAuthorizationStatus} from "../../store/selectors";
 import {AppRoute, AuthorizationStatus} from "../../const";
 
-const OfferCardBookmark = (props) => {
+const OfferBookmark = (props) => {
   const {offerId, offerBookmarkStatus, onChangeBookmark, authorizationStatus} = props;
 
   const handleBookmarkClick = (evt) => {
@@ -18,12 +18,12 @@ const OfferCardBookmark = (props) => {
   switch (authorizationStatus) {
     case AuthorizationStatus.AUTH:
       return (
-        <button className={`place-card__bookmark-button ${
-          offerBookmarkStatus ? ` place-card__bookmark-button--active ` : ``}button`}
+        <button className={`property__bookmark-button ${
+          offerBookmarkStatus ? ` property__bookmark-button--active ` : ``}button`}
         type="button"
         onClick={handleBookmarkClick}
         >
-          <svg className="place-card__bookmark-icon" width="18" height="19">
+          <svg className="property__bookmark-icon" width="31" height="33">
             <use xlinkHref="#icon-bookmark"/>
           </svg>
           <span className="visually-hidden">{offerBookmarkStatus ? `In` : `To`} bookmarks</span>
@@ -31,11 +31,11 @@ const OfferCardBookmark = (props) => {
       );
     case AuthorizationStatus.NO_AUTH:
       return (
-        <Link to={AppRoute.LOGIN} className={`place-card__bookmark-button ${
-          offerBookmarkStatus ? ` place-card__bookmark-button--active ` : ``}button`}
+        <Link to={AppRoute.LOGIN} className={`property__bookmark-button ${
+          offerBookmarkStatus ? ` property__bookmark-button--active ` : ``}button`}
         type="button"
         >
-          <svg className="place-card__bookmark-icon" width="18" height="19">
+          <svg className="property__bookmark-icon" width="31" height="33">
             <use xlinkHref="#icon-bookmark"/>
           </svg>
           <span className="visually-hidden">{offerBookmarkStatus ? `In` : `To`} bookmarks</span>
@@ -44,12 +44,12 @@ const OfferCardBookmark = (props) => {
   }
 
   return (
-    <button className={`place-card__bookmark-button ${
-      offerBookmarkStatus ? ` place-card__bookmark-button--active ` : ``}button`}
+    <button className={`property__bookmark-button ${
+      offerBookmarkStatus ? ` property__bookmark-button--active ` : ``}button`}
     type="button"
     onClick={handleBookmarkClick}
     >
-      <svg className="place-card__bookmark-icon" width="18" height="19">
+      <svg className="property__bookmark-icon" width="31" height="33">
         <use xlinkHref="#icon-bookmark"/>
       </svg>
       <span className="visually-hidden">{offerBookmarkStatus ? `In` : `To`} bookmarks</span>
@@ -57,7 +57,7 @@ const OfferCardBookmark = (props) => {
   );
 };
 
-OfferCardBookmark.propTypes = {
+OfferBookmark.propTypes = {
   offer: offerPropType,
   offerId: PropTypes.string.isRequired,
   offerBookmarkStatus: PropTypes.bool.isRequired,
@@ -76,5 +76,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {OfferCardBookmark};
-export default connect(mapStateToProps, mapDispatchToProps)(OfferCardBookmark);
+export {OfferBookmark};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferBookmark);
