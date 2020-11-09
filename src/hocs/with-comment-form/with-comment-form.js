@@ -8,12 +8,7 @@ const withCommentForm = (Component) => {
         rating: ``,
         review: ``,
       };
-      this.handleSubmit = this.handleSubmit.bind(this);
       this.handleFieldChange = this.handleFieldChange.bind(this);
-    }
-
-    handleSubmit(evt) {
-      evt.preventDefault();
     }
 
     handleFieldChange(evt) {
@@ -29,7 +24,6 @@ const withCommentForm = (Component) => {
           {...this.props}
           rating={rating}
           review={review}
-          onSubmit={this.handleSubmit}
           onFieldChange={this.handleFieldChange}
         />
       );

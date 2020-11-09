@@ -1,19 +1,32 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {uploadReview} from "../../store/api-actions";
+import {connect} from "react-redux";
 
 const RADIO_VALUES = [`5`, `4`, `3`, `2`, `1`];
 
 class CommentForm extends PureComponent {
   constructor(props) {
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(evt) {
+    const {rating, review, offerId, uploadReviewAction} = this.props;
+    evt.preventDefault();
+    uploadReviewAction({
+      rating,
+      review,
+      offerId,
+    });
   }
 
   render() {
-    const {rating, review, onSubmit, onFieldChange} = this.props;
+    const {rating, review, onFieldChange} = this.props;
 
     return (
       <form className="reviews__form form" action="#" method="post"
-        onSubmit={onSubmit}
+        onSubmit={this.handleSubmit}
       >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
@@ -48,8 +61,16 @@ class CommentForm extends PureComponent {
 CommentForm.propTypes = {
   rating: PropTypes.string.isRequired,
   review: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  offerId: PropTypes.string.isRequired,
   onFieldChange: PropTypes.func.isRequired,
+  uploadReviewAction: PropTypes.func.isRequired,
 };
 
-export default CommentForm;
+const mapDispatchToProps = (dispatch) => ({
+  uploadReviewAction(reviewData) {
+    dispatch(uploadReview(reviewData));
+  }
+});
+
+export {CommentForm};
+export default connect(undefined, mapDispatchToProps)(CommentForm);

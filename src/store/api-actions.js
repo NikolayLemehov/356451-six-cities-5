@@ -129,3 +129,16 @@ export const fetchReviews = (offerId) => (dispatch, getState, api) => (
       return err;
     })
 );
+
+export const uploadReview = ({rating, review: comment, offerId}) => (dispatch, getState, api) => (
+  api.post(`${APIRoute.REVIEWS}/${offerId}`, {comment, rating})
+    .then(({data}) => {
+      const reviews = getParsedArray(data, getParsedReview);
+      dispatch(loadReviews(reviews));
+      return ResponseType.SUCCESS;
+    })
+    .catch((err) => {
+      swal(`Error`, String(err), `error`);
+      return err;
+    })
+);

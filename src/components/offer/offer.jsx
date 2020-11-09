@@ -191,7 +191,9 @@ class Offer extends PureComponent {
                       </li>
                     ))}
                   </ul>
-                  <CommentFormWrapper/>
+                  <CommentFormWrapper
+                    offerId={offer.id}
+                  />
                 </section>
               </div>
             </div>
