@@ -8,6 +8,7 @@ const getCurrentCityName = (state) => state.COMMON.currentCityName;
 const getCurrentSortType = (state) => state.COMMON.currentSortType;
 export const getAuthorizationStatus = (state) => state.USER.authorizationStatus;
 export const getAuthInfo = (state) => state.COMMON.authInfo;
+export const getReviews = (state) => state.COMMON.reviews;
 
 export const getCurrentCityOffers = createSelector(
     getOffers,

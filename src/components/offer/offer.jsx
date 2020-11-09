@@ -1,19 +1,31 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-// import moment from "moment";
-import {offerPropType} from "../../prop-types";
+import moment from "moment";
+import {offerPropType, reviewPropType} from "../../prop-types";
 import {AppRoute, AuthorizationStatus, OfferCardType, RATING_COEFFICIENT} from "../../const";
 import OfferCard from "../offer-card/offer-card";
-// import CommentForm from "../comment-form/comment-form";
+import CommentForm from "../comment-form/comment-form";
 import Map from "../map/map";
-// import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
+import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
 import {connect} from "react-redux";
-import {getAuthInfo, getAuthorizationStatus, getChangedBookmarkOffer, getNearOffers} from "../../store/selectors";
-import {fetchBookmarkOffers, fetchIdOffer, fetchNearOffers, updateOfferBookmarkStatus} from "../../store/api-actions";
+import {
+  getAuthInfo,
+  getAuthorizationStatus,
+  getChangedBookmarkOffer,
+  getNearOffers,
+  getReviews
+} from "../../store/selectors";
+import {
+  fetchBookmarkOffers,
+  fetchIdOffer,
+  fetchNearOffers,
+  fetchReviews,
+  updateOfferBookmarkStatus
+} from "../../store/api-actions";
 import OfferBookmark from "../offer-bookmark/offer-bookmark";
 
-// const CommentFormWrapper = withCommentForm(CommentForm);
+const CommentFormWrapper = withCommentForm(CommentForm);
 const MAX_VISIBLE_PHOTO = 6;
 
 class Offer extends PureComponent {
@@ -22,21 +34,23 @@ class Offer extends PureComponent {
   }
 
   componentDidMount() {
-    const {offerId, loadOfferAction, loadNearOffersAction} = this.props;
+    const {offerId, loadOfferAction, loadNearOffersAction, loadReviewsAction} = this.props;
     loadOfferAction(offerId);
     loadNearOffersAction(offerId);
+    loadReviewsAction(offerId);
   }
 
   componentDidUpdate(prevProps) {
-    const {offerId, loadOfferAction, loadNearOffersAction} = this.props;
+    const {offerId, loadOfferAction, loadNearOffersAction, loadReviewsAction} = this.props;
     if (prevProps.offerId !== offerId) {
       loadOfferAction(offerId);
       loadNearOffersAction(offerId);
+      loadReviewsAction(offerId);
     }
   }
 
   render() {
-    const {offer, nearOffers, authorizationStatus, userEMail, userAvatar, offerBookmarkStatus} = this.props;
+    const {offer, nearOffers, authorizationStatus, userEMail, userAvatar, offerBookmarkStatus, reviews} = this.props;
     const isAuthorizedStatus = authorizationStatus === AuthorizationStatus.AUTH;
 
     return !offer.id ? (
@@ -146,39 +160,39 @@ class Offer extends PureComponent {
                     ))}
                   </div>
                 </div>
-                {/* <section className="property__reviews reviews">*/}
-                {/*  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offer.reviews.length}</span></h2>*/}
-                {/*  <ul className="reviews__list">*/}
-                {/*    {offer.reviews.map((it, i) => (*/}
-                {/*      <li key={`${i}-${it}`} className="reviews__item">*/}
-                {/*        <div className="reviews__user user">*/}
-                {/*          <div className="reviews__avatar-wrapper user__avatar-wrapper">*/}
-                {/*            <img className="reviews__avatar user__avatar" src={`${it.avatar}`} width="54" height="54"*/}
-                {/*              alt="Reviews avatar"/>*/}
-                {/*          </div>*/}
-                {/*          <span className="reviews__user-name">*/}
-                {/*            {it.reviewer}*/}
-                {/*          </span>*/}
-                {/*        </div>*/}
-                {/*        <div className="reviews__info">*/}
-                {/*          <div className="reviews__rating rating">*/}
-                {/*            <div className="reviews__stars rating__stars">*/}
-                {/*              <span style={{width: `${it.rate * RATING_COEFFICIENT}%`}}/>*/}
-                {/*              <span className="visually-hidden">Rating</span>*/}
-                {/*            </div>*/}
-                {/*          </div>*/}
-                {/*          <p className="reviews__text">*/}
-                {/*            {it.message}*/}
-                {/*          </p>*/}
-                {/*          <time className="reviews__time" dateTime={it.date}>*/}
-                {/*            {moment(it.date, `YYYY-MM-DD`).format(`MMMM YYYY`)}*/}
-                {/*          </time>*/}
-                {/*        </div>*/}
-                {/*      </li>*/}
-                {/*    ))}*/}
-                {/*  </ul>*/}
-                {/*  <CommentFormWrapper/>*/}
-                {/* </section>*/}
+                <section className="property__reviews reviews">
+                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                  <ul className="reviews__list">
+                    {reviews.map((it, i) => (
+                      <li key={`${i}-${it}`} className="reviews__item">
+                        <div className="reviews__user user">
+                          <div className="reviews__avatar-wrapper user__avatar-wrapper">
+                            <img className="reviews__avatar user__avatar" src={`${it.user.avatarUrl}`} width="54" height="54"
+                              alt="Reviews avatar"/>
+                          </div>
+                          <span className="reviews__user-name">
+                            {it.user.name}
+                          </span>
+                        </div>
+                        <div className="reviews__info">
+                          <div className="reviews__rating rating">
+                            <div className="reviews__stars rating__stars">
+                              <span style={{width: `${it.rate * RATING_COEFFICIENT}%`}}/>
+                              <span className="visually-hidden">Rating</span>
+                            </div>
+                          </div>
+                          <p className="reviews__text">
+                            {it.comment}
+                          </p>
+                          <time className="reviews__time" dateTime={it.date}>
+                            {moment(it.date, `YYYY-MM-DD`).format(`MMMM YYYY`)}
+                          </time>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <CommentFormWrapper/>
+                </section>
               </div>
             </div>
 
@@ -217,6 +231,8 @@ Offer.propTypes = {
   offerId: PropTypes.string.isRequired,
   loadOfferAction: PropTypes.func.isRequired,
   loadNearOffersAction: PropTypes.func.isRequired,
+  loadReviewsAction: PropTypes.func.isRequired,
+  reviews: PropTypes.arrayOf(reviewPropType).isRequired,
   userEMail: PropTypes.string.isRequired,
   userAvatar: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
@@ -224,6 +240,7 @@ Offer.propTypes = {
 
 const mapStateToProps = (state) => ({
   offer: getChangedBookmarkOffer(state),
+  reviews: getReviews(state),
   offerBookmarkStatus: getChangedBookmarkOffer(state).isBookmark,
   nearOffers: getNearOffers(state),
   authorizationStatus: getAuthorizationStatus(state),
@@ -237,6 +254,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadNearOffersAction(offerId) {
     dispatch(fetchNearOffers(offerId));
+  },
+  loadReviewsAction(offerId) {
+    dispatch(fetchReviews(offerId));
   },
   onChangeBookmark(offerId, bookmarkStatus) {
     dispatch(updateOfferBookmarkStatus(offerId, bookmarkStatus));

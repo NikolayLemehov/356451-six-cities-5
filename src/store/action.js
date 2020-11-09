@@ -11,6 +11,7 @@ export const ActionType = {
   CHANGE_BOOKMARK_STATUS_OFFER_IN_OFFERS: `CHANGE_BOOKMARK_STATUS_OFFER_IN_OFFERS`,
   CHANGE_BOOKMARK_STATUS_OFFER_IN_NEAR_OFFERS: `CHANGE_BOOKMARK_STATUS_OFFER_IN_NEAR_OFFERS`,
   LOAD_BOOKMARK_OFFERS: `LOAD_BOOKMARK_OFFERS`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
 };
 
 export const changeCityFilter = (cityName) => ({
@@ -60,4 +61,8 @@ export const changeBookmarkStatusOfferInNearOffers = (offer) => ({
 export const loadBookmarkOffers = (offers) => ({
   type: ActionType.LOAD_BOOKMARK_OFFERS,
   payload: offers,
+});
+export const loadReviews = (reviews) => ({
+  type: ActionType.LOAD_REVIEWS,
+  payload: reviews,
 });

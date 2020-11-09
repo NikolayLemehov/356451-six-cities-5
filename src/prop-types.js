@@ -22,17 +22,18 @@ export const offerPropType = PropTypes.shape({
   hostTop: PropTypes.bool.isRequired,
   avatar: PropTypes.string.isRequired,
   coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-  // reviews: PropTypes.arrayOf(PropTypes.shape({
-  //   reviewer: PropTypes.string.isRequired,
-  //   avatar: PropTypes.string.isRequired,
-  //   rate: PropTypes.number.isRequired,
-  //   message: PropTypes.string.isRequired,
-  //   date: PropTypes.string.isRequired,
-  // })).isRequired
 });
 
-export const citiesPropType = PropTypes.arrayOf(PropTypes.shape({
-  name: PropTypes.string.isRequired,
-  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-}));
+export const reviewPropType = PropTypes.shape({
+  comment: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  rate: PropTypes.number.isRequired,
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    isPro: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+  })
+});
 

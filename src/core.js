@@ -48,7 +48,6 @@ export const getParsedOffer = (data) => {
     coordinates: [data[`location`][`latitude`], data[`location`][`longitude`]],
   };
 };
-export const getParsedOffers = (dataArray) => dataArray.map((it) => getParsedOffer(it));
 export const getParsedAuthInfo = (data) => {
   return {
     id: data[`id`],
@@ -57,3 +56,18 @@ export const getParsedAuthInfo = (data) => {
     isPro: data[`is_pro`],
   };
 };
+export const getParsedReview = (data) => {
+  return {
+    id: data[`id`],
+    date: data[`date`],
+    comment: data[`comment`],
+    rate: data[`rating`],
+    user: {
+      id: data[`user`][`id`],
+      avatarUrl: data[`user`][`avatar_url`],
+      isPro: data[`user`][`is_pro`],
+      name: data[`user`][`name`],
+    },
+  };
+};
+export const getParsedArray = (dataArray, getParsedItem) => dataArray.map((it) => getParsedItem(it));

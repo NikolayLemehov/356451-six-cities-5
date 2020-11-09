@@ -46,6 +46,7 @@ export const APIRoute = {
   OFFERS: `/hotels`,
   LOGIN: `/login`,
   FAVORITE: `/favorite`,
+  REVIEWS: `/comments`,
 };
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
