@@ -93,13 +93,6 @@ class Offer extends PureComponent {
                     offerId={offer.id}
                     offerBookmarkStatus={offerBookmarkStatus}
                   />
-                  {/* <button className={`property__bookmark-button ${*/}
-                  {/*  offer.isBookmark ? `property__bookmark-button--active ` : ``}button`} type="button">*/}
-                  {/*  <svg className="property__bookmark-icon" width="31" height="33">*/}
-                  {/*    <use xlinkHref="#icon-bookmark"/>*/}
-                  {/*  </svg>*/}
-                  {/*  <span className="visually-hidden">{offer.isBookmark ? `In` : `To`} bookmarks</span>*/}
-                  {/* </button>*/}
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
