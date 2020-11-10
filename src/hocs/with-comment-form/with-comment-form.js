@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import {CommentCharacter} from "../../const";
 
 const withCommentForm = (Component) => {
   class WithCommentForm extends PureComponent {
@@ -7,8 +8,19 @@ const withCommentForm = (Component) => {
       this.state = {
         rating: ``,
         review: ``,
+        isValidForm: false,
       };
       this.handleFieldChange = this.handleFieldChange.bind(this);
+    }
+
+    componentDidUpdate() {
+      const {rating, review} = this.state;
+
+      if (rating && review.length >= CommentCharacter.MIN && review.length <= CommentCharacter.MAX) {
+        this.setState({isValidForm: true});
+      } else {
+        this.setState({isValidForm: false});
+      }
     }
 
     handleFieldChange(evt) {
@@ -17,13 +29,14 @@ const withCommentForm = (Component) => {
     }
 
     render() {
-      const {rating, review} = this.state;
+      const {rating, review, isValidForm} = this.state;
 
       return (
         <Component
           {...this.props}
           rating={rating}
           review={review}
+          isValidForm={isValidForm}
           onFieldChange={this.handleFieldChange}
         />
       );

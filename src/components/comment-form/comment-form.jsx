@@ -26,7 +26,7 @@ class CommentForm extends PureComponent {
   }
 
   render() {
-    const {rating, review, onFieldChange} = this.props;
+    const {rating, review, isValidForm, onFieldChange} = this.props;
 
     return (
       <form className="reviews__form form" action="#" method="post"
@@ -55,7 +55,8 @@ class CommentForm extends PureComponent {
             To submit review please make sure to set <span className="reviews__star">rating</span> and
             describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
           </p>
-          <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+          <button className="reviews__submit form__submit button" type="submit"
+            disabled={isValidForm ? `` : `disabled`}>Submit</button>
         </div>
       </form>
     );
@@ -65,6 +66,7 @@ class CommentForm extends PureComponent {
 CommentForm.propTypes = {
   rating: PropTypes.string.isRequired,
   review: PropTypes.string.isRequired,
+  isValidForm: PropTypes.bool.isRequired,
   offerId: PropTypes.string.isRequired,
   onFieldChange: PropTypes.func.isRequired,
   uploadReviewAction: PropTypes.func.isRequired,
