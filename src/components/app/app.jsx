@@ -1,17 +1,12 @@
 import React, {Fragment} from 'react';
-// import PropTypes from 'prop-types';
 import {Switch, Route, Router, Link} from "react-router-dom";
-// import {connect} from "react-redux";
 import Main from "../main/main";
 import Favorites from "../favorites/favorites";
 import Login from "../login/login";
 import Offer from "../offer/offer";
 import browserHistory from "../../browser-history";
-// import {offerPropType} from "../../prop-types";
 import {AppRoute} from "../../const";
 import PrivateRoute from "../private-route/private-route";
-// import {fetchIdOffer} from "../../store/api-actions";
-// import {getOffers} from "../../store/selectors";
 
 const App = () => {
 
