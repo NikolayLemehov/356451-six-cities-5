@@ -9,9 +9,11 @@ const withCommentForm = (Component) => {
         rating: ``,
         review: ``,
         isValidForm: false,
+        isWaitedResponseFormStatus: false,
       };
       this.handleFieldChange = this.handleFieldChange.bind(this);
       this.handleClearFormField = this.handleClearFormField.bind(this);
+      this.handleChangeResponseFormStatus = this.handleChangeResponseFormStatus.bind(this);
     }
 
     componentDidUpdate() {
@@ -36,17 +38,25 @@ const withCommentForm = (Component) => {
       });
     }
 
+    handleChangeResponseFormStatus(isWaited) {
+      this.setState(() => ({
+        isWaitedResponseFormStatus: isWaited,
+      }));
+    }
+
     render() {
-      const {rating, review, isValidForm} = this.state;
+      const {rating, review, isValidForm, isWaitedResponseFormStatus} = this.state;
+      const isDisabledSubmitButton = isValidForm && !isWaitedResponseFormStatus;
 
       return (
         <Component
           {...this.props}
           rating={rating}
           review={review}
-          isValidForm={isValidForm}
+          isDisabledSubmitButton={isDisabledSubmitButton}
           onFieldChange={this.handleFieldChange}
           onClearFormField={this.handleClearFormField}
+          onSetResponseFormStatus={this.handleChangeResponseFormStatus}
         />
       );
     }

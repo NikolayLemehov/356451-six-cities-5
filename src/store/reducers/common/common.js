@@ -16,7 +16,6 @@ const initialState = {
   currentSortType: SortingType.POPULAR,
   overOfferId: ``,
   reviews: [],
-  isWaitedResponseFormStatus: false,
 };
 
 export const common = (state = initialState, action) => {
@@ -66,10 +65,6 @@ export const common = (state = initialState, action) => {
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
-      });
-    case ActionType.SET_RESPONSE_FORM_STATUS:
-      return extend(state, {
-        isWaitedResponseFormStatus: action.payload,
       });
   }
   return state;

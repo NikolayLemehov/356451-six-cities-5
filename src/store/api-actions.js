@@ -4,7 +4,7 @@ import {
   loadAuthInfo, loadBookmarkOffers, loadNearOffer, loadBookmarkOffer,
   loadOffers,
   redirectToRoute,
-  requireAuthorization, loadReviews, setResponseFormStatus,
+  requireAuthorization, loadReviews,
 } from "./action";
 import {APIRoute, AppRoute, AuthorizationStatus, HttpCode, ResponseType} from "../const";
 import {getParsedArray, getParsedAuthInfo, getParsedOffer, getParsedReview} from "../core";
@@ -130,12 +130,14 @@ export const fetchReviews = (offerId) => (dispatch, getState, api) => (
     })
 );
 
-export const uploadReview = ({rating, review: comment, offerId}, onClearFormField) => (dispatch, getState, api) => (
+export const uploadReview = ({rating, review: comment, offerId, onClearFormField, onSetResponseFormStatus}) => (dispatch, getState, api) => (
   api.post(`${APIRoute.REVIEWS}/${offerId}`, {comment, rating})
     .then(({data}) => {
       const reviews = getParsedArray(data, getParsedReview);
       dispatch(loadReviews(reviews));
-      dispatch(setResponseFormStatus(false));
+      // dispatch(setResponseFormStatus(false));
+      // console.log(onSetResponseFormStatus);
+      onSetResponseFormStatus(false);
       onClearFormField();
       return ResponseType.SUCCESS;
     })
