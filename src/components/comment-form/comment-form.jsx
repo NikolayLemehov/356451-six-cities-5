@@ -2,6 +2,8 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {uploadReview} from "../../store/api-actions";
 import {connect} from "react-redux";
+import {setResponseFormStatus} from "../../store/action";
+import {getIsWaitedResponseFormStatus} from "../../store/selectors";
 
 const radioValues = [`5`, `4`, `3`, `2`, `1`];
 
@@ -12,17 +14,15 @@ class CommentForm extends PureComponent {
   }
 
   handleSubmit(evt) {
-    const {rating, review, offerId, uploadReviewAction} = this.props;
     evt.preventDefault();
-    uploadReviewAction({
-      rating,
-      review,
-      offerId,
-    });
+    const {rating, review, offerId, uploadReviewAction, setResponseFormStatusAction} = this.props;
+    setResponseFormStatusAction(true);
+    uploadReviewAction({rating, review, offerId});
   }
 
   render() {
-    const {rating, review, isValidForm, onFieldChange} = this.props;
+    const {rating, review, isValidForm, onFieldChange, isWaitedResponseFormStatus} = this.props;
+    const isDisabledSubmitButton = isValidForm && !isWaitedResponseFormStatus;
 
     return (
       <form className="reviews__form form" action="#" method="post"
@@ -52,7 +52,7 @@ class CommentForm extends PureComponent {
             describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
           </p>
           <button className="reviews__submit form__submit button" type="submit"
-            disabled={isValidForm ? `` : `disabled`}>Submit</button>
+            disabled={isDisabledSubmitButton ? `` : `disabled`}>Submit</button>
         </div>
       </form>
     );
@@ -63,16 +63,25 @@ CommentForm.propTypes = {
   rating: PropTypes.string.isRequired,
   review: PropTypes.string.isRequired,
   isValidForm: PropTypes.bool.isRequired,
+  isWaitedResponseFormStatus: PropTypes.bool.isRequired,
   offerId: PropTypes.string.isRequired,
   onFieldChange: PropTypes.func.isRequired,
+  setResponseFormStatusAction: PropTypes.func.isRequired,
   uploadReviewAction: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  isWaitedResponseFormStatus: getIsWaitedResponseFormStatus(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   uploadReviewAction(reviewData) {
     dispatch(uploadReview(reviewData));
-  }
+  },
+  setResponseFormStatusAction(isWaited) {
+    dispatch(setResponseFormStatus(isWaited));
+  },
 });
 
 export {CommentForm};
-export default connect(undefined, mapDispatchToProps)(CommentForm);
+export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);

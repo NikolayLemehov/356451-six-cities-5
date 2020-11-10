@@ -9,6 +9,7 @@ const getCurrentSortType = (state) => state.COMMON.currentSortType;
 export const getAuthorizationStatus = (state) => state.USER.authorizationStatus;
 export const getAuthInfo = (state) => state.COMMON.authInfo;
 export const getReviews = (state) => state.COMMON.reviews;
+export const getIsWaitedResponseFormStatus = (state) => state.COMMON.isWaitedResponseFormStatus;
 
 export const getCurrentCityOffers = createSelector(
     getOffers,

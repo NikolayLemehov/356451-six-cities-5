@@ -12,6 +12,7 @@ export const ActionType = {
   CHANGE_BOOKMARK_STATUS_OFFER_IN_NEAR_OFFERS: `CHANGE_BOOKMARK_STATUS_OFFER_IN_NEAR_OFFERS`,
   LOAD_BOOKMARK_OFFERS: `LOAD_BOOKMARK_OFFERS`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
+  SET_RESPONSE_FORM_STATUS: `SET_RESPONSE_FORM_STATUS`,
 };
 
 export const changeCityFilter = (cityName) => ({
@@ -65,4 +66,8 @@ export const loadBookmarkOffers = (offers) => ({
 export const loadReviews = (reviews) => ({
   type: ActionType.LOAD_REVIEWS,
   payload: reviews,
+});
+export const setResponseFormStatus = (isWaited) => ({
+  type: ActionType.SET_RESPONSE_FORM_STATUS,
+  payload: isWaited,
 });

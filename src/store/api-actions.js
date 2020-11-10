@@ -4,7 +4,7 @@ import {
   loadAuthInfo, loadBookmarkOffers, loadNearOffer, loadBookmarkOffer,
   loadOffers,
   redirectToRoute,
-  requireAuthorization, loadReviews,
+  requireAuthorization, loadReviews, setResponseFormStatus,
 } from "./action";
 import {APIRoute, AppRoute, AuthorizationStatus, HttpCode, ResponseType} from "../const";
 import {getParsedArray, getParsedAuthInfo, getParsedOffer, getParsedReview} from "../core";
@@ -135,6 +135,7 @@ export const uploadReview = ({rating, review: comment, offerId}) => (dispatch, g
     .then(({data}) => {
       const reviews = getParsedArray(data, getParsedReview);
       dispatch(loadReviews(reviews));
+      dispatch(setResponseFormStatus(false));
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
