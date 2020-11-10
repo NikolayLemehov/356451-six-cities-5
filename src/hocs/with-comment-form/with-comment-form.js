@@ -11,6 +11,7 @@ const withCommentForm = (Component) => {
         isValidForm: false,
       };
       this.handleFieldChange = this.handleFieldChange.bind(this);
+      this.handleClearFormField = this.handleClearFormField.bind(this);
     }
 
     componentDidUpdate() {
@@ -28,6 +29,13 @@ const withCommentForm = (Component) => {
       this.setState({[name]: value});
     }
 
+    handleClearFormField() {
+      this.setState({
+        rating: ``,
+        review: ``,
+      });
+    }
+
     render() {
       const {rating, review, isValidForm} = this.state;
 
@@ -38,6 +46,7 @@ const withCommentForm = (Component) => {
           review={review}
           isValidForm={isValidForm}
           onFieldChange={this.handleFieldChange}
+          onClearFormField={this.handleClearFormField}
         />
       );
     }

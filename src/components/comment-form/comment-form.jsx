@@ -15,9 +15,9 @@ class CommentForm extends PureComponent {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    const {rating, review, offerId, uploadReviewAction, setResponseFormStatusAction} = this.props;
+    const {rating, review, offerId, uploadReviewAction, setResponseFormStatusAction, onClearFormField} = this.props;
     setResponseFormStatusAction(true);
-    uploadReviewAction({rating, review, offerId});
+    uploadReviewAction({rating, review, offerId}, onClearFormField);
   }
 
   render() {
@@ -66,6 +66,7 @@ CommentForm.propTypes = {
   isWaitedResponseFormStatus: PropTypes.bool.isRequired,
   offerId: PropTypes.string.isRequired,
   onFieldChange: PropTypes.func.isRequired,
+  onClearFormField: PropTypes.func.isRequired,
   setResponseFormStatusAction: PropTypes.func.isRequired,
   uploadReviewAction: PropTypes.func.isRequired,
 };

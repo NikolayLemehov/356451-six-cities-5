@@ -130,12 +130,13 @@ export const fetchReviews = (offerId) => (dispatch, getState, api) => (
     })
 );
 
-export const uploadReview = ({rating, review: comment, offerId}) => (dispatch, getState, api) => (
+export const uploadReview = ({rating, review: comment, offerId}, onClearFormField) => (dispatch, getState, api) => (
   api.post(`${APIRoute.REVIEWS}/${offerId}`, {comment, rating})
     .then(({data}) => {
       const reviews = getParsedArray(data, getParsedReview);
       dispatch(loadReviews(reviews));
       dispatch(setResponseFormStatus(false));
+      onClearFormField();
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
