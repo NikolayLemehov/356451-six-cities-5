@@ -2,8 +2,9 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {uploadReview} from "../../store/api-actions";
 import {connect} from "react-redux";
+import {CommentCharacter} from "../../const";
 
-const RADIO_VALUES = [`5`, `4`, `3`, `2`, `1`];
+const radioValues = [`5`, `4`, `3`, `2`, `1`];
 
 class CommentForm extends PureComponent {
   constructor(props) {
@@ -14,6 +15,9 @@ class CommentForm extends PureComponent {
   handleSubmit(evt) {
     const {rating, review, offerId, uploadReviewAction} = this.props;
     evt.preventDefault();
+    if (rating || review.length >= CommentCharacter.MIN && review.length <= CommentCharacter.MAX) {
+      return;
+    }
     uploadReviewAction({
       rating,
       review,
@@ -30,7 +34,7 @@ class CommentForm extends PureComponent {
       >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
-          {RADIO_VALUES.map((it) => (
+          {radioValues.map((it) => (
             <React.Fragment key={it}>
               <input className="form__rating-input visually-hidden" name="rating" value={it} id={`${it}-stars`}
                 onChange={onFieldChange} type="radio" checked={rating === it}

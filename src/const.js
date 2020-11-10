@@ -60,3 +60,7 @@ export const ResponseType = {
   ERROR: `ERROR`,
 };
 export const MAX_MESSAGE_COUNT_ON_PAGE = 10;
+export const CommentCharacter = {
+  MIN: 50,
+  MAX: 300,
+};
