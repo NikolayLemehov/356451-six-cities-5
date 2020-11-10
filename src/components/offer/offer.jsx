@@ -191,9 +191,9 @@ class Offer extends PureComponent {
                       </li>
                     ))}
                   </ul>
-                  <CommentFormWrapper
+                  {isAuthorizedStatus ? <CommentFormWrapper
                     offerId={offer.id}
-                  />
+                  /> : false}
                 </section>
               </div>
             </div>
