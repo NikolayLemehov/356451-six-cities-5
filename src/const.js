@@ -59,3 +59,4 @@ export const ResponseType = {
   SUCCESS: `SUCCESS`,
   ERROR: `ERROR`,
 };
+export const MAX_MESSAGE_COUNT_ON_PAGE = 10;

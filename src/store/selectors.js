@@ -1,5 +1,5 @@
 import {createSelector} from "reselect";
-import {getCityOffers, getSortedOffersByType} from "../core";
+import {getCityOffers, getSortedOffersByType, getSortedReviewsByDate} from "../core";
 
 export const getOffers = (state) => state.COMMON.offers;
 export const getNearOffers = (state) => state.COMMON.nearOffers;
@@ -23,5 +23,12 @@ export const getCurrentSortedCityOffers = createSelector(
     getCurrentSortType,
     (currentCityOffers, currentSortType) => {
       return getSortedOffersByType(currentCityOffers, currentSortType);
+    }
+);
+
+export const getSortedReviews = createSelector(
+    getReviews,
+    (reviews) => {
+      return getSortedReviewsByDate(reviews);
     }
 );
