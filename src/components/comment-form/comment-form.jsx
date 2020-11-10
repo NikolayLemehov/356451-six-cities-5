@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {uploadReview} from "../../store/api-actions";
 import {connect} from "react-redux";
-import {CommentCharacter} from "../../const";
 
 const radioValues = [`5`, `4`, `3`, `2`, `1`];
 
@@ -15,9 +14,6 @@ class CommentForm extends PureComponent {
   handleSubmit(evt) {
     const {rating, review, offerId, uploadReviewAction} = this.props;
     evt.preventDefault();
-    if (rating || review.length >= CommentCharacter.MIN && review.length <= CommentCharacter.MAX) {
-      return;
-    }
     uploadReviewAction({
       rating,
       review,
