@@ -46,6 +46,7 @@ export const APIRoute = {
   OFFERS: `/hotels`,
   LOGIN: `/login`,
   FAVORITE: `/favorite`,
+  REVIEWS: `/comments`,
 };
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -57,4 +58,9 @@ export const HttpCode = {
 export const ResponseType = {
   SUCCESS: `SUCCESS`,
   ERROR: `ERROR`,
+};
+export const MAX_MESSAGE_COUNT_ON_PAGE = 10;
+export const CommentCharacter = {
+  MIN: 50,
+  MAX: 300,
 };

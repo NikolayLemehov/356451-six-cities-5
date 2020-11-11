@@ -1,7 +1,9 @@
-import {SortingType} from "./const";
+import {MAX_MESSAGE_COUNT_ON_PAGE, SortingType} from "./const";
 import {upperCaseFirst} from "./utils";
+import moment from "moment";
 
 export const getCityOffers = (offers, city) => offers.filter((it) => it.city === city);
+
 export const getSortedOffersByType = (offers, sortType) => {
   switch (sortType) {
     case SortingType.POPULAR:
@@ -15,6 +17,15 @@ export const getSortedOffersByType = (offers, sortType) => {
   }
   return offers;
 };
+export const getSortedReviewsByDate = (reviews) => {
+  if (reviews.length < 1) {
+    return reviews;
+  }
+  const cloneReviews = reviews.slice();
+  cloneReviews.sort((a, b) => moment(b.date).diff(a.date));
+  return cloneReviews.slice(0, MAX_MESSAGE_COUNT_ON_PAGE);
+};
+
 export const getOffersWithNewOfferByIndex = (offers, offer) => {
   const cloneOffers = offers.slice();
   const index = cloneOffers.findIndex((it) => it.id === offer.id);
@@ -24,6 +35,7 @@ export const getOffersWithNewOfferByIndex = (offers, offer) => {
   cloneOffers[index] = offer;
   return cloneOffers;
 };
+
 export const getParsedOffer = (data) => {
   return {
     id: String(data[`id`]),
@@ -48,7 +60,6 @@ export const getParsedOffer = (data) => {
     coordinates: [data[`location`][`latitude`], data[`location`][`longitude`]],
   };
 };
-export const getParsedOffers = (dataArray) => dataArray.map((it) => getParsedOffer(it));
 export const getParsedAuthInfo = (data) => {
   return {
     id: data[`id`],
@@ -57,3 +68,18 @@ export const getParsedAuthInfo = (data) => {
     isPro: data[`is_pro`],
   };
 };
+export const getParsedReview = (data) => {
+  return {
+    id: data[`id`],
+    date: data[`date`],
+    comment: data[`comment`],
+    rate: data[`rating`],
+    user: {
+      id: data[`user`][`id`],
+      avatarUrl: data[`user`][`avatar_url`],
+      isPro: data[`user`][`is_pro`],
+      name: data[`user`][`name`],
+    },
+  };
+};
+export const getParsedArray = (dataArray, getParsedItem) => dataArray.map((it) => getParsedItem(it));

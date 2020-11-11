@@ -4,16 +4,16 @@ import {
   loadAuthInfo, loadBookmarkOffers, loadNearOffer, loadBookmarkOffer,
   loadOffers,
   redirectToRoute,
-  requireAuthorization,
+  requireAuthorization, loadReviews,
 } from "./action";
 import {APIRoute, AppRoute, AuthorizationStatus, HttpCode, ResponseType} from "../const";
-import {getParsedAuthInfo, getParsedOffer, getParsedOffers} from "../core";
+import {getParsedArray, getParsedAuthInfo, getParsedOffer, getParsedReview} from "../core";
 import swal from "sweetalert";
 
 export const fetchOffers = () => (dispatch, getState, api) => (
   api.get(APIRoute.OFFERS)
     .then((response) => {
-      const offers = getParsedOffers(response.data);
+      const offers = getParsedArray(response.data, getParsedOffer);
       dispatch(loadOffers(offers));
       return ResponseType.SUCCESS;
     })
@@ -78,7 +78,7 @@ export const fetchBookmarkOffers = () => (dispatch, getState, api) => (
   api.get(APIRoute.FAVORITE)
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
-        const bookmarkOffers = getParsedOffers(response.data);
+        const bookmarkOffers = getParsedArray(response.data, getParsedOffer);
         dispatch(loadBookmarkOffers(bookmarkOffers));
         return ResponseType.SUCCESS;
       } else {
@@ -107,8 +107,38 @@ export const fetchIdOffer = (offerId) => (dispatch, getState, api) => (
 export const fetchNearOffers = (offerId) => (dispatch, getState, api) => (
   api.get(`${APIRoute.OFFERS}/${offerId}/nearby`)
     .then(({data}) => {
-      const offers = getParsedOffers(data);
+      const offers = getParsedArray(data, getParsedOffer);
       dispatch(loadNearOffer(offers));
+      return ResponseType.SUCCESS;
+    })
+    .catch((err) => {
+      swal(`Error`, String(err), `error`);
+      return err;
+    })
+);
+
+export const fetchReviews = (offerId) => (dispatch, getState, api) => (
+  api.get(`${APIRoute.REVIEWS}/${offerId}`)
+    .then(({data}) => {
+      const reviews = getParsedArray(data, getParsedReview);
+      dispatch(loadReviews(reviews));
+      return ResponseType.SUCCESS;
+    })
+    .catch((err) => {
+      swal(`Error`, String(err), `error`);
+      return err;
+    })
+);
+
+export const uploadReview = ({rating, review: comment, offerId, onClearFormField, onSetResponseFormStatus}) => (dispatch, getState, api) => (
+  api.post(`${APIRoute.REVIEWS}/${offerId}`, {comment, rating})
+    .then(({data}) => {
+      const reviews = getParsedArray(data, getParsedReview);
+      dispatch(loadReviews(reviews));
+      // dispatch(setResponseFormStatus(false));
+      // console.log(onSetResponseFormStatus);
+      onSetResponseFormStatus(false);
+      onClearFormField();
       return ResponseType.SUCCESS;
     })
     .catch((err) => {

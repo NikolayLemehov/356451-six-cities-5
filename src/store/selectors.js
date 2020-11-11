@@ -1,5 +1,5 @@
 import {createSelector} from "reselect";
-import {getCityOffers, getSortedOffersByType} from "../core";
+import {getCityOffers, getSortedOffersByType, getSortedReviewsByDate} from "../core";
 
 export const getOffers = (state) => state.COMMON.offers;
 export const getNearOffers = (state) => state.COMMON.nearOffers;
@@ -8,6 +8,8 @@ const getCurrentCityName = (state) => state.COMMON.currentCityName;
 const getCurrentSortType = (state) => state.COMMON.currentSortType;
 export const getAuthorizationStatus = (state) => state.USER.authorizationStatus;
 export const getAuthInfo = (state) => state.COMMON.authInfo;
+export const getReviews = (state) => state.COMMON.reviews;
+export const getIsWaitedResponseFormStatus = (state) => state.COMMON.isWaitedResponseFormStatus;
 
 export const getCurrentCityOffers = createSelector(
     getOffers,
@@ -22,5 +24,12 @@ export const getCurrentSortedCityOffers = createSelector(
     getCurrentSortType,
     (currentCityOffers, currentSortType) => {
       return getSortedOffersByType(currentCityOffers, currentSortType);
+    }
+);
+
+export const getSortedReviews = createSelector(
+    getReviews,
+    (reviews) => {
+      return getSortedReviewsByDate(reviews);
     }
 );

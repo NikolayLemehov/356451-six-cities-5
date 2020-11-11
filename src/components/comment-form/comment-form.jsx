@@ -1,48 +1,77 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {uploadReview} from "../../store/api-actions";
+import {connect} from "react-redux";
 
-const CommentForm = (props) => {
-  const {rating, review, onSubmit, onFieldChange} = props;
-  const RADIO_VALUES = [`5`, `4`, `3`, `2`, `1`];
+const radioValues = [`5`, `4`, `3`, `2`, `1`];
 
-  return (
-    <form className="reviews__form form" action="#" method="post"
-      onSubmit={onSubmit}
-    >
-      <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <div className="reviews__rating-form form__rating">
-        {RADIO_VALUES.map((it) => (
-          <React.Fragment key={it}>
-            <input className="form__rating-input visually-hidden" name="rating" value={it} id={`${it}-stars`}
-              onChange={onFieldChange} type="radio" checked={rating === it}
-            />
-            <label htmlFor={`${it}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
-              <svg className="form__star-image" width="37" height="33">
-                <use xlinkHref="#icon-star"/>
-              </svg>
-            </label>
-          </React.Fragment>
-        ))}
-      </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review"
-        placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={onFieldChange} value={review} />
-      <div className="reviews__button-wrapper">
-        <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and
-          describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-        </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
-      </div>
-    </form>
-  );
-};
+class CommentForm extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault();
+    const {rating, review, offerId, uploadReviewAction, onClearFormField, onSetResponseFormStatus} = this.props;
+    onSetResponseFormStatus(true);
+    uploadReviewAction({rating, review, offerId, onClearFormField, onSetResponseFormStatus});
+  }
+
+  render() {
+    const {rating, review, onFieldChange, isDisabledSubmitButton} = this.props;
+
+    return (
+      <form className="reviews__form form" action="#" method="post"
+        onSubmit={this.handleSubmit}
+      >
+        <label className="reviews__label form__label" htmlFor="review">Your review</label>
+        <div className="reviews__rating-form form__rating">
+          {radioValues.map((it) => (
+            <React.Fragment key={it}>
+              <input className="form__rating-input visually-hidden" name="rating" value={it} id={`${it}-stars`}
+                onChange={onFieldChange} type="radio" checked={rating === it}
+              />
+              <label htmlFor={`${it}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
+                <svg className="form__star-image" width="37" height="33">
+                  <use xlinkHref="#icon-star"/>
+                </svg>
+              </label>
+            </React.Fragment>
+          ))}
+        </div>
+        <textarea className="reviews__textarea form__textarea" id="review" name="review"
+          placeholder="Tell how was your stay, what you like and what can be improved"
+          onChange={onFieldChange} value={review} />
+        <div className="reviews__button-wrapper">
+          <p className="reviews__help">
+            To submit review please make sure to set <span className="reviews__star">rating</span> and
+            describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          </p>
+          <button className="reviews__submit form__submit button" type="submit"
+            disabled={isDisabledSubmitButton ? `` : `disabled`}>Submit</button>
+        </div>
+      </form>
+    );
+  }
+}
 
 CommentForm.propTypes = {
   rating: PropTypes.string.isRequired,
   review: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  isDisabledSubmitButton: PropTypes.bool.isRequired,
+  offerId: PropTypes.string.isRequired,
   onFieldChange: PropTypes.func.isRequired,
+  onClearFormField: PropTypes.func.isRequired,
+  onSetResponseFormStatus: PropTypes.func.isRequired,
+  uploadReviewAction: PropTypes.func.isRequired,
 };
 
-export default CommentForm;
+const mapDispatchToProps = (dispatch) => ({
+  uploadReviewAction(reviewData) {
+    dispatch(uploadReview(reviewData));
+  },
+});
+
+export {CommentForm};
+export default connect(undefined, mapDispatchToProps)(CommentForm);

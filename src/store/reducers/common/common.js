@@ -15,6 +15,7 @@ const initialState = {
   currentCityName: CityName.PARIS,
   currentSortType: SortingType.POPULAR,
   overOfferId: ``,
+  reviews: [],
 };
 
 export const common = (state = initialState, action) => {
@@ -60,6 +61,10 @@ export const common = (state = initialState, action) => {
     case ActionType.LOAD_BOOKMARK_OFFERS:
       return extend(state, {
         bookmarkOffers: action.payload,
+      });
+    case ActionType.LOAD_REVIEWS:
+      return extend(state, {
+        reviews: action.payload,
       });
   }
   return state;

@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import {CommentCharacter} from "../../const";
 
 const withCommentForm = (Component) => {
   class WithCommentForm extends PureComponent {
@@ -7,13 +8,22 @@ const withCommentForm = (Component) => {
       this.state = {
         rating: ``,
         review: ``,
+        isValidForm: false,
+        isWaitedResponseFormStatus: false,
       };
-      this.handleSubmit = this.handleSubmit.bind(this);
       this.handleFieldChange = this.handleFieldChange.bind(this);
+      this.handleClearFormField = this.handleClearFormField.bind(this);
+      this.handleChangeResponseFormStatus = this.handleChangeResponseFormStatus.bind(this);
     }
 
-    handleSubmit(evt) {
-      evt.preventDefault();
+    componentDidUpdate() {
+      const {rating, review} = this.state;
+
+      if (rating && review.length >= CommentCharacter.MIN && review.length <= CommentCharacter.MAX) {
+        this.setState({isValidForm: true});
+      } else {
+        this.setState({isValidForm: false});
+      }
     }
 
     handleFieldChange(evt) {
@@ -21,16 +31,32 @@ const withCommentForm = (Component) => {
       this.setState({[name]: value});
     }
 
+    handleClearFormField() {
+      this.setState({
+        rating: ``,
+        review: ``,
+      });
+    }
+
+    handleChangeResponseFormStatus(isWaited) {
+      this.setState(() => ({
+        isWaitedResponseFormStatus: isWaited,
+      }));
+    }
+
     render() {
-      const {rating, review} = this.state;
+      const {rating, review, isValidForm, isWaitedResponseFormStatus} = this.state;
+      const isDisabledSubmitButton = isValidForm && !isWaitedResponseFormStatus;
 
       return (
         <Component
           {...this.props}
           rating={rating}
           review={review}
-          onSubmit={this.handleSubmit}
+          isDisabledSubmitButton={isDisabledSubmitButton}
           onFieldChange={this.handleFieldChange}
+          onClearFormField={this.handleClearFormField}
+          onSetResponseFormStatus={this.handleChangeResponseFormStatus}
         />
       );
     }
