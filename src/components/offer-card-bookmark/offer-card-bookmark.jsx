@@ -19,8 +19,8 @@ const OfferCardBookmark = (props) => {
   switch (authorizationStatus) {
     case AuthorizationStatus.AUTH:
       return (
-        <button className={`place-card__bookmark-button ${
-          offerBookmarkStatus ? ` place-card__bookmark-button--active ` : ``}button`}
+        <button className={`place-card__bookmark-button${
+          offerBookmarkStatus ? ` place-card__bookmark-button--active ` : ` `}button`}
         type="button"
         onClick={handleBookmarkClick}
         >
@@ -32,8 +32,8 @@ const OfferCardBookmark = (props) => {
       );
     case AuthorizationStatus.NO_AUTH:
       return (
-        <Link to={AppRoute.LOGIN} className={`place-card__bookmark-button ${
-          offerBookmarkStatus ? ` place-card__bookmark-button--active ` : ``}button`}
+        <Link to={AppRoute.LOGIN} className={`place-card__bookmark-button
+        ${offerBookmarkStatus ? `place-card__bookmark-button--active ` : ` `}button`}
         type="button"
         >
           <svg className="place-card__bookmark-icon" width="18" height="19">
