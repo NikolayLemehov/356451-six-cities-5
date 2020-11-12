@@ -26,8 +26,8 @@ const withOpening = (Component) => {
         <Component
           {...this.props}
           isOpened={isOpened}
-          onMenuClose={this.handleMenuClose}
-          onMenuToggle={this.handleMenuToggle}
+          onCloseMenu={this.handleMenuClose}
+          onToggleMenu={this.handleMenuToggle}
         />
       );
     }

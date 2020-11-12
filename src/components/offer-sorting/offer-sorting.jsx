@@ -4,14 +4,14 @@ import {sortTypes} from "../../const";
 import OfferSortingItem from "../offer-sorting-item/offer-sorting-item";
 
 const OfferSorting = (props) => {
-  const {isOpened, onMenuClose, onMenuToggle} = props;
+  const {isOpened, onCloseMenu, onToggleMenu} = props;
 
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex="0"
         onClick={() => {
-          onMenuToggle(isOpened);
+          onToggleMenu(isOpened);
         }}
       >
                   Popular
@@ -24,7 +24,7 @@ const OfferSorting = (props) => {
           <OfferSortingItem
             key={`${it}-${i}`}
             type={it}
-            onCloseMenu={onMenuClose}
+            onCloseMenu={onCloseMenu}
           />
         ))}
       </ul>
@@ -34,8 +34,8 @@ const OfferSorting = (props) => {
 
 OfferSorting.propTypes = {
   isOpened: PropTypes.bool.isRequired,
-  onMenuClose: PropTypes.func.isRequired,
-  onMenuToggle: PropTypes.func.isRequired,
+  onCloseMenu: PropTypes.func.isRequired,
+  onToggleMenu: PropTypes.func.isRequired,
 };
 
 export default OfferSorting;
