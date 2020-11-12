@@ -7,11 +7,12 @@ const OfferSortingItem = (props) => {
   const {type, onCloseMenu, currentSortType, onChangeSortedType} = props;
 
   return (
-    <li className={`places__option ${currentSortType === type && `places__option--active`}`} tabIndex="0"
-      onClick={() => {
-        onChangeSortedType(type);
-        onCloseMenu();
-      }}
+    <li className={`places__option${
+      currentSortType === type ? ` places__option--active` : ``}`} tabIndex="0"
+    onClick={() => {
+      onChangeSortedType(type);
+      onCloseMenu();
+    }}
     >{type}</li>
   );
 };

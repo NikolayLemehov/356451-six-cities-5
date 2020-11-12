@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should OfferSortingItem render correctly OfferSortingItem should render correctly when the type is current 1`] = `
+<li
+  className="places__option places__option--active"
+  onClick={[Function]}
+  tabIndex="0"
+>
+  type1
+</li>
+`;
+
+exports[`Should OfferSortingItem render correctly OfferSortingItem should render correctly when the type is not current 1`] = `
+<li
+  className="places__option"
+  onClick={[Function]}
+  tabIndex="0"
+>
+  type2
+</li>
+`;

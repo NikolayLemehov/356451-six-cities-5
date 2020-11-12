@@ -16,9 +16,7 @@ const App = () => {
         <Route exact path={AppRoute.MAIN}>
           <Main/>
         </Route>
-        <PrivateRoute
-          exact
-          path={AppRoute.FAVORITES}
+        <PrivateRoute exact path={AppRoute.FAVORITES}
           render={() => {
             return (
               <Favorites/>
@@ -30,7 +28,7 @@ const App = () => {
             <Login/>
           )}
         />
-        <Route path="/offer/:id" exact
+        <Route exact path="/offer/:id"
           render={({match}) => {
             return (
               <Offer
