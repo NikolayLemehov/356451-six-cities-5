@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {OfferSortingItem} from "./offer-sorting-item";
 
-describe(`Should OfferSortingItem render correctly`, () => {
+describe(`OfferSortingItem should render correctly`, () => {
   it(`OfferSortingItem should render correctly when the type is current`, () => {
     const tree = renderer
       .create(<OfferSortingItem

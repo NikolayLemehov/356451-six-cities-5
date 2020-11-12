@@ -1,14 +1,15 @@
 import React from "react";
-import {fetchBookmarkOffers, updateOfferBookmarkStatus} from "../../store/api-actions";
-import {connect} from "react-redux";
+import PropTypes from "prop-types";
 import {offerPropType} from "../../prop-types";
 import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {fetchBookmarkOffers, updateOfferBookmarkStatus} from "../../store/api-actions";
 import {getAuthorizationStatus} from "../../store/selectors";
 import {AppRoute, AuthorizationStatus} from "../../const";
 
 const OfferCardBookmark = (props) => {
   const {offerId, offerBookmarkStatus, onChangeBookmark, authorizationStatus} = props;
+  // console.log(authorizationStatus);
 
   const handleBookmarkClick = (evt) => {
     evt.preventDefault();
