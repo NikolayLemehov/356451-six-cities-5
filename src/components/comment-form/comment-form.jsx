@@ -19,7 +19,7 @@ class CommentForm extends PureComponent {
   }
 
   render() {
-    const {rating, review, onFieldChange, isDisabledSubmitButton} = this.props;
+    const {rating, review, isDisabledSubmitButton, onFieldChange} = this.props;
 
     return (
       <form className="reviews__form form" action="#" method="post"
