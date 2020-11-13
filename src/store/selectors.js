@@ -4,12 +4,14 @@ import {getCityOffers, getSortedOffersByType, getSortedReviewsByDate} from "../c
 export const getOffers = (state) => state.COMMON.offers;
 export const getNearOffers = (state) => state.COMMON.nearOffers;
 export const getChangedBookmarkOffer = (state) => state.COMMON.changedBookmarkOffer;
-export const getCurrentCityName = (state) => state.COMMON.currentCityName;
-const getCurrentSortType = (state) => state.COMMON.currentSortType;
-export const getAuthorizationStatus = (state) => state.USER.authorizationStatus;
+export const getBookmarkOffers = (state) => state.COMMON.bookmarkOffers;
 export const getAuthInfo = (state) => state.COMMON.authInfo;
 export const getCities = (state) => state.COMMON.cities;
+export const getCurrentCityName = (state) => state.COMMON.currentCityName;
+const getCurrentSortType = (state) => state.COMMON.currentSortType;
 export const getReviews = (state) => state.COMMON.reviews;
+
+export const getAuthorizationStatus = (state) => state.USER.authorizationStatus;
 
 export const getCurrentCityOffers = createSelector(
     getOffers,
@@ -31,5 +33,16 @@ export const getSortedReviews = createSelector(
     getReviews,
     (reviews) => {
       return getSortedReviewsByDate(reviews);
+    }
+);
+
+export const getBookmarkOffersByCity = createSelector(
+    getBookmarkOffers,
+    (bookmarkOffers) => {
+      const bookmarkOffersByCity = {};
+      bookmarkOffers.forEach((it) => {
+        bookmarkOffersByCity[it.city] = bookmarkOffersByCity[it.city] ? [...(bookmarkOffersByCity[it.city]), it] : [it];
+      });
+      return bookmarkOffersByCity;
     }
 );

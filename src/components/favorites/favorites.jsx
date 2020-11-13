@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {offerPropType} from "../../prop-types";
 import OfferCard from "../offer-card/offer-card";
 import {AppRoute, AuthorizationStatus, OfferCardType} from "../../const";
+import {getAuthInfo, getAuthorizationStatus, getBookmarkOffers} from "../../store/selectors";
 
 const Favorites = (props) => {
   const {bookmarkOffers, userAvatar, userEMail, authorizationStatus} = props;
@@ -88,11 +89,11 @@ Favorites.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({COMMON, USER}) => ({
-  bookmarkOffers: COMMON.bookmarkOffers,
-  userEMail: COMMON.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.email : ``,
-  userAvatar: COMMON.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.avatarUrl : ``,
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  bookmarkOffers: getBookmarkOffers(state),
+  userEMail: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).email : ``,
+  userAvatar: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).avatarUrl : ``,
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export {Favorites};
