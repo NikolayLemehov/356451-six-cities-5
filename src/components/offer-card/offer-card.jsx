@@ -57,7 +57,7 @@ const OfferCard = (props) => {
             alt="Place image"/>
         </Link>
       </div>
-      <div className={`${getClass(``, ``, `favorites__card-info`)}place-card__info`}>
+      <div className={`${getClass(``, ``, `favorites__card-info `)}place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>

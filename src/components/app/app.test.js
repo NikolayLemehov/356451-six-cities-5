@@ -1,9 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app";
 import {MemoryRouter} from "react-router-dom";
 import configureMockStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import App from "./app";
 
 const mockStore = configureMockStore();
 const store = mockStore({
