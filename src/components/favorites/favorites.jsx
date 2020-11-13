@@ -43,7 +43,7 @@ const Favorites = (props) => {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {(Object.keys(bookmarkOffersByCity)).map((city) => (
+              {(Array.from(bookmarkOffersByCity.keys())).map((city) => (
                 <li key={city} className="favorites__locations-items">
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
@@ -53,7 +53,7 @@ const Favorites = (props) => {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {bookmarkOffersByCity[city].map((offer) => (
+                    {bookmarkOffersByCity.get(city).map((offer) => (
                       <OfferCard
                         key={offer.id}
                         offer={offer}

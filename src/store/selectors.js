@@ -39,10 +39,16 @@ export const getSortedReviews = createSelector(
 export const getBookmarkOffersByCity = createSelector(
     getBookmarkOffers,
     (bookmarkOffers) => {
-      const bookmarkOffersByCity = {};
+      // const bookmarkOffersByCity = {};
+      const bookmarkOffersByCityMap = new Map();
       bookmarkOffers.forEach((it) => {
-        bookmarkOffersByCity[it.city] = bookmarkOffersByCity[it.city] ? [...(bookmarkOffersByCity[it.city]), it] : [it];
+        if (bookmarkOffersByCityMap.has(it.city)) {
+          bookmarkOffersByCityMap.set(it.city, [...bookmarkOffersByCityMap.get(it.city), it]);
+        } else {
+          bookmarkOffersByCityMap.set(it.city, [it]);
+        }
+        // bookmarkOffersByCity[it.city] = bookmarkOffersByCity[it.city] ? [...(bookmarkOffersByCity[it.city]), it] : [it];
       });
-      return bookmarkOffersByCity;
+      return bookmarkOffersByCityMap;
     }
 );
