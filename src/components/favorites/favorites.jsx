@@ -2,17 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {offerPropType} from "../../prop-types";
 import OfferCard from "../offer-card/offer-card";
 import {AppRoute, AuthorizationStatus, OfferCardType} from "../../const";
-import {getAuthInfo, getAuthorizationStatus, getBookmarkOffers} from "../../store/selectors";
+import {getAuthInfo, getAuthorizationStatus, getBookmarkOffersByCity} from "../../store/selectors";
 
 const Favorites = (props) => {
-  const {bookmarkOffers, userAvatar, userEMail, authorizationStatus} = props;
-  const bookmarkOffersByCity = {};
-  bookmarkOffers.forEach((it) => {
-    bookmarkOffersByCity[it.city] = bookmarkOffersByCity[it.city] ? [...(bookmarkOffersByCity[it.city]), it] : [it];
-  });
+  const {bookmarkOffersByCity, userAvatar, userEMail, authorizationStatus} = props;
   const isAuthorizedStatus = authorizationStatus === AuthorizationStatus.AUTH;
 
   return (
@@ -83,14 +78,14 @@ const Favorites = (props) => {
 };
 
 Favorites.propTypes = {
-  bookmarkOffers: PropTypes.arrayOf(offerPropType).isRequired,
+  bookmarkOffersByCity: PropTypes.instanceOf(Map).isRequired,
   userEMail: PropTypes.string.isRequired,
   userAvatar: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  bookmarkOffers: getBookmarkOffers(state),
+  bookmarkOffersByCity: getBookmarkOffersByCity(state),
   userEMail: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).email : ``,
   userAvatar: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).avatarUrl : ``,
   authorizationStatus: getAuthorizationStatus(state),
