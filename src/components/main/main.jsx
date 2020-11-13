@@ -11,11 +11,10 @@ import {AppRoute, AuthorizationStatus, OfferCardType} from "../../const";
 import withOpening from "../../hocs/withOpening/withOpening";
 import MainEmpty from "../main-empty/main-empty";
 import {
-  getAuthInfo,
   getAuthorizationStatus,
   getCurrentCityName,
   getCurrentCityOffers,
-  getCurrentSortedCityOffers
+  getCurrentSortedCityOffers, getUserAvatar, getUserEMail
 } from "../../store/selectors";
 
 const OfferSortingWrapper = withOpening(OfferSorting);
@@ -104,8 +103,8 @@ const mapStateToProps = (state) => ({
   currentCityName: getCurrentCityName(state),
   currentCityOffers: getCurrentCityOffers(state),
   currentSortedCityOffers: getCurrentSortedCityOffers(state),
-  userEMail: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).email : ``,
-  userAvatar: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).avatarUrl : ``,
+  userEMail: getUserEMail(state),
+  userAvatar: getUserAvatar(state),
   authorizationStatus: getAuthorizationStatus(state),
 });
 

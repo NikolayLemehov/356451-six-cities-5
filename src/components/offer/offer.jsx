@@ -10,11 +10,10 @@ import Map from "../map/map";
 import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
 import {connect} from "react-redux";
 import {
-  getAuthInfo,
   getAuthorizationStatus,
   getChangedBookmarkOffer,
   getNearOffers,
-  getReviews, getSortedReviews
+  getReviews, getSortedReviews, getUserAvatar, getUserEMail
 } from "../../store/selectors";
 import {
   fetchBookmarkOffers,
@@ -248,8 +247,8 @@ const mapStateToProps = (state) => ({
   offerBookmarkStatus: getChangedBookmarkOffer(state).isBookmark,
   nearOffers: getNearOffers(state),
   authorizationStatus: getAuthorizationStatus(state),
-  userEMail: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).email : ``,
-  userAvatar: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).avatarUrl : ``,
+  userEMail: getUserEMail(state),
+  userAvatar: getUserAvatar(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

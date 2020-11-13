@@ -1,5 +1,6 @@
 import {createSelector} from "reselect";
 import {getCityOffers, getSortedOffersByType, getSortedReviewsByDate} from "../core";
+import {AuthorizationStatus} from "../const";
 
 export const getOffers = (state) => state.COMMON.offers;
 export const getNearOffers = (state) => state.COMMON.nearOffers;
@@ -45,5 +46,21 @@ export const getBookmarkOffersByCity = createSelector(
           [...bookmarkOffersByCityMap.get(it.city), it] : [it]);
       });
       return bookmarkOffersByCityMap;
+    }
+);
+
+export const getUserEMail = createSelector(
+    getAuthorizationStatus,
+    getAuthInfo,
+    (authorizationStatus, authInfo) => {
+      return authorizationStatus === AuthorizationStatus.AUTH ? authInfo.email : ``;
+    }
+);
+
+export const getUserAvatar = createSelector(
+    getAuthorizationStatus,
+    getAuthInfo,
+    (authorizationStatus, authInfo) => {
+      return authorizationStatus === AuthorizationStatus.AUTH ? authInfo.avatarUrl : ``;
     }
 );

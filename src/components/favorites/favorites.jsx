@@ -4,7 +4,12 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import OfferCard from "../offer-card/offer-card";
 import {AppRoute, AuthorizationStatus, OfferCardType} from "../../const";
-import {getAuthInfo, getAuthorizationStatus, getBookmarkOffersByCity} from "../../store/selectors";
+import {
+  getAuthorizationStatus,
+  getBookmarkOffersByCity,
+  getUserAvatar,
+  getUserEMail
+} from "../../store/selectors";
 
 const Favorites = (props) => {
   const {bookmarkOffersByCity, userAvatar, userEMail, authorizationStatus} = props;
@@ -86,8 +91,8 @@ Favorites.propTypes = {
 
 const mapStateToProps = (state) => ({
   bookmarkOffersByCity: getBookmarkOffersByCity(state),
-  userEMail: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).email : ``,
-  userAvatar: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).avatarUrl : ``,
+  userEMail: getUserEMail(state),
+  userAvatar: getUserAvatar(state),
   authorizationStatus: getAuthorizationStatus(state),
 });
 
