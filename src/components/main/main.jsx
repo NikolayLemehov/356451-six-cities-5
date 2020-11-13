@@ -10,7 +10,7 @@ import {offerPropType} from "../../prop-types";
 import {AppRoute, AuthorizationStatus, OfferCardType} from "../../const";
 import withOpening from "../../hocs/withOpening/withOpening";
 import MainEmpty from "../main-empty/main-empty";
-import {getCurrentCityOffers, getCurrentSortedCityOffers} from "../../store/selectors";
+import {getCurrentCityName, getCurrentCityOffers, getCurrentSortedCityOffers} from "../../store/selectors";
 
 const OfferSortingWrapper = withOpening(OfferSorting);
 
@@ -97,7 +97,7 @@ Main.propTypes = {
 const mapStateToProps = (state) => {
   const {COMMON, USER} = state;
   return ({
-    currentCityName: COMMON.currentCityName,
+    currentCityName: getCurrentCityName(state),
     currentCityOffers: getCurrentCityOffers(state),
     currentSortedCityOffers: getCurrentSortedCityOffers(state),
     userEMail: USER.authorizationStatus === AuthorizationStatus.AUTH ? COMMON.authInfo.email : ``,
