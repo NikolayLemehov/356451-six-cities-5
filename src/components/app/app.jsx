@@ -28,7 +28,7 @@ const App = () => {
             <Login/>
           )}
         />
-        <Route exact path="/offer/:id"
+        <Route exact path={`${AppRoute.OFFER}/:id`}
           render={({match}) => {
             return (
               <Offer

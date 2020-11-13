@@ -39,8 +39,9 @@ export const sortTypes = [
 ];
 export const AppRoute = {
   MAIN: `/`,
-  FAVORITES: `/favorites`,
+  OFFER: `/offer`,
   LOGIN: `/login`,
+  FAVORITES: `/favorites`,
 };
 export const APIRoute = {
   OFFERS: `/hotels`,
