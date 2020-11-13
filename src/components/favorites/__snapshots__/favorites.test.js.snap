@@ -246,7 +246,7 @@ Array [
                           className="place-card__price-value"
                         >
                           €
-                          493
+                          123
                         </b>
                         <span
                           className="place-card__price-text"
@@ -377,7 +377,7 @@ Array [
                           className="place-card__price-value"
                         >
                           €
-                          493
+                          383
                         </b>
                         <span
                           className="place-card__price-text"
@@ -717,7 +717,7 @@ Array [
                           className="place-card__price-value"
                         >
                           €
-                          493
+                          123
                         </b>
                         <span
                           className="place-card__price-text"
@@ -848,7 +848,7 @@ Array [
                           className="place-card__price-value"
                         >
                           €
-                          493
+                          383
                         </b>
                         <span
                           className="place-card__price-text"
