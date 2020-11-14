@@ -173,8 +173,8 @@ class Offer extends PureComponent {
 
             <section className="property__map map">
               <Map
-                offers={[offer, ...nearOffers]}
                 city={offer.city}
+                offers={[offer, ...nearOffers]}
               />
             </section>
           </section>
@@ -204,12 +204,12 @@ Offer.propTypes = {
   offerBookmarkStatus: PropTypes.any,
   nearOffers: PropTypes.arrayOf(offerPropType).isRequired,
   offerId: PropTypes.string.isRequired,
+  isAuthorizedStatus: PropTypes.bool.isRequired,
+  reviews: PropTypes.arrayOf(reviewPropType).isRequired,
+  visibleReviews: PropTypes.arrayOf(reviewPropType).isRequired,
   loadOfferAction: PropTypes.func.isRequired,
   loadNearOffersAction: PropTypes.func.isRequired,
   loadReviewsAction: PropTypes.func.isRequired,
-  reviews: PropTypes.arrayOf(reviewPropType).isRequired,
-  visibleReviews: PropTypes.arrayOf(reviewPropType).isRequired,
-  isAuthorizedStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
