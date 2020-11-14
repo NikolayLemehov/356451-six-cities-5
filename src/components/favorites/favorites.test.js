@@ -4,26 +4,10 @@ import {MemoryRouter} from "react-router-dom";
 import configureMockStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Favorites} from "./favorites";
+import {testInitialState} from "../../test-data";
 
 const mockStore = configureMockStore();
-const store = mockStore({
-  COMMON: {
-    offers: [],
-    nearOffers: [],
-    changedBookmarkOffer: {},
-    pageOffer: {},
-    bookmarkOffers: [],
-    authInfo: {},
-    cities: [`City7`, `City2`, `City3`, `City4`, `City5`, `City6`],
-    currentCityName: `Paris`,
-    currentSortType: `Popular`,
-    overOfferId: ``,
-    reviews: [],
-  },
-  USER: {
-    authorizationStatus: `NO_AUTH`,
-  },
-});
+const store = mockStore(testInitialState);
 const bookmarkOffersByCity = new Map();
 bookmarkOffersByCity.set(`City1`, [
   {

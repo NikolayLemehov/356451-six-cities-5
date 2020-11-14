@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {getIsAuthorizedStatus} from "../../store/selectors";
-import {AppRoute} from "../../const";
+import {AppRoute, offerBookmarkTypeProperty} from "../../const";
 import OfferBookmarkContent from "../offer-bookmark-content/offer-bookmark-content";
 
 const OfferBookmark = (props) => {
@@ -23,6 +23,7 @@ const OfferBookmark = (props) => {
     >
       <OfferBookmarkContent
         offerBookmarkStatus={offerBookmarkStatus}
+        offerBookmarkTypeProperty={offerBookmarkTypeProperty.page}
       />
     </button>
   ) : (
@@ -32,6 +33,7 @@ const OfferBookmark = (props) => {
     >
       <OfferBookmarkContent
         offerBookmarkStatus={offerBookmarkStatus}
+        offerBookmarkTypeProperty={offerBookmarkTypeProperty.page}
       />
     </Link>
   );

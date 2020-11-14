@@ -5,26 +5,10 @@ import {AppRoute} from "../../const";
 import {Provider} from "react-redux";
 import {MemoryRouter} from "react-router-dom";
 import configureMockStore from "redux-mock-store";
+import {testInitialState} from "../../test-data";
 
 const mockStore = configureMockStore();
-const store = mockStore({
-  COMMON: {
-    offers: [],
-    nearOffers: [],
-    changedBookmarkOffer: {},
-    pageOffer: {},
-    bookmarkOffers: [],
-    authInfo: {},
-    cities: [`City1`, `City2`, `City3`, `City4`, `City5`, `City6`],
-    currentCityName: `Paris`,
-    currentSortType: `Popular`,
-    overOfferId: ``,
-    reviews: [],
-  },
-  USER: {
-    authorizationStatus: `NO_AUTH`,
-  },
-});
+const store = mockStore(testInitialState);
 
 describe(`Header should render correctly`, () => {
   it(`Header should render correctly if the page is Main`, () => {

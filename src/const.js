@@ -65,3 +65,15 @@ export const CommentCharacter = {
   MIN: 50,
   MAX: 300,
 };
+export const offerBookmarkTypeProperty = {
+  card: {
+    bemBlock: `place-card`,
+    width: `18`,
+    height: `19`,
+  },
+  page: {
+    bemBlock: `property`,
+    width: `31`,
+    height: `33`,
+  },
+};

@@ -4,27 +4,11 @@ import {Provider} from "react-redux";
 import {MemoryRouter} from "react-router-dom";
 import configureMockStore from "redux-mock-store";
 import {Login} from "./login";
+import {testInitialState} from "../../test-data";
 
 const noop = () => {};
 const mockStore = configureMockStore();
-const store = mockStore({
-  COMMON: {
-    offers: [],
-    nearOffers: [],
-    changedBookmarkOffer: {},
-    pageOffer: {},
-    bookmarkOffers: [],
-    authInfo: {},
-    cities: [`Paris`, `City2`, `City3`, `City4`, `City5`, `City6`],
-    currentCityName: `Paris`,
-    currentSortType: `Popular`,
-    overOfferId: ``,
-    reviews: [],
-  },
-  USER: {
-    authorizationStatus: `NO_AUTH`,
-  },
-});
+const store = mockStore(testInitialState);
 
 it(`Login should render correctly`, () => {
   const tree = renderer

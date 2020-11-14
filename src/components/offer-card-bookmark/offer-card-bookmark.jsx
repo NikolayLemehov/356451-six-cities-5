@@ -4,57 +4,39 @@ import {offerPropType} from "../../prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {fetchBookmarkOffers, updateOfferBookmarkStatus} from "../../store/api-actions";
-import {getAuthorizationStatus} from "../../store/selectors";
-import {AppRoute, AuthorizationStatus} from "../../const";
+import {getIsAuthorizedStatus} from "../../store/selectors";
+import {AppRoute, offerBookmarkTypeProperty} from "../../const";
+import OfferBookmarkContent from "../offer-bookmark-content/offer-bookmark-content";
 
 const OfferCardBookmark = (props) => {
-  const {offerId, offerBookmarkStatus, onChangeBookmark, authorizationStatus} = props;
-  // console.log(authorizationStatus);
+  const {offerId, offerBookmarkStatus, onChangeBookmark, isAuthorizedStatus} = props;
 
   const handleBookmarkClick = (evt) => {
     evt.preventDefault();
     onChangeBookmark(offerId, !offerBookmarkStatus);
   };
 
-  switch (authorizationStatus) {
-    case AuthorizationStatus.AUTH:
-      return (
-        <button className={`place-card__bookmark-button${
-          offerBookmarkStatus ? ` place-card__bookmark-button--active ` : ` `}button`}
-        type="button"
-        onClick={handleBookmarkClick}
-        >
-          <svg className="place-card__bookmark-icon" width="18" height="19">
-            <use xlinkHref="#icon-bookmark"/>
-          </svg>
-          <span className="visually-hidden">{offerBookmarkStatus ? `In` : `To`} bookmarks</span>
-        </button>
-      );
-    case AuthorizationStatus.NO_AUTH:
-      return (
-        <Link to={AppRoute.LOGIN} className={`place-card__bookmark-button
-        ${offerBookmarkStatus ? ` place-card__bookmark-button--active ` : ` `}button`}
-        type="button"
-        >
-          <svg className="place-card__bookmark-icon" width="18" height="19">
-            <use xlinkHref="#icon-bookmark"/>
-          </svg>
-          <span className="visually-hidden">{offerBookmarkStatus ? `In` : `To`} bookmarks</span>
-        </Link>
-      );
-  }
-
-  return (
-    <button className={`place-card__bookmark-button ${
+  return isAuthorizedStatus ? (
+    <button className={`place-card__bookmark-button${
       offerBookmarkStatus ? ` place-card__bookmark-button--active ` : ` `}button`}
     type="button"
     onClick={handleBookmarkClick}
     >
-      <svg className="place-card__bookmark-icon" width="18" height="19">
-        <use xlinkHref="#icon-bookmark"/>
-      </svg>
-      <span className="visually-hidden">{offerBookmarkStatus ? `In` : `To`} bookmarks</span>
+      <OfferBookmarkContent
+        offerBookmarkStatus={offerBookmarkStatus}
+        offerBookmarkTypeProperty={offerBookmarkTypeProperty.card}
+      />
     </button>
+  ) : (
+    <Link to={AppRoute.LOGIN} className={`place-card__bookmark-button
+        ${offerBookmarkStatus ? ` place-card__bookmark-button--active ` : ` `}button`}
+    type="button"
+    >
+      <OfferBookmarkContent
+        offerBookmarkStatus={offerBookmarkStatus}
+        offerBookmarkTypeProperty={offerBookmarkTypeProperty.card}
+      />
+    </Link>
   );
 };
 
@@ -63,11 +45,11 @@ OfferCardBookmark.propTypes = {
   offerId: PropTypes.string.isRequired,
   offerBookmarkStatus: PropTypes.bool.isRequired,
   onChangeBookmark: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
+  isAuthorizedStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
+  isAuthorizedStatus: getIsAuthorizedStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
