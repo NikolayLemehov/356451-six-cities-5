@@ -84,11 +84,6 @@ const OfferCard = (props) => {
   );
 };
 
-OfferCard.defaultProps = {
-  onMouseOverOffer: () => {
-  },
-};
-
 OfferCard.propTypes = {
   offer: offerPropType,
   onChangeOfferId: PropTypes.func.isRequired,
