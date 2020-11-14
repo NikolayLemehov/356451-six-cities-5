@@ -5,6 +5,7 @@ import {offerPropType} from "../../prop-types";
 import {OfferCardType, RATING_COEFFICIENT} from "../../const";
 import {connect} from "react-redux";
 import {setOverOfferId} from "../../store/action";
+import {fetchBookmarkOffers, updateOfferBookmarkStatus} from "../../store/api-actions";
 import OfferCardBookmark from "../offer-card-bookmark/offer-card-bookmark";
 
 const OfferCard = (props) => {
@@ -84,11 +85,20 @@ const OfferCard = (props) => {
   );
 };
 
+OfferCard.defaultProps = {
+  onMouseOverOffer: () => {
+  },
+};
+
 OfferCard.propTypes = {
   offer: offerPropType,
-  onChangeOfferId: PropTypes.func.isRequired,
+  changedBookmarkOffer: offerPropType,
   currentCardType: PropTypes.string.isRequired,
   overOfferId: PropTypes.string.isRequired,
+  onMouseOverOffer: PropTypes.func.isRequired,
+  onChangeOfferId: PropTypes.func.isRequired,
+  onChangeBookmarkOffers: PropTypes.func.isRequired,
+  onChangeBookmark: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({COMMON}) => ({
@@ -98,6 +108,12 @@ const mapStateToProps = ({COMMON}) => ({
 const mapDispatchToProps = (dispatch) => ({
   onChangeOfferId(offerId) {
     dispatch(setOverOfferId(offerId));
+  },
+  onChangeBookmark(offerId, bookmarkStatus) {
+    dispatch(updateOfferBookmarkStatus(offerId, bookmarkStatus));
+  },
+  onChangeBookmarkOffers() {
+    dispatch(fetchBookmarkOffers());
   },
 });
 
