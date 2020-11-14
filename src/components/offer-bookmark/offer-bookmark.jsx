@@ -8,7 +8,7 @@ import {AppRoute} from "../../const";
 import OfferBookmarkContent from "../offer-bookmark-content/offer-bookmark-content";
 
 const OfferBookmark = (props) => {
-  const {offerId, offerBookmarkStatus, onChangeBookmark, isAuthorizedStatus} = props;
+  const {offerId, isAuthorizedStatus, offerBookmarkStatus, onChangeBookmark} = props;
 
   const handleBookmarkClick = (evt) => {
     evt.preventDefault();
@@ -39,9 +39,9 @@ const OfferBookmark = (props) => {
 
 OfferBookmark.propTypes = {
   offerId: PropTypes.string.isRequired,
+  isAuthorizedStatus: PropTypes.bool.isRequired,
   offerBookmarkStatus: PropTypes.bool.isRequired,
   onChangeBookmark: PropTypes.func.isRequired,
-  isAuthorizedStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
