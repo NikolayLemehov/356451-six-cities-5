@@ -1,5 +1,5 @@
 // import {upperCaseFirst} from "./utils";
-//
+
 // const currentCityOffers = [
 //   {
 //     id: `1`,
@@ -24,7 +24,7 @@
 //     coordinates: [48.877610000000004, 2.333499],
 //   },
 //   {
-//     id: `2`,
+//     id: `4`,
 //     img: [`url1`, `url2`, `url3`, `url4`, `url5`, `url6`],
 //     smallImg: `small-url`,
 //     title: `title`,
@@ -34,7 +34,7 @@
 //     rating: `4.8`,
 //     bedroom: `3`,
 //     visitor: `4`,
-//     price: 226,
+//     price: 126,
 //     option: [`option1`, `option2`, `option3`, `option4`],
 //     isBookmark: false,
 //     city: `city1`,
@@ -46,7 +46,7 @@
 //     coordinates: [48.877610000000004, 2.333499],
 //   },
 //   {
-//     id: `3`,
+//     id: `7`,
 //     img: [`url1`, `url2`, `url3`, `url4`, `url5`, `url6`],
 //     smallImg: `small-url`,
 //     title: `title`,
@@ -56,7 +56,7 @@
 //     rating: `4.8`,
 //     bedroom: `3`,
 //     visitor: `4`,
-//     price: 226,
+//     price: 256,
 //     option: [`option1`, `option2`, `option3`, `option4`],
 //     isBookmark: false,
 //     city: `city1`,

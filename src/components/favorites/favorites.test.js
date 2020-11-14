@@ -4,7 +4,6 @@ import {MemoryRouter} from "react-router-dom";
 import configureMockStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {Favorites} from "./favorites";
-import {AuthorizationStatus} from "../../const";
 
 const mockStore = configureMockStore();
 const store = mockStore({
@@ -98,34 +97,13 @@ bookmarkOffersByCity.set(`City3`, [
 ]);
 
 describe(`Favorites should render correctly`, () => {
-  it(`Favorites should render correctly when authorizationStatus={AuthorizationStatus.AUTH}`, () => {
+  it(`Favorites should render correctly`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
             <MemoryRouter>
               <Favorites
                 bookmarkOffersByCity={bookmarkOffersByCity}
-                userEMail={`user@mail.com`}
-                userAvatar={`url-user-avatar`}
-                authorizationStatus={AuthorizationStatus.AUTH}
-              />)
-            </MemoryRouter>
-          </Provider>
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`Favorites should render correctly when authorizationStatus={AuthorizationStatus.NO_AUTH}`, () => {
-    const tree = renderer
-      .create(
-          <Provider store={store}>
-            <MemoryRouter>
-              <Favorites
-                bookmarkOffersByCity={bookmarkOffersByCity}
-                userEMail={`user@mail.com`}
-                userAvatar={`url-user-avatar`}
-                authorizationStatus={AuthorizationStatus.NO_AUTH}
               />)
             </MemoryRouter>
           </Provider>

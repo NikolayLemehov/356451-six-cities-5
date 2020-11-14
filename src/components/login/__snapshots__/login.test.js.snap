@@ -40,13 +40,7 @@ exports[`Login should render correctly 1`] = `
               className="header__nav-item user"
             >
               <a
-                className="header__nav-link header__nav-link--profile"
-                style={
-                  Object {
-                    "cursor": "default",
-                    "textShadow": "none",
-                  }
-                }
+                className="header__nav-link header__nav-link--profile header__nav-link--inactive"
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"

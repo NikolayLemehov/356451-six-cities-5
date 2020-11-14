@@ -64,3 +64,10 @@ export const getUserAvatar = createSelector(
       return authorizationStatus === AuthorizationStatus.AUTH ? authInfo.avatarUrl : ``;
     }
 );
+
+export const getIsAuthorizedStatus = createSelector(
+    getAuthorizationStatus,
+    (authorizationStatus) => {
+      return authorizationStatus === AuthorizationStatus.AUTH;
+    }
+);
