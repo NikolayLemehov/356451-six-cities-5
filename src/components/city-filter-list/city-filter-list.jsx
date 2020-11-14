@@ -13,7 +13,7 @@ const CityFilterList = (props) => {
           {cities.map((it, i) => (
             <li key={`city-${i}`} className="locations__item">
               <a className={`locations__item-link tabs__item${
-                it === currentCityName && ` tabs__item--active`}`} href="#"
+                it === currentCityName ? ` tabs__item--active` : ``}`} href="#"
               onClick={(evt) => {
                 evt.preventDefault();
                 onChangeCityFilter(it);
