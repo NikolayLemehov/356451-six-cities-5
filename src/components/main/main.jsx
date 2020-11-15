@@ -7,7 +7,7 @@ import CityFilterList from "../city-filter-list/city-filter-list";
 import OfferSorting from "../offer-sorting/offer-sorting";
 import {offerPropType} from "../../prop-types";
 import {AppRoute, OfferCardType} from "../../const";
-import withOpening from "../../hocs/withOpening/withOpening";
+import withOpening from "../../hocs/with-opening/with-opening";
 import MainEmpty from "../main-empty/main-empty";
 import Header from "../header/header";
 import {
