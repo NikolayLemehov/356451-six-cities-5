@@ -1,5 +1,5 @@
 // import {upperCaseFirst} from "./utils";
-
+//
 // const currentCityOffers = [
 //   {
 //     id: `1`,
