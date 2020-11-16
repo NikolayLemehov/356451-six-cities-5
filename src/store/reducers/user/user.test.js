@@ -2,13 +2,13 @@ import {user} from "./user";
 import {ActionType} from "../../action";
 import {AuthorizationStatus} from "../../../const";
 
-it(`Reducer without additional parameters should return initial state`, () => {
+it(`Reducer user without additional parameters should return initial state`, () => {
   expect(user(void 0, {})).toEqual({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
   });
 });
 
-it(`Reducer should update authorizationStatus to "auth"`, () => {
+it(`Reducer user should update authorizationStatus to "auth"`, () => {
   expect(user({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
   }, {
