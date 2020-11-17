@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {offerPropType} from "../../prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {fetchBookmarkOffers, updateOfferBookmarkStatus} from "../../store/api-actions";
@@ -41,7 +40,6 @@ const OfferCardBookmark = (props) => {
 };
 
 OfferCardBookmark.propTypes = {
-  offer: offerPropType,
   offerId: PropTypes.string.isRequired,
   offerBookmarkStatus: PropTypes.bool.isRequired,
   onChangeBookmark: PropTypes.func.isRequired,
