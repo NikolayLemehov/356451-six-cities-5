@@ -79,15 +79,31 @@ bookmarkOffersByCity.set(`City3`, [
     visitor: 4,
   },
 ]);
+const emptyBookmarkOffersByCity = new Map();
 
 describe(`Favorites should render correctly`, () => {
-  it(`Favorites should render correctly`, () => {
+  it(`Favorites should render correctly with fill bookmarkOffersByCity`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
             <MemoryRouter>
               <Favorites
                 bookmarkOffersByCity={bookmarkOffersByCity}
+              />)
+            </MemoryRouter>
+          </Provider>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Favorites should render correctly with empty bookmarkOffersByCity`, () => {
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <MemoryRouter>
+              <Favorites
+                bookmarkOffersByCity={emptyBookmarkOffersByCity}
               />)
             </MemoryRouter>
           </Provider>
