@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {uploadReview} from "../../store/api-actions";
 import {connect} from "react-redux";
 
-const radioValues = [`5`, `4`, `3`, `2`, `1`];
+const RADIO_VALUES = [`5`, `4`, `3`, `2`, `1`];
 
 class CommentForm extends PureComponent {
   constructor(props) {
@@ -27,7 +27,7 @@ class CommentForm extends PureComponent {
       >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
-          {radioValues.map((it) => (
+          {RADIO_VALUES.map((it) => (
             <React.Fragment key={it}>
               <input className="form__rating-input visually-hidden" name="rating" value={it} id={`${it}-stars`}
                 onChange={onFieldChange} type="radio" checked={rating === it}
