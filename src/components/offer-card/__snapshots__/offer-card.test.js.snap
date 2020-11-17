@@ -14,6 +14,7 @@ exports[`OfferCard should render correctly 1`] = `
        place-card__image-wrapper"
   >
     <a
+      className="place-card__img-link"
       href="/offer/7"
       onClick={[Function]}
     >

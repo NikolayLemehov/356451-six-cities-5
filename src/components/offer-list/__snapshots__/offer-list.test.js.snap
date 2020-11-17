@@ -17,6 +17,7 @@ exports[`OfferList should render correctly 1`] = `
        place-card__image-wrapper"
     >
       <a
+        className="place-card__img-link"
         href="/offer/1"
         onClick={[Function]}
       >
@@ -126,6 +127,7 @@ exports[`OfferList should render correctly 1`] = `
        place-card__image-wrapper"
     >
       <a
+        className="place-card__img-link"
         href="/offer/4"
         onClick={[Function]}
       >
@@ -235,6 +237,7 @@ exports[`OfferList should render correctly 1`] = `
        place-card__image-wrapper"
     >
       <a
+        className="place-card__img-link"
         href="/offer/7"
         onClick={[Function]}
       >

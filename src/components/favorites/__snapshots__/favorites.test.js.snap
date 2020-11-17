@@ -110,6 +110,7 @@ Array [
        place-card__image-wrapper"
                   >
                     <a
+                      className="place-card__img-link"
                       href="/offer/1"
                       onClick={[Function]}
                     >
@@ -217,6 +218,7 @@ Array [
        place-card__image-wrapper"
                   >
                     <a
+                      className="place-card__img-link"
                       href="/offer/4"
                       onClick={[Function]}
                     >
@@ -348,6 +350,7 @@ Array [
        place-card__image-wrapper"
                   >
                     <a
+                      className="place-card__img-link"
                       href="/offer/8"
                       onClick={[Function]}
                     >
