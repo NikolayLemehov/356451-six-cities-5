@@ -47,7 +47,7 @@ const OfferCard = (props) => {
         `near-places__image-wrapper`,
         `favorites__image-wrapper`)}
        place-card__image-wrapper`}>
-        <Link to={`/offer/${offer.id}`}
+        <Link to={`/offer/${offer.id}`} className={`place-card__img-link`}
           onClick={currentCardType !== OfferCardType.MAIN ? onSetNewId : undefined}
         >
           <img className="place-card__image"
