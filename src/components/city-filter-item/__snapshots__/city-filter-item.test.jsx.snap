@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CityFilterItem should render correctly CityFilterItem should render correctly when city !== currentCityName 1`] = `
+<li
+  className="locations__item"
+>
+  <a
+    className="locations__item-link tabs__item"
+    href="#"
+    onClick={[Function]}
+  >
+    <span>
+      City1
+    </span>
+  </a>
+</li>
+`;
+
+exports[`CityFilterItem should render correctly CityFilterItem should render correctly when city === currentCityName 1`] = `
+<li
+  className="locations__item"
+>
+  <a
+    className="locations__item-link tabs__item tabs__item--active"
+    href="#"
+    onClick={[Function]}
+  >
+    <span>
+      City1
+    </span>
+  </a>
+</li>
+`;
+
+exports[`CityFilterItem should render correctly when city !== currentCityName 1`] = `
+<li
+  className="locations__item"
+>
+  <a
+    className="locations__item-link tabs__item"
+    href="#"
+    onClick={[Function]}
+  >
+    <span>
+      City1
+    </span>
+  </a>
+</li>
+`;
