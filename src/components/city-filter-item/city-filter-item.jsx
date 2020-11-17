@@ -6,14 +6,17 @@ import {changeCityFilter} from "../../store/action";
 
 const CityFilterItem = (props) => {
   const {city, currentCityName, onChangeCityFilter} = props;
+  const isActiveCity = city === currentCityName;
 
   return (
     <li className="locations__item">
       <a className={`locations__item-link tabs__item${
-        city === currentCityName ? ` tabs__item--active` : ``}`} href="#"
+        isActiveCity ? ` tabs__item--active` : ``}`} href="#"
       onClick={(evt) => {
         evt.preventDefault();
-        onChangeCityFilter(city);
+        if (!isActiveCity) {
+          onChangeCityFilter(city);
+        }
       }}
       >
         <span>{city}</span>

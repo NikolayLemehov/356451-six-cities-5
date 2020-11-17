@@ -31,19 +31,3 @@ exports[`CityFilterItem should render correctly CityFilterItem should render cor
   </a>
 </li>
 `;
-
-exports[`CityFilterItem should render correctly when city !== currentCityName 1`] = `
-<li
-  className="locations__item"
->
-  <a
-    className="locations__item-link tabs__item"
-    href="#"
-    onClick={[Function]}
-  >
-    <span>
-      City1
-    </span>
-  </a>
-</li>
-`;
