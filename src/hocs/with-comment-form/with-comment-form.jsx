@@ -18,12 +18,8 @@ const withCommentForm = (Component) => {
 
     componentDidUpdate() {
       const {rating, review} = this.state;
-
-      if (rating && review.length >= CommentCharacter.MIN && review.length <= CommentCharacter.MAX) {
-        this.setState({isValidForm: true});
-      } else {
-        this.setState({isValidForm: false});
-      }
+      this.setState({isValidForm: rating && review.length >= CommentCharacter.MIN
+          && review.length <= CommentCharacter.MAX});
     }
 
     handleFieldChange(evt) {
