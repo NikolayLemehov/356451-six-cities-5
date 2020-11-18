@@ -5,7 +5,7 @@ import OfferSorting from "./offer-sorting";
 
 configure({adapter: new Adapter()});
 
-test(`click on OfferSorting correctly`, () => {
+it(`click on OfferSorting correctly`, () => {
   const onCloseMenu = jest.fn();
   const onToggleMenu = jest.fn();
   const wrapper = shallow(

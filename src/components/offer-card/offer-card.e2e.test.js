@@ -28,7 +28,7 @@ const mockOffer = {
   coordinates: [48.877610000000004, 2.333499],
 };
 
-test(`click on OfferCard correctly`, () => {
+it(`click on OfferCard correctly`, () => {
   const onMouseOverOffer = jest.fn();
   const onChangeOfferId = jest.fn();
   const onChangeBookmarkOffers = jest.fn();

@@ -6,7 +6,7 @@ import {CityFilterItem} from "./city-filter-item";
 configure({adapter: new Adapter()});
 
 describe(`click on CityFilterItem correctly`, () => {
-  test(`click on CityFilterItem correctly when city !== currentCityName`, () => {
+  it(`click on CityFilterItem correctly when city !== currentCityName`, () => {
     const onChangeCityFilter = jest.fn();
     const wrapper = shallow(
         <CityFilterItem
@@ -20,7 +20,7 @@ describe(`click on CityFilterItem correctly`, () => {
     expect(onChangeCityFilter).toHaveBeenCalledTimes(1);
   });
 
-  test(`click on CityFilterItem correctly when city === currentCityName`, () => {
+  it(`click on CityFilterItem correctly when city === currentCityName`, () => {
     const onChangeCityFilter = jest.fn();
     const wrapper = shallow(
         <CityFilterItem
