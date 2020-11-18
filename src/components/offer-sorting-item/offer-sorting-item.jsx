@@ -4,14 +4,15 @@ import {connect} from "react-redux";
 import {setSortedType} from "../../store/action";
 
 const OfferSortingItem = (props) => {
-  const {type, onCloseMenu, currentSortType, onChangeSortedType} = props;
+  const {type, currentSortType, onCloseMenu, onChangeSortedType} = props;
 
   return (
-    <li className={`places__option ${currentSortType === type && `places__option--active`}`} tabIndex="0"
-      onClick={() => {
-        onChangeSortedType(type);
-        onCloseMenu();
-      }}
+    <li className={`places__option${
+      currentSortType === type ? ` places__option--active` : ``}`} tabIndex="0"
+    onClick={() => {
+      onChangeSortedType(type);
+      onCloseMenu();
+    }}
     >{type}</li>
   );
 };

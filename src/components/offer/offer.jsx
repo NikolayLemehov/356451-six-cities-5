@@ -1,18 +1,15 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
 import moment from "moment";
 import {offerPropType, reviewPropType} from "../../prop-types";
-import {AppRoute, AuthorizationStatus, OfferCardType, RATING_COEFFICIENT} from "../../const";
+import {AppRoute, OfferCardType, RATING_COEFFICIENT} from "../../const";
 import OfferCard from "../offer-card/offer-card";
 import CommentForm from "../comment-form/comment-form";
 import Map from "../map/map";
 import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
 import {connect} from "react-redux";
 import {
-  getAuthInfo,
-  getAuthorizationStatus,
-  getChangedBookmarkOffer,
+  getChangedBookmarkOffer, getIsAuthorizedStatus,
   getNearOffers,
   getReviews, getSortedReviews
 } from "../../store/selectors";
@@ -24,6 +21,7 @@ import {
   updateOfferBookmarkStatus
 } from "../../store/api-actions";
 import OfferBookmark from "../offer-bookmark/offer-bookmark";
+import Header from "../header/header";
 
 const CommentFormWrapper = withCommentForm(CommentForm);
 const MAX_VISIBLE_PHOTO = 6;
@@ -50,40 +48,15 @@ class Offer extends PureComponent {
   }
 
   render() {
-    const {offer, nearOffers, authorizationStatus, userEMail, userAvatar, offerBookmarkStatus, reviews, visibleReviews} = this.props;
-    const isAuthorizedStatus = authorizationStatus === AuthorizationStatus.AUTH;
+    const {offer, nearOffers, offerBookmarkStatus, reviews, visibleReviews, isAuthorizedStatus} = this.props;
 
     return !offer.id ? (
       <div>Идёт загрузка...</div>
     ) : (
       <div className="page">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                <Link className="header__logo-link header__logo-link--active" to={AppRoute.MAIN}>
-                  <img className="header__logo" src={`img/logo.svg`} alt="6 cities logo" width="81" height="41"/>
-                </Link>
-              </div>
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <Link className="header__nav-link header__nav-link--profile"
-                      to={isAuthorizedStatus ? AppRoute.FAVORITES : AppRoute.LOGIN}
-                    >
-                      <div className="header__avatar-wrapper user__avatar-wrapper"
-                        style={isAuthorizedStatus ? {backgroundImage: `url(${userAvatar})`} : undefined}
-                      >
-                      </div>
-                      <span className="header__user-name user__name"
-                      >{isAuthorizedStatus ? userEMail : `Sign in`}</span>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </header>
+        <Header
+          appRoute={AppRoute.OFFER}
+        />
 
         <main className="page__main page__main--property">
           <section className="property">
@@ -191,17 +164,17 @@ class Offer extends PureComponent {
                       </li>
                     ))}
                   </ul>
-                  {isAuthorizedStatus ? <CommentFormWrapper
+                  {isAuthorizedStatus && <CommentFormWrapper
                     offerId={offer.id}
-                  /> : false}
+                  />}
                 </section>
               </div>
             </div>
 
             <section className="property__map map">
               <Map
-                offers={[offer, ...nearOffers]}
                 city={offer.city}
+                offers={[offer, ...nearOffers]}
               />
             </section>
           </section>
@@ -231,14 +204,12 @@ Offer.propTypes = {
   offerBookmarkStatus: PropTypes.any,
   nearOffers: PropTypes.arrayOf(offerPropType).isRequired,
   offerId: PropTypes.string.isRequired,
+  isAuthorizedStatus: PropTypes.bool.isRequired,
+  reviews: PropTypes.arrayOf(reviewPropType).isRequired,
+  visibleReviews: PropTypes.arrayOf(reviewPropType).isRequired,
   loadOfferAction: PropTypes.func.isRequired,
   loadNearOffersAction: PropTypes.func.isRequired,
   loadReviewsAction: PropTypes.func.isRequired,
-  reviews: PropTypes.arrayOf(reviewPropType).isRequired,
-  visibleReviews: PropTypes.arrayOf(reviewPropType).isRequired,
-  userEMail: PropTypes.string.isRequired,
-  userAvatar: PropTypes.string.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -247,9 +218,7 @@ const mapStateToProps = (state) => ({
   visibleReviews: getSortedReviews(state),
   offerBookmarkStatus: getChangedBookmarkOffer(state).isBookmark,
   nearOffers: getNearOffers(state),
-  authorizationStatus: getAuthorizationStatus(state),
-  userEMail: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).email : ``,
-  userAvatar: getAuthorizationStatus(state) === AuthorizationStatus.AUTH ? getAuthInfo(state).avatarUrl : ``,
+  isAuthorizedStatus: getIsAuthorizedStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

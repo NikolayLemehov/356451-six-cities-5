@@ -47,7 +47,7 @@ const OfferCard = (props) => {
         `near-places__image-wrapper`,
         `favorites__image-wrapper`)}
        place-card__image-wrapper`}>
-        <Link to={`/offer/${offer.id}`}
+        <Link to={`/offer/${offer.id}`} className={`place-card__img-link`}
           onClick={currentCardType !== OfferCardType.MAIN ? onSetNewId : undefined}
         >
           <img className="place-card__image"
@@ -57,7 +57,7 @@ const OfferCard = (props) => {
             alt="Place image"/>
         </Link>
       </div>
-      <div className={`${getClass(``, ``, `favorites__card-info`)}place-card__info`}>
+      <div className={`${getClass(``, ``, `favorites__card-info `)}place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>
@@ -93,12 +93,12 @@ OfferCard.defaultProps = {
 OfferCard.propTypes = {
   offer: offerPropType,
   changedBookmarkOffer: offerPropType,
+  currentCardType: PropTypes.string.isRequired,
+  overOfferId: PropTypes.string.isRequired,
   onMouseOverOffer: PropTypes.func.isRequired,
   onChangeOfferId: PropTypes.func.isRequired,
   onChangeBookmarkOffers: PropTypes.func.isRequired,
   onChangeBookmark: PropTypes.func.isRequired,
-  currentCardType: PropTypes.string.isRequired,
-  overOfferId: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({COMMON}) => ({
