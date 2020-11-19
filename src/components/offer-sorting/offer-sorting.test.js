@@ -38,5 +38,5 @@ it(`OfferSorting should render correctly when the menu is open`, () => {
   const menuButton = tree.find(`.places__sorting-type`);
   menuButton.simulate(`click`);
   expect(tree.debug()).toMatchSnapshot();
-
+  tree.unmount();
 });
