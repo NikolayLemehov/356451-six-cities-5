@@ -23,16 +23,13 @@ it(`click on OfferSorting correctly`, () => {
   );
 
   const menuButton = wrapper.find(`.places__sorting-type`);
-  const typeList = wrapper.find(`.places__options--custom`);
-  console.log(typeList.hasClass(`places__options--custom`), typeList.html());
-  // console.log(typeList.hasClass(`places__options--custom`));
+
   menuButton.simulate(`click`);
-  console.log(typeList.hasClass(`places__options--opened`), typeList.html());
-  // console.log(typeList.hasClass(`places__options--opened`));
-  // expect(typeList.hasClass(`places__options--opened`)).toBe(true);
+  let typeList = wrapper.find(`.places__options--custom`);
+  expect(typeList.hasClass(`places__options--opened`)).toEqual(true);
+
   menuButton.simulate(`click`);
-  console.log(typeList.hasClass(`places__options--opened`), typeList.html());
-  // console.log(typeList.hasClass(`places__options--opened`));
-  // expect(typeList.hasClass(`places__options--opened`)).toBe(false);
+  typeList = wrapper.find(`.places__options--custom`);
+  expect(typeList.hasClass(`places__options--opened`)).toEqual(false);
 });
 
