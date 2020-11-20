@@ -25,8 +25,9 @@ class UserLink extends PureComponent {
   render() {
     const {appRoute, isAuthorizedStatus} = this.props;
     const link = this._getLink(appRoute, isAuthorizedStatus);
+    const isActiveLink = appRoute !== AppRoute.FAVORITES && isAuthorizedStatus || appRoute !== AppRoute.LOGIN && !isAuthorizedStatus;
 
-    return appRoute !== AppRoute.FAVORITES && isAuthorizedStatus || appRoute !== AppRoute.LOGIN && !isAuthorizedStatus ? (
+    return isActiveLink ? (
       <Link className="header__nav-link header__nav-link--profile"
         to={link}
       >
