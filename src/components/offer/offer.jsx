@@ -6,7 +6,6 @@ import {AppRoute, OfferCardType, RATING_COEFFICIENT} from "../../const";
 import OfferCard from "../offer-card/offer-card";
 import CommentForm from "../comment-form/comment-form";
 import Map from "../map/map";
-import withCommentForm from "../../hocs/with-comment-form/with-comment-form";
 import {connect} from "react-redux";
 import {
   getChangedBookmarkOffer, getIsAuthorizedStatus,
@@ -23,7 +22,6 @@ import {
 import OfferBookmark from "../offer-bookmark/offer-bookmark";
 import Header from "../header/header";
 
-const CommentFormWrapper = withCommentForm(CommentForm);
 const MAX_VISIBLE_PHOTO = 6;
 
 class Offer extends PureComponent {
@@ -164,7 +162,7 @@ class Offer extends PureComponent {
                       </li>
                     ))}
                   </ul>
-                  {isAuthorizedStatus && <CommentFormWrapper
+                  {isAuthorizedStatus && <CommentForm
                     offerId={offer.id}
                   />}
                 </section>
