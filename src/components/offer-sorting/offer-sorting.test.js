@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import OfferSorting from "./offer-sorting";
+import {OfferSorting} from "./offer-sorting";
 import configureMockStore from "redux-mock-store";
 import {testInitialState} from "../../test-data";
 import {Provider} from "react-redux";
@@ -18,7 +18,9 @@ describe(`OfferSorting should render correctly`, () => {
       .create(
           <Provider store={store}>
             <MemoryRouter>
-              <OfferSorting/>
+              <OfferSorting
+                currentSortType={`Popular`}
+              />
             </MemoryRouter>
           </Provider>
       )
@@ -31,7 +33,9 @@ it(`OfferSorting should render correctly when the menu is open`, () => {
   const tree = mount(
       <Provider store={store}>
         <MemoryRouter>
-          <OfferSorting/>
+          <OfferSorting
+            currentSortType={`Popular`}
+          />
         </MemoryRouter>
       </Provider>
   );

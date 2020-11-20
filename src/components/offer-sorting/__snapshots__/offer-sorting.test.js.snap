@@ -66,18 +66,18 @@ exports[`OfferSorting should render correctly when the menu is open 1`] = `
 "<Provider store={{...}}>
   <MemoryRouter>
     <Router history={{...}}>
-      <OfferSorting>
+      <OfferSorting currentSortType=\\"Popular\\">
         <form className=\\"places__sorting\\" action=\\"#\\" method=\\"get\\">
           <span className=\\"places__sorting-caption\\">
             Sort by
           </span>
-          <span className=\\"places__sorting-type\\" tabIndex=\\"0\\" onClick={[Function: onClick]}>
+          <span className=\\"places__sorting-type\\" tabIndex=\\"0\\" onClick={[Function: clickMenuHandle]}>
             Popular
             <svg className=\\"places__sorting-arrow\\" width=\\"7\\" height=\\"4\\">
               <use xlinkHref=\\"#icon-arrow-select\\" />
             </svg>
           </span>
-          <ul className=\\"places__options places__options--customplaces__options--opened\\">
+          <ul className=\\"places__options places__options--custom places__options--opened\\">
             <Connect(OfferSortingItem) type=\\"Popular\\" onCloseMenu={[Function: onCloseMenu]}>
               <OfferSortingItem type=\\"Popular\\" onCloseMenu={[Function: onCloseMenu]} currentSortType=\\"Popular\\" onChangeSortedType={[Function: onChangeSortedType]}>
                 <li className=\\"places__option places__option--active\\" tabIndex=\\"0\\" onClick={[Function: onClick]}>
