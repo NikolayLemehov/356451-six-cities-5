@@ -1,10 +1,11 @@
-import React, {useReducer, useCallback} from "react";
+import React, {Fragment, useReducer, useCallback} from "react";
 import PropTypes from "prop-types";
 import {uploadReview} from "../../store/api-actions";
 import {connect} from "react-redux";
 import {initialState, reducer} from "./stor/reducer";
 import {clearFormFields, setFieldValue, setIsValidForm, setIsWaitedResponseFormStatus} from "./stor/action";
 import {getIsDisabledSubmitButton} from "./stor/selectors";
+import CommentFormSubmitButton from "../comment-form-submit-button/comment-form-submit-button";
 
 const RADIO_VALUES = [`5`, `4`, `3`, `2`, `1`];
 const CommentForm = (props) => {
@@ -35,7 +36,7 @@ const CommentForm = (props) => {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RADIO_VALUES.map((it) => (
-          <React.Fragment key={it}>
+          <Fragment key={it}>
             <input className="form__rating-input visually-hidden" name="rating" value={it} id={`${it}-stars`}
               onChange={onFieldChange} type="radio" checked={rating === it}
             />
@@ -44,7 +45,7 @@ const CommentForm = (props) => {
                 <use xlinkHref="#icon-star"/>
               </svg>
             </label>
-          </React.Fragment>
+          </Fragment>
         ))}
       </div>
       <textarea className="reviews__textarea form__textarea" id="review" name="review"
@@ -55,8 +56,9 @@ const CommentForm = (props) => {
           To submit review please make sure to set <span className="reviews__star">rating</span> and
           describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit"
-          disabled={isDisabledSubmitButton ? `` : `disabled`}>Submit</button>
+        <CommentFormSubmitButton
+          isDisabledSubmitButton={isDisabledSubmitButton}
+        />
       </div>
     </form>
   );
