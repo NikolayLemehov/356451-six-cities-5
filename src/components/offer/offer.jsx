@@ -25,7 +25,8 @@ import Header from "../header/header";
 const MAX_VISIBLE_PHOTO = 6;
 
 const Offer = (props) => {
-  const {offer, offerId, loadOfferAction, loadNearOffersAction, loadReviewsAction, nearOffers, offerBookmarkStatus, reviews, visibleReviews, isAuthorizedStatus} = props;
+  const {offer, offerId, loadOfferAction, loadNearOffersAction, loadReviewsAction, nearOffers, offerBookmarkStatus,
+    reviews, visibleReviews, isAuthorizedStatus} = props;
   useEffect(() => {
     loadOfferAction(offerId);
     loadNearOffersAction(offerId);
