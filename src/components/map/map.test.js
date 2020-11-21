@@ -76,7 +76,6 @@ it(`Map should render correctly`, () => {
           <MemoryRouter>
             <Map
               offers={[offer1, offer2]}
-              city={`City1`}
               overOfferId={`1`}
             />
           </MemoryRouter>
