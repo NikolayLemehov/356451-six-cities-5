@@ -16,7 +16,7 @@ const CommentForm = (props) => {
 
   const isDisabledSubmitButton = getIsDisabledSubmitButton(state);
 
-  const onFieldChange = useCallback((evt) => {
+  const handleFieldChange = useCallback((evt) => {
     dispatch(setFieldValue(evt));
     dispatch(setIsValidForm());
   }, [rating, review]);
@@ -38,7 +38,7 @@ const CommentForm = (props) => {
         {RADIO_VALUES.map((it) => (
           <Fragment key={it}>
             <input className="form__rating-input visually-hidden" name="rating" value={it} id={`${it}-stars`}
-              onChange={onFieldChange} type="radio" checked={rating === it}
+              onChange={handleFieldChange} type="radio" checked={rating === it}
             />
             <label htmlFor={`${it}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
               <svg className="form__star-image" width="37" height="33">
@@ -50,7 +50,7 @@ const CommentForm = (props) => {
       </div>
       <textarea className="reviews__textarea form__textarea" id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={onFieldChange} value={review} />
+        onChange={handleFieldChange} value={review} />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and
