@@ -53,7 +53,7 @@ const Offer = (props) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer.isPremium ? <div className="property__mark"><span>Premium</span></div> : false}
+              {offer.isPremium && <div className="property__mark"><span>Premium</span></div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {offer.title}
