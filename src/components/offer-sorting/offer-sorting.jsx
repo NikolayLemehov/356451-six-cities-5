@@ -11,7 +11,7 @@ const OfferSorting = (props) => {
   const onCloseMenu = () => {
     setIsOpened(false);
   };
-  const clickMenuHandle = () => {
+  const handleMenuClick = () => {
     setIsOpened(!isOpened);
   };
 
@@ -19,7 +19,7 @@ const OfferSorting = (props) => {
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex="0"
-        onClick={clickMenuHandle}
+        onClick={handleMenuClick}
       >
         {currentSortType}
         <svg className="places__sorting-arrow" width="7" height="4">
