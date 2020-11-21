@@ -5,7 +5,7 @@ import {Login} from "./login";
 
 configure({adapter: new Adapter()});
 
-test(`click on Login correctly`, () => {
+it(`click on Login correctly`, () => {
   const onSubmit = jest.fn();
   const wrapper = shallow(
       <Login

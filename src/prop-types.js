@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-// import {PlaceType} from "./const";
 
 export const offerPropType = PropTypes.shape({
   id: PropTypes.string.isRequired,

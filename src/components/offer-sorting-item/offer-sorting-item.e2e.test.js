@@ -8,7 +8,7 @@ configure({adapter: new Adapter()});
 const type = `type1`;
 const currentSortType = `current type`;
 
-test(`click on OfferSortingItem correctly`, () => {
+it(`click on OfferSortingItem correctly`, () => {
   const onChangeSortedType = jest.fn();
   const onCloseMenu = jest.fn();
   const wrapper = shallow(

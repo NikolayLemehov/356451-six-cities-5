@@ -135,8 +135,6 @@ export const uploadReview = ({rating, review: comment, offerId, onClearFormField
     .then(({data}) => {
       const reviews = getParsedArray(data, getParsedReview);
       dispatch(loadReviews(reviews));
-      // dispatch(setResponseFormStatus(false));
-      // console.log(onSetResponseFormStatus);
       onSetResponseFormStatus(false);
       onClearFormField();
       return ResponseType.SUCCESS;

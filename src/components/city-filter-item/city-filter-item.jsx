@@ -8,16 +8,18 @@ const CityFilterItem = (props) => {
   const {city, currentCityName, onChangeCityFilter} = props;
   const isActiveCity = city === currentCityName;
 
+  const handleFilterClick = (evt) => {
+    evt.preventDefault();
+    if (!isActiveCity) {
+      onChangeCityFilter(city);
+    }
+  };
+
   return (
     <li className="locations__item">
       <a className={`locations__item-link tabs__item${
         isActiveCity ? ` tabs__item--active` : ``}`} href="#"
-      onClick={(evt) => {
-        evt.preventDefault();
-        if (!isActiveCity) {
-          onChangeCityFilter(city);
-        }
-      }}
+      onClick={handleFilterClick}
       >
         <span>{city}</span>
       </a>

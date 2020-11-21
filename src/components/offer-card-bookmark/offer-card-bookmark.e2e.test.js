@@ -5,7 +5,7 @@ import {OfferCardBookmark} from "./offer-card-bookmark";
 
 configure({adapter: new Adapter()});
 
-test(`click on OfferCardBookmark correctly`, () => {
+it(`click on OfferCardBookmark correctly`, () => {
   const onChangeBookmark = jest.fn();
   const wrapper = shallow(
       <OfferCardBookmark

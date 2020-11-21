@@ -78,7 +78,6 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
-  city: PropTypes.string.isRequired,
   overOfferId: PropTypes.string.isRequired,
 };
 

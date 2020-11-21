@@ -9,7 +9,7 @@ export const getBookmarkOffers = (state) => state.COMMON.bookmarkOffers;
 export const getAuthInfo = (state) => state.COMMON.authInfo;
 export const getCities = (state) => state.COMMON.cities;
 export const getCurrentCityName = (state) => state.COMMON.currentCityName;
-const getCurrentSortType = (state) => state.COMMON.currentSortType;
+export const getCurrentSortType = (state) => state.COMMON.currentSortType;
 export const getReviews = (state) => state.COMMON.reviews;
 
 export const getAuthorizationStatus = (state) => state.USER.authorizationStatus;
