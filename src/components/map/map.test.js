@@ -5,7 +5,7 @@ import {MemoryRouter} from "react-router-dom";
 import configureMockStore from "redux-mock-store";
 import {Map} from "./map";
 import {testInitialState} from "../../test-data";
-import {upperCaseFirst} from "../../utils";
+import {makeUpperCaseFirst} from "../../utils";
 
 const mockStore = configureMockStore();
 const store = mockStore(testInitialState);
@@ -17,7 +17,7 @@ const offer1 = {
   title: `title`,
   description: [`description`],
   isPremium: false,
-  type: upperCaseFirst(`type1`),
+  type: makeUpperCaseFirst(`type1`),
   rating: 4.8,
   bedroom: 3,
   visitor: 4,
@@ -40,7 +40,7 @@ const offer2 = {
   title: `title`,
   description: [`description`],
   isPremium: false,
-  type: upperCaseFirst(`type1`),
+  type: makeUpperCaseFirst(`type1`),
   rating: 4.8,
   bedroom: 3,
   visitor: 4,
