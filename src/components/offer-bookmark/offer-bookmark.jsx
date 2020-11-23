@@ -16,8 +16,8 @@ const OfferBookmark = (props) => {
   };
 
   return isAuthorizedStatus ? (
-    <button className={`property__bookmark-button ${
-      offerBookmarkStatus ? ` property__bookmark-button--active ` : ``}button`}
+    <button className={`property__bookmark-button${
+      offerBookmarkStatus ? ` property__bookmark-button--active ` : ` `}button`}
     type="button"
     onClick={handleBookmarkClick}
     >

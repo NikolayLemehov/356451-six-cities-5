@@ -46,6 +46,7 @@ const Main = (props) => {
                     <Map
                       city={currentCityName}
                       offers={currentCityOffers}
+                      type={AppRoute.MAIN}
                     />
                   </section>
                 </div>

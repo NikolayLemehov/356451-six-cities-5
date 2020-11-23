@@ -11,6 +11,7 @@ export const getCities = (state) => state.COMMON.cities;
 export const getCurrentCityName = (state) => state.COMMON.currentCityName;
 export const getCurrentSortType = (state) => state.COMMON.currentSortType;
 export const getReviews = (state) => state.COMMON.reviews;
+export const getPageOffer = (state) => state.COMMON.pageOffer;
 
 export const getAuthorizationStatus = (state) => state.USER.authorizationStatus;
 

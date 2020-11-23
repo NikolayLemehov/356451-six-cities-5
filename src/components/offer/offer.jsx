@@ -9,7 +9,7 @@ import Map from "../map/map";
 import {connect} from "react-redux";
 import {
   getChangedBookmarkOffer, getIsAuthorizedStatus,
-  getNearOffers,
+  getNearOffers, getPageOffer,
   getReviews, getSortedReviews
 } from "../../store/selectors";
 import {
@@ -25,7 +25,7 @@ import Header from "../header/header";
 const MAX_VISIBLE_PHOTO = 6;
 
 const Offer = (props) => {
-  const {offer, offerId, loadOfferAction, loadNearOffersAction, loadReviewsAction, nearOffers, offerBookmarkStatus,
+  const {offer, changedBookmarkOffer, offerId, loadOfferAction, loadNearOffersAction, loadReviewsAction, nearOffers, offerBookmarkStatus,
     reviews, visibleReviews, isAuthorizedStatus} = props;
   useEffect(() => {
     loadOfferAction(offerId);
@@ -59,10 +59,12 @@ const Offer = (props) => {
                 <h1 className="property__name">
                   {offer.title}
                 </h1>
+
                 <OfferBookmark
                   offerId={offer.id}
-                  offerBookmarkStatus={offerBookmarkStatus}
+                  offerBookmarkStatus={offer.id === changedBookmarkOffer.id ? offerBookmarkStatus : offer.isBookmark}
                 />
+
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -158,6 +160,7 @@ const Offer = (props) => {
             <Map
               city={offer.city}
               offers={[offer, ...nearOffers]}
+              type={AppRoute.OFFER}
             />
           </section>
         </section>
@@ -183,6 +186,7 @@ const Offer = (props) => {
 
 Offer.propTypes = {
   offer: PropTypes.any.isRequired,
+  changedBookmarkOffer: PropTypes.any.isRequired,
   offerBookmarkStatus: PropTypes.any,
   nearOffers: PropTypes.arrayOf(offerPropType).isRequired,
   offerId: PropTypes.string.isRequired,
@@ -195,7 +199,8 @@ Offer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offer: getChangedBookmarkOffer(state),
+  offer: getPageOffer(state),
+  changedBookmarkOffer: getChangedBookmarkOffer(state),
   reviews: getReviews(state),
   visibleReviews: getSortedReviews(state),
   offerBookmarkStatus: getChangedBookmarkOffer(state).isBookmark,

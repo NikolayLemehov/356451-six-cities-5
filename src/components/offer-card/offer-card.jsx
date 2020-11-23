@@ -63,10 +63,12 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
+
           <OfferCardBookmark
             offerId={offer.id}
             offerBookmarkStatus={offer.isBookmark}
           />
+
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
