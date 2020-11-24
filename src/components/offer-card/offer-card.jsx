@@ -79,7 +79,7 @@ const OfferCard = (props) => {
         <h2 className="place-card__name">
           <Link to={`/offer/${offer.id}`}
             onClick={currentCardType !== OfferCardType.MAIN ? onSetNewId : undefined}
-          >{offer.id} {offer.title}</Link>
+          >{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

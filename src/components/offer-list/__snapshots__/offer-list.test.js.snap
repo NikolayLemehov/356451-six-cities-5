@@ -102,8 +102,6 @@ exports[`OfferList should render correctly 1`] = `
           href="/offer/1"
           onClick={[Function]}
         >
-          1
-           
           title
         </a>
       </h2>
@@ -212,8 +210,6 @@ exports[`OfferList should render correctly 1`] = `
           href="/offer/4"
           onClick={[Function]}
         >
-          4
-           
           title
         </a>
       </h2>
@@ -322,8 +318,6 @@ exports[`OfferList should render correctly 1`] = `
           href="/offer/7"
           onClick={[Function]}
         >
-          7
-           
           title
         </a>
       </h2>

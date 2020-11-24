@@ -308,8 +308,6 @@ Array [
                         href="/offer/1"
                         onClick={[Function]}
                       >
-                        1
-                         
                         title
                       </a>
                     </h2>
@@ -416,8 +414,6 @@ Array [
                         href="/offer/4"
                         onClick={[Function]}
                       >
-                        4
-                         
                         title
                       </a>
                     </h2>
@@ -548,8 +544,6 @@ Array [
                         href="/offer/8"
                         onClick={[Function]}
                       >
-                        8
-                         
                         title
                       </a>
                     </h2>
