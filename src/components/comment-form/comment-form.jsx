@@ -12,15 +12,18 @@ const CommentForm = (props) => {
   const {offerId, uploadReviewAction} = props;
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const {rating, review} = state;
+  const {rating, review, isWaitedResponseFormStatus} = state;
 
   const isDisabledSubmitButton = getIsDisabledSubmitButton(state);
 
   const handleFieldChange = useCallback((evt) => {
     dispatch(setFieldValue(evt));
     dispatch(setIsValidForm());
-  }, [rating, review]);
-  const onClearFormField = () => dispatch(clearFormFields());
+  }, [rating, review, isWaitedResponseFormStatus]);
+  const onClearFormField = () => {
+    dispatch(clearFormFields());
+    dispatch(setIsValidForm());
+  };
   const onSetResponseFormStatus = (status) => dispatch(setIsWaitedResponseFormStatus(status));
 
   const handleSubmit = (evt) => {
