@@ -7,6 +7,6 @@ export const getIsDisabledSubmitButton = createSelector(
     getIsValidForm,
     getIsWaitedResponseFormStatus,
     (isValidForm, isWaitedResponseFormStatus) => {
-      return isValidForm && !isWaitedResponseFormStatus;
+      return Boolean(isValidForm && !isWaitedResponseFormStatus);
     }
 );
