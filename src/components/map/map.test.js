@@ -6,6 +6,7 @@ import configureMockStore from "redux-mock-store";
 import {Map} from "./map";
 import {testInitialState} from "../../test-data";
 import {makeUpperCaseFirst} from "../../utils";
+import {AppRoute} from "../../const";
 
 const mockStore = configureMockStore();
 const store = mockStore(testInitialState);
@@ -77,6 +78,7 @@ it(`Map should render correctly`, () => {
             <Map
               offers={[offer1, offer2]}
               overOfferId={`1`}
+              type={AppRoute.MAIN}
             />
           </MemoryRouter>
         </Provider>

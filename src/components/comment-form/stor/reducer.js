@@ -22,8 +22,8 @@ export const reducer = (state = initialState, action) => {
       });
     case ActionType.SET_IS_VALID_FORM:
       return extend(state, {
-        isValidForm: state.rating && state.review.length >= CommentCharacter.MIN
-          && state.review.length <= CommentCharacter.MAX,
+        isValidForm: Boolean(state.rating && state.review.length >= CommentCharacter.MIN
+          && state.review.length <= CommentCharacter.MAX),
       });
     case ActionType.SET_IS_WAITED_RESPONSE_FORM_STATUS:
       return extend(state, {

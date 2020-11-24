@@ -25,7 +25,7 @@ it(`Reducer user should update authorizationStatus to "auth"`, () => {
 });
 
 describe(`Async operation work correctly`, () => {
-  it(`Should make a correct API call to /login`, () => {
+  it(`Should make a correct API call to /login 1`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const questionLoader = checkAuth();
@@ -44,7 +44,7 @@ describe(`Async operation work correctly`, () => {
       });
   });
 
-  it(`Should make a correct API call to /login`, () => {
+  it(`Should make a correct API call to /login 2`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const fakeUser = {login: `test@test.ru`, password: `123456`};
@@ -58,10 +58,6 @@ describe(`Async operation work correctly`, () => {
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.REQUIRED_AUTHORIZATION,
-          payload: AuthorizationStatus.AUTH,
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.LOAD_AUTH_INFO,
           payload: {
             "avatarUrl": undefined,
@@ -69,6 +65,10 @@ describe(`Async operation work correctly`, () => {
             "id": undefined,
             "isPro": undefined,
           },
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.REQUIRED_AUTHORIZATION,
+          payload: AuthorizationStatus.AUTH,
         });
       });
   });

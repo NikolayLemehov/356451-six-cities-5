@@ -68,6 +68,7 @@ it(`Offer should render correctly`, () => {
           <MemoryRouter>
             <Offer
               offer={offer}
+              changedBookmarkOffer={offer}
               offerBookmarkStatus={false}
               nearOffers={[offer]}
               offerId={`1`}
