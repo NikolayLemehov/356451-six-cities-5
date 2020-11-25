@@ -99,8 +99,6 @@ exports[`OfferCard should render correctly 1`] = `
         href="/offer/7"
         onClick={[Function]}
       >
-        7
-         
         title
       </a>
     </h2>

@@ -1,5 +1,5 @@
 import {MAX_MESSAGE_COUNT_ON_PAGE, SortingType} from "./const";
-import {upperCaseFirst} from "./utils";
+import {makeUpperCaseFirst} from "./utils";
 import moment from "moment";
 
 export const getCityOffers = (offers, city) => offers.filter((it) => it.city === city);
@@ -44,7 +44,7 @@ export const getParsedOffer = (data) => {
     title: data[`title`],
     description: [data[`description`]],
     isPremium: data[`is_premium`],
-    type: upperCaseFirst(data[`type`]),
+    type: makeUpperCaseFirst(data[`type`]),
     rating: data[`rating`],
     bedroom: data[`bedrooms`],
     visitor: data[`max_adults`],

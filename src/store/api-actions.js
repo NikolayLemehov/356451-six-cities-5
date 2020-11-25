@@ -4,7 +4,7 @@ import {
   loadAuthInfo, loadBookmarkOffers, loadNearOffer, loadBookmarkOffer,
   loadOffers,
   redirectToRoute,
-  requireAuthorization, loadReviews,
+  requireAuthorization, loadReviews, loadPageOffer,
 } from "./action";
 import {APIRoute, AppRoute, AuthorizationStatus, HttpCode, ResponseType} from "../const";
 import {getParsedArray, getParsedAuthInfo, getParsedOffer, getParsedReview} from "../core";
@@ -46,8 +46,8 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
         const authInfo = getParsedAuthInfo(response.data);
-        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(loadAuthInfo(authInfo));
+        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
         return ResponseType.SUCCESS;
       } else {
         return response;
@@ -95,6 +95,7 @@ export const fetchIdOffer = (offerId) => (dispatch, getState, api) => (
   api.get(`${APIRoute.OFFERS}/${offerId}`)
     .then(({data}) => {
       const offer = getParsedOffer(data);
+      dispatch(loadPageOffer(offer));
       dispatch(loadBookmarkOffer(offer));
       return ResponseType.SUCCESS;
     })
@@ -135,8 +136,6 @@ export const uploadReview = ({rating, review: comment, offerId, onClearFormField
     .then(({data}) => {
       const reviews = getParsedArray(data, getParsedReview);
       dispatch(loadReviews(reviews));
-      // dispatch(setResponseFormStatus(false));
-      // console.log(onSetResponseFormStatus);
       onSetResponseFormStatus(false);
       onClearFormField();
       return ResponseType.SUCCESS;

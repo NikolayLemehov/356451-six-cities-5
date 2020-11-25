@@ -66,6 +66,10 @@ export const common = (state = initialState, action) => {
       return extend(state, {
         reviews: action.payload,
       });
+    case ActionType.LOAD_PAGE_OFFER:
+      return extend(state, {
+        pageOffer: action.payload,
+      });
   }
   return state;
 };

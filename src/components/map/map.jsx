@@ -3,6 +3,7 @@ import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import {offerPropType} from "../../prop-types";
 import {connect} from "react-redux";
+import {AppRoute} from "../../const";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -52,9 +53,19 @@ class Map extends PureComponent {
   }
 
   _addMarkersToMap(offers) {
-    const {overOfferId} = this.props;
-    offers.forEach(({coordinates, title, id}) => {
-      const currentIcon = overOfferId === id ? this.activeIcon : this.icon;
+    const {overOfferId, type} = this.props;
+    let currentIcon = {};
+    offers.forEach(({coordinates, title, id}, i) => {
+      switch (type) {
+        case AppRoute.MAIN:
+          currentIcon = overOfferId === id ? this.activeIcon : this.icon;
+          break;
+        case AppRoute.OFFER:
+          currentIcon = i === 0 ? this.activeIcon : this.icon;
+          break;
+        default:
+          currentIcon = this.icon;
+      }
       const marker = leaflet
         .marker(coordinates, {icon: currentIcon, title})
         .addTo(this.map);
@@ -78,8 +89,8 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
-  city: PropTypes.string.isRequired,
   overOfferId: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([AppRoute.MAIN, AppRoute.OFFER]).isRequired
 };
 
 const mapStateToProps = ({COMMON}) => ({

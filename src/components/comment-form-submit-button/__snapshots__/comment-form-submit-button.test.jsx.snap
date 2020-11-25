@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommentFormSubmitButton should render correctly CommentFormSubmitButton should render correctly when isDisabledSubmitButton={false} 1`] = `
+<button
+  className="reviews__submit form__submit button"
+  disabled="disabled"
+  type="submit"
+>
+  Submit
+</button>
+`;
+
+exports[`CommentFormSubmitButton should render correctly CommentFormSubmitButton should render correctly when isDisabledSubmitButton={true} 1`] = `
+<button
+  className="reviews__submit form__submit button"
+  type="submit"
+>
+  Submit
+</button>
+`;

@@ -1,25 +1,32 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, {useState} from "react";
 import {sortTypes} from "../../const";
 import OfferSortingItem from "../offer-sorting-item/offer-sorting-item";
+import PropTypes from "prop-types";
+import {getCurrentSortType} from "../../store/selectors";
+import {connect} from "react-redux";
 
 const OfferSorting = (props) => {
-  const {isOpened, onCloseMenu, onToggleMenu} = props;
+  const {currentSortType} = props;
+  const [isOpened, setIsOpened] = useState(false);
+  const onCloseMenu = () => {
+    setIsOpened(false);
+  };
+  const handleMenuClick = () => {
+    setIsOpened(!isOpened);
+  };
 
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex="0"
-        onClick={() => {
-          onToggleMenu(isOpened);
-        }}
+        onClick={handleMenuClick}
       >
-                  Popular
+        {currentSortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"/>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isOpened && `places__options--opened`}`}>
+      <ul className={`places__options places__options--custom${isOpened ? ` places__options--opened` : ``}`}>
         {sortTypes.map((it, i) => (
           <OfferSortingItem
             key={`${it}-${i}`}
@@ -33,9 +40,12 @@ const OfferSorting = (props) => {
 };
 
 OfferSorting.propTypes = {
-  isOpened: PropTypes.bool.isRequired,
-  onCloseMenu: PropTypes.func.isRequired,
-  onToggleMenu: PropTypes.func.isRequired,
+  currentSortType: PropTypes.string.isRequired,
 };
 
-export default OfferSorting;
+const mapStateToProps = (state) => ({
+  currentSortType: getCurrentSortType(state),
+});
+
+export {OfferSorting};
+export default connect(mapStateToProps)(OfferSorting);

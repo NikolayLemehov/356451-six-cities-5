@@ -7,7 +7,6 @@ import CityFilterList from "../city-filter-list/city-filter-list";
 import OfferSorting from "../offer-sorting/offer-sorting";
 import {offerPropType} from "../../prop-types";
 import {AppRoute, OfferCardType} from "../../const";
-import withOpening from "../../hocs/with-opening/with-opening";
 import MainEmpty from "../main-empty/main-empty";
 import Header from "../header/header";
 import {
@@ -15,8 +14,6 @@ import {
   getCurrentCityOffers,
   getCurrentSortedCityOffers
 } from "../../store/selectors";
-
-const OfferSortingWrapper = withOpening(OfferSorting);
 
 const Main = (props) => {
   const {currentSortedCityOffers, currentCityOffers, currentCityName} = props;
@@ -38,7 +35,7 @@ const Main = (props) => {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{currentSortedCityOffers.length} offers to stay in {currentCityName}</b>
-                  <OfferSortingWrapper/>
+                  <OfferSorting/>
                   <OfferList
                     offers={currentSortedCityOffers}
                     currentCardType={OfferCardType.MAIN}
@@ -49,6 +46,7 @@ const Main = (props) => {
                     <Map
                       city={currentCityName}
                       offers={currentCityOffers}
+                      type={AppRoute.MAIN}
                     />
                   </section>
                 </div>
